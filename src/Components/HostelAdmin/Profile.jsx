@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useFormikContext } from 'formik';
 import Avatar from 'react-avatar-edit';
 
 function Profile() {
+  const { setFieldValue } = useFormikContext();
   const [src, setSrc] = useState(null);
   const [preview, setPreview] = useState(null);
   console.log(preview);
 
   const onClose = () => {
     setPreview(null);
+    setFieldValue('profileImage', null); // Reset the profileImage field value
   };
 
   const onCrop = (view) => {
     setPreview(view);
+    setFieldValue('profileImage', view);
+     // Update the profileImage field value
   };
 
   const dataURItoBlob = (dataURI) => {
