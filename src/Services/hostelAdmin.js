@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export const hostelDataApi = (data) =>{
-    return axios.post('/hostelAdmin/register',data)
+export const hostelAdminApi = (data) =>{
+    return axios.post('/hostelAdmin/signing',data)
 }

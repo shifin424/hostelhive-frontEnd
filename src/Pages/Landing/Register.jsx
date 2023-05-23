@@ -1,41 +1,78 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../Components/Landing/NavBar/Navbar'
 import Profile from '../../Components/HostelAdmin/Profile'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { hostelAdminApi } from '../../Services/hostelAdmin'
 import * as yup from 'yup'
 
 function Register() {
+
+
+    const initialValues = {
+        fullName: "", email: "", password: "", confirmPassword: "",
+        mobileNumber: "", qualification: "",
+        landMark: "", area: "", gender: "", state: ""
+    }
+
+    const [error, setError] = useState("")
+    const [formValues, setFormValues] = useState(initialValues);
+
+
+    const onChangeHandle = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value })
+        setError({ ...error, [name]: "" })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData()
+
+        data.append("fullName", formValues.fullName)
+        data.append("email", formValues.email)
+        data.append("password", formValues.password)
+        data.append("confirmPassword", formValues.confirmPassword)
+        data.append("mobileNumber", formValues.mobileNumber)
+        data.append("qualification", formValues.qualification)
+        data.append("gender", formValues.gender)
+        data.append("landMark", formValues.landMark)
+        data.append("area", formValues.area)
+        data.append("state", formValues.state)
+
+       
+         if(data) {
+            hostelAdminApi(data).then((response) => {
+                if (response.data.error) {
+                    setError(response.data.error);
+                } else {
+                    alert.success("Your singing Successfully Completed");
+                    console.log("every thing uptodate"); // Correction made here
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+
+
+
+    }
+
+
+
+
     return (
-
-
-
-
-
         <div>
-
             <Navbar />
             <div>
                 <h1 className="text-[#002D7A] bg-white font-bold text-4xl   sm:pl-56  sm:pt-5 md:pt-5 ">Provide your Details</h1>
             </div>
             <Formik
-                initialValues={{
-                    fullName: "",
-                    password: "",
-                    mobileNumber: "",
-                    qualification: "",
-                    confirmPassword: "",
-                    email: "",
-                    landMark: "",
-                    area: "",
-                    gender: "",
-                    state: ""
-                }}
-
+                initialValues={formValues}
                 validationSchema={yup.object({
                     fullName: yup.string().required('Required'),
                     password: yup.string().required('Required'),
                     email: yup.string().email('Invalid email address').required
-                    ('Please enter your email'),
+                        ('Please enter your email'),
                     confirmPassword: yup
                         .string()
                         .required('Confirm Password is required')
@@ -50,11 +87,6 @@ function Register() {
 
                 })}
 
-                onSubmit={(values, { setSubmitting }) => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false)
-
-                }}
 
             >
                 <Form>
@@ -91,7 +123,7 @@ function Register() {
                                         <Field type="text" placeholder='Enter your Qualifiacion' name="qualification"
                                             className='w-72 h-10 bg-white font-sans mt-2
                                   text-black rounded-md pl-2 shadow-sm ' />
-                                    <ErrorMessage name='qualification' component='div' className='text-red-400' />
+                                        <ErrorMessage name='qualification' component='div' className='text-red-400' />
                                     </div>
 
                                     <div className='flex flex-col items-center'>
@@ -117,7 +149,7 @@ function Register() {
                                         <Field type="text" placeholder='Enter your Land Mark' name="landMark"
                                             className='w-72 h-10 bg-white font-sans mt-2
                                   text-black rounded-md pl-2 shadow-sm ' />
-                                    <ErrorMessage name='landMark' component='div' className='text-red-400' />
+                                        <ErrorMessage name='landMark' component='div' className='text-red-400' />
                                     </div>
 
                                     <div className='flex flex-col items-center'>
@@ -137,7 +169,7 @@ function Register() {
                                         <Field type="text" placeholder='Enter your Area' name="area"
                                             className='w-72 h-10 bg-white font-sans mt-2
                                   text-black rounded-md pl-2 shadow-sm ' />
-                                    <ErrorMessage name='area' component='div' className='text-red-400' />
+                                        <ErrorMessage name='area' component='div' className='text-red-400' />
                                     </div>
 
                                     <div className='flex flex-col items-center'>
@@ -145,14 +177,14 @@ function Register() {
                                         <Field type="text" placeholder='Enter your State' name="state"
                                             className='w-72 h-10 bg-white font-sans mt-2
                                   text-black rounded-md  pl-2 shadow-sm ' />
-                                    <ErrorMessage name='state' component='div' className='text-red-400' />
+                                        <ErrorMessage name='state' component='div' className='text-red-400' />
                                     </div>
 
                                 </div>
 
-                                <div className='bg-white flex  flex-col  w-50 border-dashed border-black h-max rounded-md'>
+                                {/* <div className='bg-white flex  flex-col  w-50 border-dashed border-black h-max rounded-md'>
                                     <Profile />
-                                </div>
+                                </div> */}
 
                             </div>
 
