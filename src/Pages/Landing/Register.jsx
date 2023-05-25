@@ -3,9 +3,17 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { hostelAdminApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch,useSelector} from 'react-redux'
+import { resetState,registerHostelAdmin } from '../../Redux/Features/hostelAdminSlice';
+
+
 
 
 function Register() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, errors } = useSelector((state) => state.hostelAdmin);
 
     const initialValues = {
         fullName: "",
@@ -15,15 +23,14 @@ function Register() {
         mobileNumber: "",
         qualification: "",
         landMark: "",
-        area: "",
         gender: "",
-        state: ""
+      
     };
 
     const [error, setError] = useState("")
     const [formValues, setFormValues] = useState(initialValues);
 
-    const navigate = useNavigate();
+    
 
     const validationSchema = yup.object({
         fullName: yup.string().required('Required'),
@@ -45,10 +52,7 @@ function Register() {
             .required('Mobile Number is required')
             .matches(/^\d{10}$/, 'Mobile Number must be exactly 10 digits'),
         qualification: yup.string().required('Required'),
-        landMark: yup.string().required('Required'),
-        area: yup.string().required('Required'),
         gender: yup.string().required('Required'),
-        state: yup.string().required('Required')
     });
 
     const handleSubmit = (values) => {
@@ -59,6 +63,8 @@ function Register() {
                     setError(response.data.error);
                 } else {
                     console.log("form submitted");
+                    dispatch(resetState());
+                    dispatch(registerHostelAdmin(values));
                     navigate('/hostelAdmin/otpVerification');
                 }
             })
@@ -71,7 +77,7 @@ function Register() {
 
     return (
         <div>
-            <div className="w-full h-screen bg-white mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="w-full h-screen bg-white mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
                 <Formik
                     initialValues={initialValues}
@@ -121,17 +127,8 @@ function Register() {
                                 <ErrorMessage name="qualification" component="div" className="text-red-500" />
                             </div>
 
-                            <div>
-                                <label htmlFor="landMark">Landmark</label>
-                                <Field type="text" id="landMark" name="landMark" className="border rounded-md p-2 w-full" />
-                                <ErrorMessage name="landMark" component="div" className="text-red-500" />
-                            </div>
+                           
 
-                            <div>
-                                <label htmlFor="area">Area</label>
-                                <Field type="text" id="area" name="area" className="border rounded-md p-2 w-full" />
-                                <ErrorMessage name="area" component="div" className="text-red-500" />
-                            </div>
 
                             <div>
                                 <label htmlFor="gender">Gender</label>
@@ -144,11 +141,7 @@ function Register() {
                                 <ErrorMessage name="gender" component="div" className="text-red-500" />
                             </div>
 
-                            <div>
-                                <label htmlFor="state">State</label>
-                                <Field type="text" id="state" name="state" className="border rounded-md p-2 w-full" />
-                                <ErrorMessage name="state" component="div" className="text-red-500" />
-                            </div>
+                           
                         </div>
 
                         <div className="text-center mt-8">

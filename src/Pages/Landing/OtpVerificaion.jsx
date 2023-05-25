@@ -1,7 +1,7 @@
-import React, { useState, useRef, createRef } from 'react';
-import { verifyOtp  } from '../../Services/hostelAdmin';
+import React, { useState, useRef, createRef, useEffect } from 'react';
+import { verifyOtp } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 
 
 function OtpVerification() {
@@ -11,8 +11,18 @@ function OtpVerification() {
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
   const submitButtonRef = useRef(null);
 
-  
   const navigate = useNavigate();
+
+  const [hostelAdmins,SetHostelAdmin] = useState(null)
+
+  const hostelAdmin = useSelector(state => state.hostelAdmin.user)
+
+  useEffect(() => {
+    SetHostelAdmin(hostelAdmin)
+  }, [hostelAdmin])
+  
+
+  console.log(hostelAdmin)
 
   const handleChange = (e, index) => {
     const { value } = e.target;
@@ -23,10 +33,8 @@ function OtpVerification() {
 
     if (value !== '') {
       if (index === otp.length - 1) {
-        // Last input field, focus on the submit button
         submitButtonRef.current.focus();
       } else {
-        // Focus on the next input field
         inputRefs.current[index + 1].current.focus();
       }
     }
@@ -37,29 +45,26 @@ function OtpVerification() {
 
     const otpValue = otp.join('');
 
+
+
     if (otpValue.length !== 6) {
       setError('OTP must be 6 digits long');
     } else {
       const data = {
-        fullName: 'shifin',
-        email: 'kunjippa@gmail.com',
-        mobileNumber: '6238424753',
-        password: 'hello123',
-        landMark: 'calicut',
-        state: 'kerala',
-        area: 'near metro med',
-        qualification: 'plustwo',
-        gender: 'male',
-        otpCode: otpValue 
+        ...hostelAdmins,
+        otpCode: otpValue,
       };
 
+      console.log("heyyyyyyy",data)
+
       verifyOtp(data)
-      .then(response => {
-        navigate('/hostelAdmin/login')
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(() => {
+          navigate('/hostelAdmin/login');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          setError('Failed to verify OTP');
+        });
     }
   };
 
