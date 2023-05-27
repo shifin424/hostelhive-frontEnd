@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { adminLoginApi } from "../../Services/superAdmin";
-import Image from "../../assets/images/adminBackground.jpeg";
 import {useNavigate} from 'react-router-dom'
 
 function Body() {
@@ -31,7 +30,8 @@ function Body() {
     }
   };
 
-  
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,16 +60,15 @@ function Body() {
 
   return (
     <div
-      className="h-screen bg-center bg-cover bg-no-repeat"
-      style={{ backgroundImage: `url(${Image})` }}
+      className="h-screen bg-white"
     >
-      <div className="flex flex-col items-center justify-center bg-black/60 h-screen">
-        <h1 className="text-4xl text-white font-bold mb-5">Login Form</h1>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-4xl text-black font-bold mb-7">Admin Login</h1>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <input
-              className="bg-transparent text-white border
-               border-white w-[300px] px-3 py-2 rounded-full"
+              className="bg-transparent text-black border
+               border-black w-[300px] px-3 py-2 rounded-full"
               type="email"
               placeholder="Enter your Email"
               value={email}
@@ -83,8 +82,8 @@ function Body() {
           </div>
           <div>
             <input
-              className="bg-transparent text-white border
-               border-white w-[300px] px-3 py-2 rounded-full"
+              className="bg-transparent text-black border
+               border-black w-[300px] px-3 py-2 rounded-full"
               type="password"
               placeholder="Enter your Password"
               value={password}
@@ -96,8 +95,8 @@ function Body() {
               <p className="text-red-500 text-center w-[300px]">{passwordError}</p>
             )}
           </div>
-          <div className="text-white border py-3 rounded-full animate-pulse
-           hover:text-black font-semibold hover:bg-white justify-center 
+          <div className="text-white border boder-black py-3 rounded-full 
+           hover:text-black bg-[#002D7A] font-semibold hover:bg-[#9dbbef] justify-center 
            items-center text-center">
             <button type="submit">Submit</button>
           </div>

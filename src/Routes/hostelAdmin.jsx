@@ -5,18 +5,18 @@ import OtpPage from "../Pages/Landing/OtpVerificaion";
 import Login from '../Pages/HostelAdmin/Login'
 import LandingPage from '../Pages/HostelAdmin/Welcome'
 import AddHostel from '../Pages/HostelAdmin/AddHostel'
+import HostelAdmin from '../Verification/hostelAdminVerification'
 
 
 
 const hostelRoutes = () => {
     return (
       <Routes>
-        <Route path="/register" element={<Register/>}></Route>
-        <Route path="/locaion" element={<Locaion/>}></Route>
-        <Route path="/otpVerification" element={<OtpPage/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/getStarted" element={<LandingPage/>}></Route>
-        <Route path="/addHostel" element={<AddHostel/>}></Route>
+        <Route path="/register" element={<HostelAdmin> <Register/></HostelAdmin>}></Route>
+        <Route path="/otpVerification" element={ <HostelAdmin><OtpPage/> </HostelAdmin>}></Route>
+        <Route path="/login" element={<HostelAdmin><Login/> </HostelAdmin>}></Route>
+        <Route path="/getStarted" element={<HostelAdmin><LandingPage/> </HostelAdmin>}></Route>
+        <Route path="/addHostel" element={<HostelAdmin><AddHostel/> </HostelAdmin>}></Route>
       </Routes>
     );
   };

@@ -5,7 +5,7 @@ function section1() {
     <div className="bg-emerald-500 w-full h-[50rem] md:h-[55rem] flex flex-wrap">
       <div className="bg-slate-400 w-full h-1/2 flex md:flex md: justify-center  sm:bg-red-300 md:bg-blue-900">
         <img
-          className="w-80 h-[20rem] rounded-md mt-10 md:absolute md:right-6 md:h-80 md:w-[30rem]"
+          className="w-80 h-[20rem] rounded-md mt-24 md:absolute md:right-6 md:h-80 md:w-[30rem] "
           src={require("../../../assets/images/2-bed-pic.jpg")}
           alt="logo"
         />

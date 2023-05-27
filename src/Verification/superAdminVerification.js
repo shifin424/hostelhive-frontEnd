@@ -5,10 +5,13 @@ export default function AdminVerificaion({children}){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        if(!localStorage.getItem('AdminToken')){
-            navigate('/admin',{replace:true})
+        if(!localStorage.getItem('adminToken')){
+            navigate('/superAdmin/login')
+        }else{
+            navigate('/superAdmin/dashBoard')
         }
     
     },[])
+
     return children
 }

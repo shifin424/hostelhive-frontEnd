@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Landing() {
   return (
@@ -17,9 +18,9 @@ function Landing() {
         </p>
       </div>
       <div className="flex justify-center mt-12 animate-pulse">
-        <a href="#" className="bg-[#002D7A] hover:bg-[#002D7A] text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out">
+        <Link to={"/hostelAdmin/addHostel"} className="bg-[#002D7A] hover:bg-[#002D7A] text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out">
           Add Your Hostel
-        </a>
+        </Link>
       </div>
       
     </div>

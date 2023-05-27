@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { hostelAdminLogin } from '../../Services/hostelAdmin'
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState("");
+
+  const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -20,15 +23,18 @@ function Login() {
     }));
   };
 
+
+
   const handleSubmit = (values) => {
     hostelAdminLogin(values)
       .then((response) => {
         if (response.data.error) {
           setError(response.data.error);
         } else {
+          localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
           console.log("Form submitted");
-          // navigate('/hostelAdmin/otpVerification');
-          alert("Entered the home page");
+          navigate('/hostelAdmin/getStarted');
+
         }
       })
       .catch((err) => {

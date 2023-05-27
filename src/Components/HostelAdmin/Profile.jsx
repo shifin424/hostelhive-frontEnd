@@ -10,13 +10,12 @@ function Profile() {
 
   const onClose = () => {
     setPreview(null);
-    setFieldValue('profileImage', null); // Reset the profileImage field value
+    setFieldValue('profileImage', null);
   };
 
   const onCrop = (view) => {
     setPreview(view);
     setFieldValue('profileImage', view);
-     // Update the profileImage field value
   };
 
   const dataURItoBlob = (dataURI) => {

@@ -7,7 +7,7 @@ import { TbMessages } from 'react-icons/tb'
 import { BiLogOutCircle } from 'react-icons/bi'
 import { GiVerticalBanner } from 'react-icons/gi'
 import SideBar from './SideBar';
-import Navbar from '../Landing/NavBar/Navbar';
+import Navbar from '../SuperAdmin/NavBar';
 
 function SuperAdminLayout() {
     const menus = [
