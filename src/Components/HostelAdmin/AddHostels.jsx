@@ -102,6 +102,7 @@ const AddHostel = () => {
                   <label htmlFor="input1" className="block text-gray-900 font-semibold mb-2">
                     Hostel Name
                   </label>
+                  
                   <Field
                     type="text"
                     id="input1"
