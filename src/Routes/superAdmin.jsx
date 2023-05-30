@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../Pages/SuperAdmin/Login";
 import DashBoard from '../Pages/SuperAdmin/Home'
-import Request from "../Pages/SuperAdmin/Request";
+import Request from "../Pages/SuperAdmin/HostelRequests";
 import SuperAdminLayout from "../Components/SuperAdmin/SuperAdminLayout";
 import AdminVerificaton from '../Verification/superAdminVerification'
 

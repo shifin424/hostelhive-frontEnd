@@ -2,7 +2,7 @@ import { Route,Routes } from "react-router-dom";
 import Register from "../Pages/Landing/Register";
 import Locaion from "../Components/Landing/Location/Locaion";
 import OtpPage from "../Pages/Landing/OtpVerificaion";
-import Login from '../Pages/HostelAdmin/Login'
+import Login from '../Pages/HostelAdmin/LoginPage'
 import LandingPage from '../Pages/HostelAdmin/Welcome'
 import AddHostel from '../Pages/HostelAdmin/AddHostel'
 import HostelAdmin from '../Verification/hostelAdminVerification'

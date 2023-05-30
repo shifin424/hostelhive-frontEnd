@@ -6,17 +6,18 @@ import { addHostelApi } from '../../Services/hostelAdmin';
 import { message } from 'antd';
 import { BiCurrentLocation } from 'react-icons/bi'
 import { Modal, Button } from 'antd';
-import AddLocation from './Location';
+import LocationNew from './LocationNew';
 
 const AddHostel = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [lat, setLat] = useState(10.45);
+  const [lng, setLng] = useState(76.6);
   const initialValues = {
     file: null,
     title: '',
     location: '',
-    description: ''
+    description: '',
   };
 
   const validationSchema = Yup.object({
@@ -176,7 +177,7 @@ const AddHostel = () => {
         width={800}
       >
         <h1>Choose your location</h1>
-        <AddLocation />
+        <LocationNew lat={lat} setLat={setLat} lng={lng} setLng={setLng}/>
       </Modal>
 
 
