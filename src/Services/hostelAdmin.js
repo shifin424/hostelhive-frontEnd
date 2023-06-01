@@ -15,6 +15,6 @@ export const hostelAdminLogin =(values) =>{
 }
 
 export const addHostelApi =(data) =>{
-    return axios.post('/hostelAdmin/addHostel',data)
+    return axios.post('/hostelAdmin/add-Hostel',data)
 }
 

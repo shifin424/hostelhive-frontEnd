@@ -20,7 +20,7 @@ function NavBar() {
 
   return (
     <div>
-  <nav className="bg-white ">
+  <nav className="bg-white border-b border-black shadow-2xl">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
       <a href="#" className="flex items-center">
         <img className="w-32 h-14 absolute left-4" src={require('../../assets/images/hostel-logo.png')} alt="logo" />

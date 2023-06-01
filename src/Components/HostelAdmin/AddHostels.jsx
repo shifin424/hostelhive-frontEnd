@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import defualtImage from '../../assets/images/hostel-img-1.jpg';
+import defaultImage from '../../assets/images/hostel-img-1.jpg';
 import { addHostelApi } from '../../Services/hostelAdmin';
 import { message } from 'antd';
-import { BiCurrentLocation } from 'react-icons/bi'
+import { BiCurrentLocation } from 'react-icons/bi';
 import { Modal, Button } from 'antd';
 import LocationNew from './LocationNew';
 
 const AddHostel = () => {
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [lat, setLat] = useState(10.45);
   const [lng, setLng] = useState(76.6);
+  const [selectedPlace, setSelectedPlace] = useState('');
+
   const initialValues = {
     file: null,
     title: '',
@@ -20,23 +21,31 @@ const AddHostel = () => {
     description: '',
   };
 
-  const validationSchema = Yup.object({
-
+  const validationSchema = Yup.object().shape({
     title: Yup.string().required('Hostel Name is required'),
-    location: Yup.string().required('Location is required'),
+    location: Yup.string().when('selectedPlace', {
+      is: '',
+      then: Yup.string().required('Location is required'),
+    }),
     description: Yup.string().required('Description is required'),
-    file: Yup.mixed().required('Image is required')
+    file: Yup.mixed().required('Image is required'),
   });
 
   const handleSubmit = (values) => {
     const data = new FormData();
     data.append('title', values.title);
-    data.append('location', values.location);
+    data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
     data.append('description', values.description);
     data.append('image', values.file);
+    data.append('latitude', lat);
+    data.append('longitude', lng);
 
     addHostelApi(data)
       .then((response) => {
+        console.log(response);
+        if (response) {
+          message.success('Form submitted');
+        }
         message.success('Hostel added successfully');
       })
       .catch((error) => {
@@ -56,9 +65,13 @@ const AddHostel = () => {
     setIsModalVisible(false);
   };
 
+  const updatePlaceName = (name) => {
+    setSelectedPlace(name);
+  };
+
   return (
     <div className="bg-[#ffff] py-4 pb-16">
-      <div className="max-w-3xl mx-auto p-4 bg-white rounded-lg shadow-2xl mt-14  pb-16">
+      <div className="max-w-3xl mx-auto p-4 bg-[#93b8f9] rounded-lg shadow-2xl mt-14  pb-16">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -79,7 +92,7 @@ const AddHostel = () => {
                           />
                         ) : (
                           <div className="mb-4 aspect-w-1 aspect-h-1 mt-4 rounded-sm ">
-                            <img src={defualtImage} alt="" />
+                            <img src={defaultImage} alt="" />
                           </div>
                         )}
                         <input
@@ -89,7 +102,7 @@ const AddHostel = () => {
                           onChange={(event) => {
                             form.setFieldValue(field.name, event.currentTarget.files[0]);
                           }}
-                          className="py-2 px-4 border border-gray-400 rounded w-full"
+                          className="py-2 px-4 border border-gray-700 rounded bg-white w-full"
                         />
                       </>
                     )}
@@ -97,23 +110,23 @@ const AddHostel = () => {
                   <ErrorMessage name="file" component="div" className="text-red-500" />
                 </div>
               </div>
-              
+
               <div className="w-1/2">
                 <div className="mb-4">
                   <label htmlFor="input1" className="block text-gray-900 font-semibold mb-2">
                     Hostel Name
                   </label>
-                  
+
                   <Field
                     type="text"
                     id="input1"
                     name="title"
                     placeholder="Enter your hostel name"
-                    className="py-2 px-4 border border-gray-400 rounded w-full bg-white"
+                    className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white"
                   />
                   <ErrorMessage name="title" component="div" className="text-red-500" />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 ">
                   <label htmlFor="input2" className="block text-gray-700 font-semibold mb-2">
                     Location
                     <button
@@ -125,12 +138,21 @@ const AddHostel = () => {
                     </button>
                   </label>
 
-                  <div className='border border-gray-400 text-[#002D7A] rounded-sm flex  py-2 px-4 '>
+                  <div className='border border-gray-800 text-[#002D7A] rounded-sm flex  py-2 px-4  bg-white '>
                     <span className='mt-1'>
                       <BiCurrentLocation />
                     </span>
-
+                    {selectedPlace}
                   </div>
+                  {selectedPlace === '' && (
+                    <Field
+                      type="text"
+                      id="location"
+                      name="location"
+                      placeholder="Enter location"
+                      className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white mt-2"
+                    />
+                  )}
                   <ErrorMessage name="location" component="div" className="text-red-500" />
                 </div>
                 <div>
@@ -142,7 +164,7 @@ const AddHostel = () => {
                     id="description"
                     name="description"
                     placeholder="Enter your details about hostel"
-                    className="py-2 px-4 border border-gray-400 rounded w-full h-48 bg-white"
+                    className="py-2 px-4 border border-gray-700 rounded text-gray-700 w-full h-48 bg-white"
                   />
                   <ErrorMessage name="description" component="div" className="text-red-500" />
                 </div>
@@ -160,10 +182,8 @@ const AddHostel = () => {
         </Formik>
       </div>
 
-
-
       <Modal
-        open={isModalVisible}
+        visible={isModalVisible}
         onCancel={handleModalClose}
         footer={[
           <Button key="cancel" className='bg-red-400 text-white' onClick={handleModalClose}>
@@ -177,12 +197,8 @@ const AddHostel = () => {
         width={800}
       >
         <h1>Choose your location</h1>
-        <LocationNew lat={lat} setLat={setLat} lng={lng} setLng={setLng}/>
+        <LocationNew lat={lat} setLat={setLat} lng={lng} setLng={setLng} updatePlaceName={updatePlaceName} />
       </Modal>
-
-
-
-
     </div>
   );
 };

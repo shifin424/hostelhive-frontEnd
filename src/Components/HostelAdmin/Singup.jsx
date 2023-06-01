@@ -70,92 +70,116 @@ function Singnup() {
       });
   };
 
+  const goBack = () => {
+    navigate('/hostelAdmin/login')
+  };
+
   return (
     <div>
-      <div className="w-full h-screen bg-white mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="w-full h-screen bg-white  mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="max-w-2xl bg-[#93b8f9] mx-auto mt-8 rounded-md shadow-2xl p-6">
-            <h2 className="text-2xl text-center font-bold mb-4 text-white">HostelAdmin Signup</h2>
+          <Form className="max-w-2xl bg-[#93b8f9] min-h-max mx-auto mt-8 rounded-md shadow-2xl p-6">
+            <h2 className="text-2xl text-center font-bold mb-4 text-[#002D7A]">HostelAdmin Signup</h2>
             {error && <div className="text-red-500 text-center">{error}</div>}
-  
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="fullName" className='text-white'>Full Name</label>
+                <label htmlFor="fullName" className="font-popins  text-[#002D7A]">
+                  Full Name
+                </label>
                 <Field
                   type="text"
                   id="fullName"
                   name="fullName"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Enter your fullName"
                 />
                 <ErrorMessage name="fullName" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="email" className='text-white'>Email</label>
+                <label htmlFor="email" className="font-popins  text-[#002D7A]">
+                  Email
+                </label>
                 <Field
                   type="email"
                   id="email"
                   name="email"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Enter your email"
                 />
                 <ErrorMessage name="email" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="password" className='text-white'>Password</label>
+                <label htmlFor="password" className="font-popins  text-[#002D7A]">
+                  Password
+                </label>
                 <Field
                   type="password"
                   id="password"
                   name="password"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Enter your Password"
                 />
                 <ErrorMessage name="password" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="confirmPassword" className='text-white'>Confirm Password</label>
+                <label htmlFor="confirmPassword" className="font-popins  text-[#002D7A]">
+                  Confirm Password
+                </label>
                 <Field
                   type="password"
                   id="confirmPassword"
                   name="confirmPassword"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Confirm your password"
                 />
                 <ErrorMessage name="confirmPassword" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="mobileNumber" className='text-white'>Mobile Number</label>
+                <label htmlFor="mobileNumber" className="font-popins  text-[#002D7A]">
+                  Mobile Number
+                </label>
                 <Field
                   type="text"
                   id="mobileNumber"
                   name="mobileNumber"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Enter your Mobile Number"
                 />
                 <ErrorMessage name="mobileNumber" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="qualification" className='text-white'>Qualification</label>
+                <label htmlFor="qualification" className="font-popins  text-[#002D7A]">
+                  Qualification
+                </label>
                 <Field
                   type="text"
                   id="qualification"
                   name="qualification"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
+                  placeholder="Enter your Qualification"
                 />
                 <ErrorMessage name="qualification" component="div" className="text-red-500" />
               </div>
-  
+
               <div>
-                <label htmlFor="gender" className='text-white'>Gender</label>
+                <label htmlFor="gender" className="font-popins  text-[#002D7A]">
+                  Gender
+                </label>
                 <Field
                   as="select"
                   id="gender"
                   name="gender"
-                  className="border rounded-md p-2 w-full"
+                  className="border rounded-md p-2 w-full text-gray-700 bg-slate-200"
                 >
                   <option value="">Select</option>
                   <option value="male">Male</option>
@@ -165,22 +189,25 @@ function Singnup() {
                 <ErrorMessage name="gender" component="div" className="text-red-500" />
               </div>
             </div>
-  
+
             <div className="text-center mt-8">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              >
+              <button type="submit" className="bg-[#1a4ca3] text-white text-lg hover:bg-blue-500 px-16 py-4 rounded-full">
                 Submit
               </button>
             </div>
           </Form>
         </Formik>
+
+        <p className="text-center mt-4">
+          <button className="text-gray-500  font-bold font-popins text-center mt-4" onClick={() => goBack()}>
+            Go back
+          </button>
+        </p>
       </div>
     </div>
   );
-  
-  
+
+
 }
 
 export default Singnup;
