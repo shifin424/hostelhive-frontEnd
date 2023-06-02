@@ -161,6 +161,9 @@ sub {
 sup {
   top: -0.5em;
 }
+.custom-modal .ant-modal-body {
+  background-color: #93b8f9;
+}
 
 /*
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)

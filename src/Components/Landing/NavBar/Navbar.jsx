@@ -13,7 +13,7 @@ function Navbar() {
 
   const handleLogout =()=>{
     localStorage.removeItem('HostelAdminToken')
-    navigate('/superAdmin/login')
+    navigate('/hostelAdmin/login')
   }
 
 

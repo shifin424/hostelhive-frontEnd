@@ -6,6 +6,8 @@ import Login from '../Pages/HostelAdmin/LoginPage'
 import LandingPage from '../Pages/HostelAdmin/Welcome'
 import AddHostel from '../Pages/HostelAdmin/AddHostel'
 import HostelAdmin from '../Verification/hostelAdminVerification'
+import Notification from "../Pages/HostelAdmin/Notification";
+import Layout from "../Pages/HostelAdmin/Layout";
 
 
 
@@ -17,6 +19,8 @@ const hostelRoutes = () => {
         <Route path="/login" element={<HostelAdmin><Login/> </HostelAdmin>}></Route>
         <Route path="/getStarted" element={<HostelAdmin><LandingPage/> </HostelAdmin>}></Route>
         <Route path="/addHostel" element={<HostelAdmin><AddHostel/> </HostelAdmin>}></Route>
+        <Route path='/notification' element={<Notification/>} ></Route>
+        <Route path='/dummy' element ={<Layout/>}></Route>
       </Routes>
     );
   };

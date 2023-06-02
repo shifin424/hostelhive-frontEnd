@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import defaultImage from '../../assets/images/hostel-img-1.jpg';
@@ -8,11 +9,14 @@ import { BiCurrentLocation } from 'react-icons/bi';
 import { Modal, Button } from 'antd';
 import LocationNew from './LocationNew';
 
+
 const AddHostel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [lat, setLat] = useState(10.45);
   const [lng, setLng] = useState(76.6);
   const [selectedPlace, setSelectedPlace] = useState('');
+
+  const navigate = useNavigate()
 
   const initialValues = {
     file: null,
@@ -32,6 +36,9 @@ const AddHostel = () => {
   });
 
   const handleSubmit = (values) => {
+
+
+    console.log(values.file);
     const data = new FormData();
     data.append('title', values.title);
     data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
@@ -40,13 +47,20 @@ const AddHostel = () => {
     data.append('latitude', lat);
     data.append('longitude', lng);
 
-    addHostelApi(data)
+    const headers = {
+      headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("HostelAdminToken")
+      },
+  }
+
+    addHostelApi(data,headers)
       .then((response) => {
-        console.log(response);
         if (response) {
-          message.success('Form submitted');
+        navigate('/hostelAdmin/notification')
+        message.success('The hostel request has been successfully send');
         }
-        message.success('Hostel added successfully');
+        
       })
       .catch((error) => {
         message.error('An error occurred while adding the hostel');

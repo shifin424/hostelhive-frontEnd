@@ -14,7 +14,7 @@ export const hostelAdminLogin =(values) =>{
     return axios.post('/hostelAdmin/postLogin',values)
 }
 
-export const addHostelApi =(data) =>{
-    return axios.post('/hostelAdmin/add-Hostel',data)
+export const addHostelApi =(data,headers) =>{
+    return axios.post('/hostelAdmin/add-Hostel',data,headers)
 }
 
