@@ -9,14 +9,13 @@ import { BiCurrentLocation } from 'react-icons/bi';
 import { Modal, Button } from 'antd';
 import LocationNew from './LocationNew';
 
-
 const AddHostel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [lat, setLat] = useState(10.45);
   const [lng, setLng] = useState(76.6);
   const [selectedPlace, setSelectedPlace] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const initialValues = {
     file: null,
@@ -25,19 +24,20 @@ const AddHostel = () => {
     description: '',
   };
 
-  const validationSchema = Yup.object().shape({
-    title: Yup.string().required('Hostel Name is required'),
-    location: Yup.string().when('selectedPlace', {
-      is: '',
-      then: Yup.string().required('Location is required'),
-    }),
-    description: Yup.string().required('Description is required'),
-    file: Yup.mixed().required('Image is required'),
-  });
+ const validationSchema = Yup.object().shape({
+  title: Yup.string().required('Hostel Name is required'),
+  location: Yup.string().test(
+    'required',
+    'Location is required',
+    function(value) {
+      return this.options.context.selectedPlace !== '' || value.trim() !== '';
+    }
+  ),
+  description: Yup.string().required('Description is required'),
+  file: Yup.mixed().required('Image is required'),
+});
 
   const handleSubmit = (values) => {
-
-
     console.log(values.file);
     const data = new FormData();
     data.append('title', values.title);
@@ -49,18 +49,17 @@ const AddHostel = () => {
 
     const headers = {
       headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: localStorage.getItem("HostelAdminToken")
+        'Content-Type': 'multipart/form-data',
+        Authorization: localStorage.getItem('HostelAdminToken'),
       },
-  }
+    };
 
-    addHostelApi(data,headers)
+    addHostelApi(data, headers)
       .then((response) => {
         if (response) {
-        navigate('/hostelAdmin/notification')
-        message.success('The hostel request has been successfully send');
+          navigate('/hostelAdmin/hostel-listing');
+          message.success('The hostel request has been successfully sent');
         }
-        
       })
       .catch((error) => {
         message.error('An error occurred while adding the hostel');
@@ -140,7 +139,7 @@ const AddHostel = () => {
                   />
                   <ErrorMessage name="title" component="div" className="text-red-500" />
                 </div>
-                <div className="mb-4 ">
+                <div className="mb-4">
                   <label htmlFor="input2" className="block text-gray-700 font-semibold mb-2">
                     Location
                     <button
@@ -152,20 +151,33 @@ const AddHostel = () => {
                     </button>
                   </label>
 
-                  <div className='border border-gray-800 text-[#002D7A] rounded-sm flex  py-2 px-4  bg-white '>
-                    <span className='mt-1'>
-                      <BiCurrentLocation />
-                    </span>
-                    {selectedPlace}
-                  </div>
-                  {selectedPlace === '' && (
-                    <Field
-                      type="text"
-                      id="location"
-                      name="location"
-                      placeholder="Enter location"
-                      className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white mt-2"
-                    />
+                  {selectedPlace !== '' ? (
+                    <div className="border border-gray-800 text-[#002D7A] rounded-sm flex  py-2 px-4  bg-white">
+                      <span className="mt-1">
+                        <BiCurrentLocation />
+                      </span>
+                      {selectedPlace}
+                    </div>
+                  ) : (
+                    <>
+                      <div className="hidden">
+                        <Field
+                          type="text"
+                          id="location"
+                          name="location"
+                          placeholder="Enter location"
+                          className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white mt-2"
+                        />
+                      </div>
+                      <Field
+                        type="text"
+                        id="dummy"
+                        name="dummy"
+                        style={{ display: 'none' }}
+                        tabIndex={-1}
+                        aria-hidden="true"
+                      />
+                    </>
                   )}
                   <ErrorMessage name="location" component="div" className="text-red-500" />
                 </div>
@@ -200,7 +212,7 @@ const AddHostel = () => {
         visible={isModalVisible}
         onCancel={handleModalClose}
         footer={[
-          <Button key="cancel" className='bg-red-400 text-white' onClick={handleModalClose}>
+          <Button key="cancel" className="bg-red-400 text-white" onClick={handleModalClose}>
             Cancel
           </Button>,
           <Button key="ok" onClick={handleModalOk}>

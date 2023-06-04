@@ -18,3 +18,6 @@ export const addHostelApi =(data,headers) =>{
     return axios.post('/hostelAdmin/add-Hostel',data,headers)
 }
 
+export const hostelDataApi = (headers) =>{
+    return axios.get('/hostelAdmin/get-hostel-data',{headers})
+}

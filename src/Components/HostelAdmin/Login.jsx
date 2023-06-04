@@ -32,9 +32,7 @@ function Login() {
           setError(response.data.error);
         } else {
           localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
-          console.log("Form submitted");
-          navigate('/hostelAdmin/getStarted');
-
+          navigate('/hostelAdmin/dashboard');
         }
       })
       .catch((err) => {

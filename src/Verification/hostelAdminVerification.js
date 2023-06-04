@@ -14,7 +14,7 @@ export default function HostelAdminVerification({ children }) {
                 navigate("/hostelAdmin/login");
         } else {
                 
-            navigate('/hostelAdmin/getStarted')
+            navigate('/hostelAdmin/dashboard')
         }
     }, []);
 
