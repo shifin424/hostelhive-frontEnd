@@ -26,6 +26,13 @@ function AddHostelButton() {
     fetchHostelData();
   }, []);
 
+  const handleNavigate=(status)=>{
+    if(status ==="Pending"){
+      message.error("hostel is not approved")
+    }else if(status==="Approved"){
+      message.success("navigated to hostel page")
+    }
+  }
   return (
     <>
       <div>
@@ -39,7 +46,7 @@ function AddHostelButton() {
           {hostelData.map((hostel) => (
             <div
               key={hostel._id}
-              className="max-w-xs sm:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
+              className="max-w-xs sm:max-w-sm bg-white border pb-12 border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
             >
               <a href="#">
                 <img
@@ -57,8 +64,8 @@ function AddHostelButton() {
                 <p className="mb-3 text-sm sm:text-base font-normal text-gray-700 dark:text-gray-400">
                   Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
                 </p>
-                <a
-                  href="#"
+                <div
+                  onClick={()=>handleNavigate(hostel.isApproved)}
                   className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Enter 
@@ -75,7 +82,7 @@ function AddHostelButton() {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </a>
+                </div>
               </div>
             </div>
           ))}

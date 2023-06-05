@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <div>
-  <nav className="bg-white ">
+  <nav className="bg-white  border-b-4  shadow-lg ">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
       <a href="#" className="flex items-center">
         <img className="w-32 h-14 absolute left-4" src={require('../../../assets/images/hostel-logo.png')} alt="logo" />
@@ -119,7 +119,7 @@ function Navbar() {
               <div className="py-1">
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                  onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                 >
                   Sign out
                 </a>
