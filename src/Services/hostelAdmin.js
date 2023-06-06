@@ -21,3 +21,5 @@ export const addHostelApi =(data,headers) =>{
 export const hostelDataApi = (headers) =>{
     return axios.get('/hostelAdmin/get-hostel-data',{headers})
 }
+
+

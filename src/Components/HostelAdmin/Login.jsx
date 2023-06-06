@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { hostelAdminLogin } from '../../Services/hostelAdmin'
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -32,6 +33,7 @@ function Login() {
           setError(response.data.error);
         } else {
           localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
+          message.success('logged in successfully.')
           navigate('/hostelAdmin/dashboard');
         }
       })

@@ -102,12 +102,14 @@ const AddHostel = () => {
                             src={URL.createObjectURL(field.value)}
                             alt="Preview"
                             className="object-cover rounded-lg"
+                            style={{ width: "1425px", height: "300px" }} 
                           />
                         ) : (
                           <div className="mb-4 aspect-w-1 aspect-h-1 mt-4 rounded-sm ">
                             <img src={defaultImage} alt="" />
                           </div>
                         )}
+                        <br />
                         <input
                           type="file"
                           id="image"

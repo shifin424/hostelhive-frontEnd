@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { hostelAdminApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { message } from 'antd'
 import { resetState, registerHostelAdmin } from '../../Redux/Features/hostelAdminSlice';
 
 function Singnup() {
@@ -56,17 +59,20 @@ function Singnup() {
     hostelAdminApi(values)
       .then((response) => {
         if (response.data.error) {
+          toast.error(response.data.error);
           setError(response.data.error);
         } else {
           console.log('form submitted');
           dispatch(resetState());
           dispatch(registerHostelAdmin(values));
+          message.success('Form submitted successfully!'); 
           navigate('/hostelAdmin/otpVerification');
         }
       })
       .catch((err) => {
         console.log(err);
         setError(err.response.data.error || 'An error occurred');
+        toast.error(err.response.data.error || 'An error occurred'); 
       });
   };
 
