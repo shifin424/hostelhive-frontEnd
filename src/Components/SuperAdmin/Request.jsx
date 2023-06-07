@@ -157,16 +157,12 @@ function Request() {
   const [requests, setRequests] = useState([]);
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [description, setDescription] = useState('');
-  const [selectedRejectId, setSelectedRejectId] = useState(null);
+  const [selectedRequestId, setSelectedRequestId] = useState(null);
   const [rejectModalVisible, setRejectModalVisible] = useState(false);
   const [rejectDescription, setRejectDescription] = useState('');
 
   useEffect(() => {
     const fetchHostelRequests = async () => {
-      setStatus(true);
-      setStatus(false);
       try {
         const headers = {
           Authorization: localStorage.getItem('adminToken'),
@@ -175,7 +171,6 @@ function Request() {
         if (response) {
           console.log(response.data);
           setRequests(response.data);
-          setStatus(false);
         } else {
           console.log(response);
         }
@@ -184,16 +179,14 @@ function Request() {
       }
     };
     fetchHostelRequests();
-  }, [status]);
+  }, []);
 
   const openModal = (requestId) => {
-    setSelectedRejectId(requestId);
-    setRejectModalVisible(true);
+    setSelectedRequestId(requestId);
   };
 
   const closeModal = () => {
-    setSelectedRejectId(null);
-    setRejectModalVisible(false); // Close the modal
+    setSelectedRequestId(null);
   };
 
   const approveHostel = async (id) => {
@@ -201,23 +194,22 @@ function Request() {
       const headers = {
         Authorization: localStorage.getItem('adminToken'),
       };
-      await hostelApprovalApi(id, headers).then(() => {
-        message.success('Hostel approved successfully');
-        setStatus(true);
-      });
+      await hostelApprovalApi(id, headers);
+      message.success('Hostel approved successfully');
+      setStatus(!status);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const rejectHostel = async (description) => {
+  const rejectHostel = async () => {
     try {
       const headers = {
         Authorization: localStorage.getItem('adminToken'),
       };
-      await hostelRejectedApi(selectedRejectId, headers, description);
-      setStatus(true);
+      await hostelRejectedApi(selectedRequestId, headers, rejectDescription);
       message.success('Hostel rejected successfully');
+      setStatus(!status);
     } catch (error) {
       console.log(error);
     }
@@ -225,19 +217,19 @@ function Request() {
 
   const handleRejectSubmit = () => {
     setLoading(true);
+    rejectHostel();
     setLoading(false);
     setRejectModalVisible(false);
-    rejectHostel(rejectDescription);
+    setRejectDescription('');
   };
 
   const handleRejectCancel = () => {
     setRejectModalVisible(false);
+    setRejectDescription('');
   };
 
   const handleRejectButton = (requestId) => {
-    console.log("Request ID:", requestId);
-    setSelectedRejectId(requestId);
-    console.log("Selected Reject ID:", selectedRejectId);
+    setSelectedRequestId(requestId);
     setRejectModalVisible(true);
   };
   
@@ -274,7 +266,7 @@ function Request() {
                 <button className="btn btn-success" onClick={() => approveHostel(data._id)}>
                   Approve
                 </button>
-                <button className="btn btn-error ml-5" onClick={() => handleRejectButton()}>
+                <button className="btn btn-error ml-5" onClick={() => handleRejectButton(data._id)}>
                   Reject
                 </button>
               </td>
@@ -282,14 +274,15 @@ function Request() {
           ))}
         </tbody>
       </table>
+
       {requests.map((item) => (
         <Modal
           key={item._id}
           title="Hostel Info"
           centered
-          visible={selectedRejectId === item._id}
-          onOk={closeModal}
+          visible={selectedRequestId === item._id}
           onCancel={closeModal}
+          footer={null}
           width={1000}
           className="custom-modal"
         >
@@ -304,15 +297,15 @@ function Request() {
             <div className="w-1/2 p-4">
               <h2 className="text-2xl text-[#002D7A] font-bold mb-2">Hostel Name: {item.hostelName}</h2>
               <br />
-              <p className="text-lg mb-2 font-semibold">Hostel Owner Name   : {item.adminData.fullName}</p>
-              <p className="text-lg font-semibold">Hostel Owner Number   : {item.adminData.mobile}</p>
-              <p className="text-lg font-semibold">Hostel Owner Number   : {item.adminData.email}</p>
-              <p className="text-lg mb-2 font-semibold">Hostel Location  : {item.location}</p>
+              <p className="text-lg mb-2 font-semibold">Hostel Owner Name: {item.adminData.fullName}</p>
+              <p className="text-lg font-semibold">Hostel Owner Number: {item.adminData.mobile}</p>
+              <p className="text-lg font-semibold">Hostel Owner Email: {item.adminData.email}</p>
+              <p className="text-lg mb-2 font-semibold">Hostel Location: {item.location}</p>
             </div>
           </div>
           <div className="flex flex-col mt-4">
-            <h3 className="text-lg font-bold mb-2 text-[#002D7A]  ">Description</h3>
-            <div className="bg-gray-200  mt-2 p-4 rounded-md">
+            <h3 className="text-lg font-bold mb-2 text-[#002D7A]">Description</h3>
+            <div className="bg-gray-200 mt-2 p-4 rounded-md">
               <p className="text-lg">{item.description}</p>
             </div>
           </div>
@@ -324,9 +317,9 @@ function Request() {
         visible={rejectModalVisible}
         onOk={handleRejectSubmit}
         onCancel={handleRejectCancel}
-        className="custom-modal "
+        className="custom-modal"
       >
-        <p className=" mb-2 text-slate-600">Description</p>
+        <p className="mb-2 text-slate-600">Description</p>
         <textarea
           className="w-full h-40 border border-gray-700 rounded-lg p-2 bg-white"
           name="reject-reason"
@@ -340,3 +333,4 @@ function Request() {
 }
 
 export default Request;
+
