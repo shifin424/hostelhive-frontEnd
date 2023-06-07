@@ -14,9 +14,11 @@ export const hostelApprovalApi = (id,headers) =>{
     return axios.patch(`/superAdmin/approve-hostel/${id}`,{},{headers})
 }
 
-export const hostelRejectedApi = (id,headers) =>{
-    return axios.patch(`/superAdmin/reject-hostel/${id}`,{},{headers})
-}
+export const hostelRejectedApi = (id, headers, description) => {
+    console.log(id,666);
+    return axios.patch(`/superAdmin/reject-hostel/${id}`, { description }, { headers });
+  };
+  
 
 
 
