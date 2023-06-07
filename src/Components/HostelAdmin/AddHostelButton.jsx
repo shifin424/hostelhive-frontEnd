@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, message } from 'antd';
 import { hostelDataApi } from '../../Services/hostelAdmin';
+import { useNavigate } from 'react-router-dom';
 
 function AddHostelButton() {
   const [hostelData, setHostelData] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchHostelData = async () => {
@@ -30,7 +32,7 @@ function AddHostelButton() {
     if(status ==="Pending"){
       message.error("hostel is not approved")
     }else if(status==="Approved"){
-      message.success("navigated to hostel page")
+      navigate('/hostelAdmin/hostel-listing/dashboard')
     }
   }
   return (
