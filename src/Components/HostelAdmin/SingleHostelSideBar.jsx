@@ -1,21 +1,24 @@
 
 import React, { useState } from 'react';
 import { RxDashboard } from 'react-icons/rx';
-import { HiOutlineOfficeBuilding } from 'react-icons/hi';
-import { TbMessages } from 'react-icons/tb';
+import { FaBed } from 'react-icons/fa';
 import { CgMenuRightAlt } from 'react-icons/cg';
-import { BsEnvelopePaper } from 'react-icons/bs';
-import { ImNewspaper } from 'react-icons/im';
+import { RiMessage2Fill } from 'react-icons/ri';
+import { SlEnvolopeLetter } from 'react-icons/sl';
+import {GiScrollQuill}  from 'react-icons/gi'
+import {IoFastFoodSharp} from  'react-icons/io5'
 import { MdOutlineReportProblem } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 function SingleHostelSideBar() {
     const menus = [
-        { name: 'DASHBOARD', link: '/hostelAdmin/dashboard', icon: RxDashboard },
-        { name: 'HOSTELS', link: '/hostelAdmin/hostel-listing', icon: TbMessages },
-        { name: 'STUDENT REQUESTS', link: '', icon: TbMessages },
-        { name: 'VACATING LETTERS', link: '', icon: BsEnvelopePaper },
-        { name: 'LEAVE LETTERS', link: '', icon: ImNewspaper },
+        { name: 'DASHBOARD', link: '/hostelAdmin/hostel-listing/dashboard', icon: RxDashboard },
+        { name: 'ROOMS', link: '/hostelAdmin/hostel-listing/rooms', icon: FaBed },
+        { name: 'STUDENT REQUESTS', link: '', icon:RiMessage2Fill  },
+        { name: 'STUDENT MANAGMENTS', link: '', icon:FaBed},
+        { name: 'FOOD SYSTEMS', link: '', icon: IoFastFoodSharp },
+        { name: 'LEAVE LETTERS', link: '', icon: SlEnvolopeLetter },
+        { name: 'VACATING LETTERS', link: '', icon: GiScrollQuill },
         { name: 'COMPLAINTS', link: '', icon: MdOutlineReportProblem },
       ];
     
