@@ -22,4 +22,8 @@ export const hostelDataApi = (headers) =>{
     return axios.get('/hostelAdmin/get-hostel-data',{headers})
 }
 
+export const hostelRoomApi = (formData,headers) =>{
+    return axios.post('/hostelAdmin/add-rooms',formData,headers)
+}
+
 
