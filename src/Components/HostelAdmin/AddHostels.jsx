@@ -43,7 +43,7 @@ const AddHostel = () => {
     data.append('title', values.title);
     data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
     data.append('description', values.description);
-    data.append('image', values.file);
+    data.append('im age', values.file);
     data.append('latitude', lat);
     data.append('longitude', lng);
 

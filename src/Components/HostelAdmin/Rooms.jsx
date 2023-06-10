@@ -1,16 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, message } from 'antd';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { navigate, useNavigate } from 'react-router-dom';
-import { hostelRoomApi } from '../../Services/hostelAdmin';
+import { hostelRoomApi ,hostelRoomData} from '../../Services/hostelAdmin';
 
 function Rooms() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState([]);
+    const [roomData,setRoomData] = useState([])
     const [previewImage, setPreviewImage] = useState(null);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const fetchRoomData = async () => {
+          try {
+            const headers = {
+              Authorization: localStorage.getItem("HostelAdminToken"),
+              hostelId: "64823427c73f97a6e30d7b44" 
+            };
+            const response = await hostelRoomData(headers);
+            if (response) {
+              console.log(response.data);
+              setRoomData(response.data);
+            } else {
+              console.log(response);
+            }
+          } catch (error) {
+            message.error(error);
+          }
+        };
+        fetchRoomData();
+      }, []);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -31,7 +54,7 @@ function Rooms() {
         image: Yup.mixed().required('Image is required'),
     });
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values, { resetForm }) => {
         const formData = new FormData();
         formData.append('roomNo', values.roomNo);
         formData.append('roomType', values.roomType);
@@ -42,30 +65,30 @@ function Rooms() {
 
         const headers = {
             headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: localStorage.getItem('HostelAdminToken'),
+                'Content-Type': 'multipart/form-data',
+                Authorization: localStorage.getItem('HostelAdminToken'),
             },
-          };
-      
-      console.log(formData,headers);
-        hostelRoomApi(formData,headers)
-          .then((response) => {
-            if (response.data.error) {
-              toast.error(response.data.error);
-              setError(response.data.error);
-            } else {
-              message.success('Room added successfully');
-              // navigate('');
-              message.success('Navigated to this page');
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            setError(err.response.data.error || 'An error occurred');
-            toast.error(err.response.data.error || 'An error occurred');
-          });
-      };
-      
+        };
+
+        console.log(formData, headers);
+        hostelRoomApi(formData, headers)
+            .then((response) => {
+                if (response.data.error) {
+                    toast.error(response.data.error);
+                    setError(response.data.error);
+                } else {
+                    message.success('Room added successfully');
+                    // navigate('');
+                    message.success('Navigated to this page');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(err.response.data.error || 'An error occurred');
+                toast.error(err.response.data.error || 'An error occurred');
+            });
+    };
+
 
     const handleImageChange = (event, setFieldValue) => {
         const file = event.currentTarget.files[0];
@@ -99,8 +122,7 @@ function Rooms() {
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { resetForm }) => {
-                        handleSubmit(values);
-                        resetForm();
+                        handleSubmit(values, resetForm);
                         setIsModalOpen(false);
                     }}
                 >
@@ -218,7 +240,7 @@ function Rooms() {
                             {previewImage && (
                                 <div>
                                     <h3>Room Image Preview:</h3>
-                                    <img src={previewImage} alt="Preview"  className='w-[28rem] h-52 rounded-md'/>
+                                    <img src={previewImage} alt="Preview" className='w-[28rem] h-52 rounded-md' />
                                 </div>
                             )}
                             <div className="flex justify-end">

@@ -31,7 +31,7 @@ function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
       const data = await response.json();
       const placeName = data.features[0].place_name;
       console.log('Place Name:', placeName);
-      updatePlaceName(placeName); // Update selected place name
+      updatePlaceName(placeName); 
     } catch (error) {
       console.error('Error retrieving place name:', error);
     }

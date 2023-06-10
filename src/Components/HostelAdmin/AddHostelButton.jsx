@@ -3,35 +3,24 @@ import { Link } from 'react-router-dom';
 import { Button, message } from 'antd';
 import { hostelDataApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { allHostel } from '../../Redux/Features/hostel/hostelSlice';
 
 function AddHostelButton() {
-  const [hostelData, setHostelData] = useState([]);
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
+  const { hostels } = useSelector(state => state.hostel)
   useEffect(() => {
-    const fetchHostelData = async () => {
-      try {
-        const headers = {
-          Authorization: localStorage.getItem("HostelAdminToken")
-        };
-        const response = await hostelDataApi(headers);
-        if (response) {
-          console.log(response.data);
-          setHostelData(response.data);
-        } else {
-          console.log(response);
-        }
-      } catch (error) {
-        message.error(error);
-      }
+    const headers = {
+      Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
     };
-    fetchHostelData();
+    dispatch(allHostel(headers))
   }, []);
 
-  const handleNavigate=(status)=>{
-    if(status ==="Pending"){
+  const handleNavigate = (status) => {
+    if (status === "Pending") {
       message.error("hostel is not approved")
-    }else if(status==="Approved"){
+    } else if (status === "Approved") {
       navigate('/hostelAdmin/hostel-listing/dashboard')
     }
   }
@@ -43,16 +32,16 @@ function AddHostelButton() {
             <button className='btn btn-info'>Add Hostel</button>
           </Link>
         </div>
-  
-        {hostelData.length <1 ? (
-         <div className="bg-white w-full h-[33rem] flex justify-start flex-col">
-         <p className="text-center text-3xl text-black mt-10">Not added any hostels yet.</p>
-       </div>
-       
-          
+
+        {hostels?.length < 1 ? (
+          <div className="bg-white w-full h-[33rem] flex justify-start flex-col">
+            <p className="text-center text-3xl text-black mt-10">Not added any hostels yet.</p>
+          </div>
+
+
         ) : (
           <div className='flex flex-row flex-wrap justify-center'>
-            {hostelData.map((hostel) => (
+            {hostels?.map((hostel) => (
               <div
                 key={hostel._id}
                 className="max-w-xs sm:max-w-sm bg-white border pb-12 border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
@@ -74,10 +63,10 @@ function AddHostelButton() {
                     Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
                   </p>
                   <div
-                    onClick={()=>handleNavigate(hostel.isApproved)}
+                    onClick={() => handleNavigate(hostel.isApproved)}
                     className="inline-flex items-center px-3 py-2 text-sm cursor-pointer font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Enter 
+                    Enter
                     <svg
                       aria-hidden="true"
                       className="w-4 h-4 ml-2 -mr-1"
@@ -100,7 +89,7 @@ function AddHostelButton() {
       </div>
     </>
   );
-  
+
 }
 
 export default AddHostelButton;

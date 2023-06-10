@@ -7,12 +7,11 @@ import { hostelAdminApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd'
-import { resetState, registerHostelAdmin } from '../../Redux/Features/hostelAdminSlice';
+// import { resetState, registerHostelAdmin } from '../../Redux/Features/hostelAdminSlice';
 
 function Singnup() {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, errors } = useSelector((state) => state.hostelAdmin);
 
   const initialValues = {
     fullName: '',
@@ -63,8 +62,8 @@ function Singnup() {
           setError(response.data.error);
         } else {
           console.log('form submitted');
-          dispatch(resetState());
-          dispatch(registerHostelAdmin(values));
+          // dispatch(resetState());
+          // dispatch(registerHostelAdmin(values));
           message.success('Form submitted successfully!'); 
           navigate('/hostelAdmin/otpVerification');
         }

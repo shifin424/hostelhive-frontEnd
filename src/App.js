@@ -13,7 +13,7 @@ import HostelRoutes from './Routes/hostelAdmin';
 function App() {
   return (
     <div>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <Router>
           <Routes>
             <Route path="/" element={<Landing />} />
@@ -22,7 +22,7 @@ function App() {
             <Route path="/hostelAdmin/*" element={<HostelRoutes />} />
           </Routes>
         </Router>
-      </Provider>
+      {/* </Provider> */}
     </div>
   );
 }
