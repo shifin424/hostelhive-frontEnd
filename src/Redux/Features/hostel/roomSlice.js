@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { hostelDataApi } from '../../../Services/hostelAdmin'
+import {hostelRoomData } from '../../../Services/hostelAdmin'
 
 
 const initialState = {
-    hostels: [],
+    rooms: [],
     isLoading: false,
     isSuccess: false,
     isError: false,
@@ -11,12 +11,13 @@ const initialState = {
     error: ""
 }
 
-export const allHostel = createAsyncThunk(
-    "hostelAdmin/hostels",
-    async (headers, thunkAPI) => {
+export const roomData = createAsyncThunk(
+    "Rooms/roomData",
+    async ({headers, hostelId}) => {
         try {
-            console.log(headers);
-            const response = await hostelDataApi(headers)
+            console.log("header",headers,"id",hostelId);
+            const response = await hostelRoomData(headers, hostelId)
+            console.log(response.data,"hello");
             return response.data
         } catch (err) {
             console.log(err);
@@ -24,9 +25,8 @@ export const allHostel = createAsyncThunk(
     }
 )
 
-
-export const hostelSlice = createSlice({
-    name: "hostel",
+export const RoomSlice = createSlice({
+    name: "Rooms",
     initialState,
     reducers: {
         reset: (state) => {
@@ -35,15 +35,15 @@ export const hostelSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(allHostel.pending, (state) => {
+            .addCase(roomData.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(allHostel.fulfilled, (state, action) => {
+            .addCase(roomData.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.hostels = action.payload;
+                state.rooms = action.payload;
             })
-            .addCase(allHostel.rejected, (state, action) => {
+            .addCase(roomData.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
@@ -52,5 +52,5 @@ export const hostelSlice = createSlice({
     }
 })
 
-export const { reset } = hostelSlice.actions
-export default hostelSlice.reducer
+export const { reset } = RoomSlice.actions
+export default RoomSlice.reducer

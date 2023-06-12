@@ -26,8 +26,8 @@ export const hostelRoomApi = (formData, headers,hostelId) => {
     return axios.post(`/hostelAdmin/add-rooms/${hostelId}`, formData, headers)
 }
 
-export const hostelRoomData = (headers) => {
-    // return axios.get('/hostelAdmin/room-data/:id',headers)
+export const hostelRoomData = (headers,hostelId) => {
+     return axios.get(`/hostelAdmin/room-data/${hostelId}`,{headers})
 }
 
 
