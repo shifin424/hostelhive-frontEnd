@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import hostelReducer from './Features/hostel/hostelSlice'
 import roomReducer from './Features/hostel/roomSlice'
+import hostelViewReducer from './Features/student/hostelSlice'
 
 const hostelPersistConfig = {
     key:"hostel",
@@ -14,8 +15,15 @@ const roomPersistConfig = {
     storage
 }
 
+const hostelViewPersistConfig = {
+    key:"hostelView",
+    storage
+}
+
+
 const persistedHostelReducer = persistReducer(hostelPersistConfig,hostelReducer)
 const persistedRoomReducer = persistReducer(roomPersistConfig,roomReducer)
+const persistedHostelViewReducer = persistReducer(hostelViewPersistConfig,hostelViewReducer)
 
 
 
@@ -23,14 +31,15 @@ const persistedRoomReducer = persistReducer(roomPersistConfig,roomReducer)
 
 const rootReducer = {
     hostel:persistedHostelReducer,
-    room:persistedRoomReducer
+    room:persistedRoomReducer,
+    hostelView:persistedHostelViewReducer
 }
 
-const store = configureStore({
+export const store = configureStore({
     reducer:rootReducer
 })
 
-export default store
+export  const persistor = persistStore(store)
 
 
 

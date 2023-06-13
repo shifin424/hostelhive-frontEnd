@@ -43,14 +43,14 @@ const AddHostel = () => {
     data.append('title', values.title);
     data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
     data.append('description', values.description);
-    data.append('im age', values.file);
+    data.append('image', values.file);
     data.append('latitude', lat);
     data.append('longitude', lng);
 
     const headers = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization: localStorage.getItem('HostelAdminToken'),
+        Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token,
       },
     };
 

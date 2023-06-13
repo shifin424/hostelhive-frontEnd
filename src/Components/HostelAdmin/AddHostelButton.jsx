@@ -44,7 +44,7 @@ function AddHostelButton() {
             {hostels?.map((hostel) => (
               <div
                 key={hostel._id}
-                className="max-w-xs sm:max-w-sm bg-white border pb-12 border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
+                className="max-w-xs sm:max-w-sm bg-white border pb-16 border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
               >
                 <a href="#">
                   <img

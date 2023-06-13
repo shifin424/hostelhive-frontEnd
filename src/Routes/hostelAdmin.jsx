@@ -4,7 +4,7 @@ import Locaion from "../Components/Landing/Location/Locaion";
 import OtpPage from "../Pages/Landing/OtpVerificaion";
 import Login from '../Pages/HostelAdmin/LoginPage'
 import AddHostel from '../Pages/HostelAdmin/AddHostel'
-import HostelAdmin from '../Verification/hostelAdminVerification'
+import HostelAdmin from '../Verification/hostelAdminVerifica0tion'
 import Notification from "../Pages/HostelAdmin/Notification";
 import DashBoard from "../Pages/HostelAdmin/DashBoard";
 import GlobalHostelLayout from "../Components/HostelAdmin/GlobalHostelLayout";

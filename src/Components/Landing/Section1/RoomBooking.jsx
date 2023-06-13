@@ -1,0 +1,76 @@
+import React from 'react'
+import image from '../../../assets/images/four-bed.jpg';
+import { ImCross } from "react-icons/im";
+import { FaRegUser } from "react-icons/fa";
+import { IoBedOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
+
+function RoomBooking() {
+    return (
+
+        <>
+            <div className="bg-white w-full h-44 pt-14">
+                <h1 className="ml-10 text-3xl text-[#002D7A] font-bold font-popins">
+                    Room Details
+                </h1>
+            </div>
+            <div className='bg-white pb-10'>
+                <li className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16  lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20 ">
+                    <div className="overflow-hidden rounded-md lg:w-2/6">
+                        <img
+                            className="w-full h-full"
+                            src={image}
+                            alt="room"
+                        ></img>
+                    </div>
+                    <div className="p-5 grid lg:grid-cols-2 w-full">
+                        <div className="grid gap-4">
+                            <div className="text-2xl font-bold text-[#002D7A]">
+                                <h1>Single room</h1>
+                            </div>
+
+                            <div className="flex-wrap text-gray-600  text-xl">
+                                Mwone onnum paraynilla anyayam
+                            </div>
+                            <div className="flex flex-wrap items-center text-gray-900 text-xl gap-6 sm:gap-6">
+                                <div className="flex gap-2 items-center">
+                                    <div>
+                                        <FaRegUser />
+                                    </div>
+                                    <div>1 Sleep</div>
+                                </div>
+
+                                <div className="flex gap-2 items-center">
+                                    <div>
+                                        <IoBedOutline size={25} />
+                                    </div>
+                                    <div>soft fluffy bed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="grid gap-6 py-5 lg:py-0 lg:flex lg:flex-col lg:items-end lg:justify-between">
+                            <div className="">
+                                <div className="text-3xl font-bold inline-block lg:text-4xl text-gray-800 lg:font-extrabold">
+                                    ₹5000
+                                </div>
+                                <span className="px-1 text-gray-600 text-lg">/month</span>
+                            </div>
+                            <button className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300">
+                                <Link>Book Now</Link>
+                            </button>
+                            <div>
+                                <div className="flex items-center gap-1.5">
+                                    <p className="text-green-500 font-bold"> Available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </div>
+
+        </>
+    )
+}
+
+export default RoomBooking

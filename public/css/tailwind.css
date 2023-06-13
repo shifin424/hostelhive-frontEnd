@@ -154,6 +154,60 @@ sup {
   vertical-align: baseline;
 }
 
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-slide.opacity-100 {
+  opacity: 1;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+}
+
+.carousel-control-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.carousel-control-icon {
+  font-size: 20px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.carousel-indicator:focus {
+  outline: none;
+}
+
+
 sub {
   bottom: -0.25em;
 }

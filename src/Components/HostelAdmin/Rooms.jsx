@@ -163,10 +163,10 @@ function Rooms() {
                     name="roomType"
                   >
                     <option value="">Select Room Type</option>
-                    <option value="single">Single Share</option>
-                    <option value="double">Double Share</option>
-                    <option value="four">Four Share</option>
-                    <option value="six">Six Share</option>
+                    <option value="Single">Single Share</option>
+                    <option value="Double-Share">Double Share</option>
+                    <option value="Four-Share">Four Share</option>
+                    <option value="Six">Six Share</option>
                   </Field>
                   <ErrorMessage name="roomType" component="div" className="text-red-500" />
                 </div>

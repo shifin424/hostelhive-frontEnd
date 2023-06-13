@@ -4,6 +4,6 @@ export const hostelInfoApi = () =>{
     return axios.get('/hostel-info')
 }
 
-export const hostelSingleViewApi =() =>{
-    return axios.get('/hostel-over-view')
+export const hostelSingleViewApi =(id) =>{
+    return axios.get(`/hostel-over-view/${id}`)
 }
