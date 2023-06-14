@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 import hostelReducer from './Features/hostel/hostelSlice'
 import roomReducer from './Features/hostel/roomSlice'
 import hostelViewReducer from './Features/student/hostelSlice'
+import authReducer from './Features/hostel/AuthSlice'
 
 const hostelPersistConfig = {
     key:"hostel",
@@ -20,19 +21,24 @@ const hostelViewPersistConfig = {
     storage
 }
 
+const AuthPersistConfig = {
+    key:"Auth",
+    storage
+}
+
 
 const persistedHostelReducer = persistReducer(hostelPersistConfig,hostelReducer)
 const persistedRoomReducer = persistReducer(roomPersistConfig,roomReducer)
 const persistedHostelViewReducer = persistReducer(hostelViewPersistConfig,hostelViewReducer)
-
-
+const persistedAuthReducer = persistReducer(AuthPersistConfig,authReducer)
 
 
 
 const rootReducer = {
     hostel:persistedHostelReducer,
     room:persistedRoomReducer,
-    hostelView:persistedHostelViewReducer
+    hostelView:persistedHostelViewReducer,
+    auth:persistedAuthReducer
 }
 
 export const store = configureStore({

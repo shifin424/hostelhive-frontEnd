@@ -38,7 +38,8 @@ const AddHostel = () => {
 });
 
   const handleSubmit = (values) => {
-    console.log(values.file);
+    console.log(values,1);
+    console.log(values.file,2);
     const data = new FormData();
     data.append('title', values.title);
     data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
@@ -46,6 +47,8 @@ const AddHostel = () => {
     data.append('image', values.file);
     data.append('latitude', lat);
     data.append('longitude', lng);
+    
+    console.log(data,3)
 
     const headers = {
       headers: {

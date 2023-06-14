@@ -15,11 +15,11 @@ function OtpVerification() {
 
   const [hostelAdmins, SetHostelAdmin] = useState(null);
 
-  const hostelAdmin = useSelector(state => state.hostelAdmin.user);
+  const AuthData = useSelector(state => state.auth.Auth);
 
   useEffect(() => {
-    SetHostelAdmin(hostelAdmin);
-  }, [hostelAdmin]);
+    SetHostelAdmin(AuthData);
+  }, [AuthData]);
 
   const handleChange = (e, index) => {
     const { value } = e.target;
@@ -44,7 +44,7 @@ function OtpVerification() {
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && otp[index] === '') {
+    if (e.key === 'Backspace' && otp[index] === ''){
       const updatedOtp = [...otp];
       updatedOtp[index - 1] = '';
       setOtp(updatedOtp);

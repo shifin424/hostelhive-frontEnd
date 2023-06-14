@@ -7,10 +7,10 @@ import { hostelAdminApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd'
-// import { resetState, registerHostelAdmin } from '../../Redux/Features/hostelAdminSlice';
+import { AuthData } from '../../Redux/Features/hostel/AuthSlice';
 
 function Singnup() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -20,7 +20,6 @@ function Singnup() {
     confirmPassword: '',
     mobileNumber: '',
     qualification: '',
-    landMark: '',
     gender: '',
   };
 
@@ -54,26 +53,24 @@ function Singnup() {
   });
 
   const handleSubmit = (values) => {
-    console.log(values);
-    hostelAdminApi(values)
-      .then((response) => {
-        if (response.data.error) {
-          toast.error(response.data.error);
-          setError(response.data.error);
-        } else {
-          console.log('form submitted');
-          // dispatch(resetState());
-          // dispatch(registerHostelAdmin(values));
-          message.success('Form submitted successfully!'); 
-          navigate('/hostelAdmin/otpVerification');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err.response.data.error || 'An error occurred');
-        toast.error(err.response.data.error || 'An error occurred'); 
-      });
-  };
+    dispatch(AuthData(values))
+        .then((response) => {
+            if (response.error) {
+                toast.error(response.error);
+                setError(response.error);
+            } else {
+                console.log('form submitted');
+                message.success('Form submitted successfully!'); 
+                navigate('/hostelAdmin/otpVerification');
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            setError(err.response?.data?.error || 'An error occurred');
+            toast.error(err.response?.data?.error || 'An error occurred'); 
+        });
+};
+
 
   const goBack = () => {
     navigate('/hostelAdmin/login')
