@@ -5,6 +5,7 @@ import hostelReducer from './Features/hostel/hostelSlice'
 import roomReducer from './Features/hostel/roomSlice'
 import hostelViewReducer from './Features/student/hostelSlice'
 import authReducer from './Features/hostel/AuthSlice'
+import roomDatareducer  from './Features/student/RoomSlice'
 
 const hostelPersistConfig = {
     key:"hostel",
@@ -26,11 +27,18 @@ const AuthPersistConfig = {
     storage
 }
 
+const roomDataPersistConfig = {
+    key:"RoomsData",
+    storage
+}
+
 
 const persistedHostelReducer = persistReducer(hostelPersistConfig,hostelReducer)
 const persistedRoomReducer = persistReducer(roomPersistConfig,roomReducer)
 const persistedHostelViewReducer = persistReducer(hostelViewPersistConfig,hostelViewReducer)
 const persistedAuthReducer = persistReducer(AuthPersistConfig,authReducer)
+const persistedRoomDataReducer = persistReducer(roomDataPersistConfig,roomDatareducer)
+
 
 
 
@@ -38,7 +46,9 @@ const rootReducer = {
     hostel:persistedHostelReducer,
     room:persistedRoomReducer,
     hostelView:persistedHostelViewReducer,
-    auth:persistedAuthReducer
+    auth:persistedAuthReducer,
+    roomsDetils:persistedRoomDataReducer
+  
 }
 
 export const store = configureStore({

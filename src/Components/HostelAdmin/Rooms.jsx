@@ -25,9 +25,7 @@ function Rooms() {
         const headers = {
           Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
         };
-
         const hostelId = hostels[0]._id;
-
         dispatch(roomData({headers, hostelId}))
       } catch (error) {
         setError(error.message); 
@@ -52,10 +50,35 @@ function Rooms() {
     roomPrice: Yup.string()
       .required('Room Price is required')
       .matches(/^[0-9]+$/, 'Room Price must contain only numbers'),
-    image: Yup.mixed().required('Image is required'),
-    title: Yup.string().trim().required("Title is required"),
-    description: Yup.string().trim().required('Description is required')
+    image: Yup.mixed()
+      .required('Image is required')
+      .test('fileFormat', 'Invalid image format', (value) => {
+        if (!value) return false;
+        const supportedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
+        return supportedFormats.includes(value.type);
+      }),
+    title: Yup.string()
+      .trim()
+      .required('Title is required')
+      .test('minWords', 'Title must have at least 2 words', (value) => {
+        if (!value) return false;
+        const words = value.split(' ');
+        return words.length >= 2;
+      }),
+    description: Yup.string()
+      .trim()
+      .required('Description is required')
+      .test('minWords', 'Description must have at least 15 words', (value) => {
+        if (!value) return false;
+        const words = value.split(' ');
+        return words.length >= 15;
+      }).test('maxWords', 'Description must have at most 25 words', (value) => {
+        if (!value) return true;
+        const words = value.split(' ');
+        return words.length <= 25;
+      }),
   });
+  
 
   const handleSubmit = (values, { resetForm }) => {
     const formData = new FormData();
@@ -77,7 +100,7 @@ function Rooms() {
       },
     };
 
-    console.log(formData, headers);
+    console.log(formData, headers,"texting");
     hostelRoomApi(formData, headers, hostelId)
       .then((response) => {
         if (response.data.error) {
@@ -163,10 +186,10 @@ function Rooms() {
                     name="roomType"
                   >
                     <option value="">Select Room Type</option>
-                    <option value="Single">Single Share</option>
-                    <option value="Double-Share">Double Share</option>
-                    <option value="Four-Share">Four Share</option>
-                    <option value="Six">Six Share</option>
+                    <option value="Single" className="bg-white">Single Share</option>
+                    <option value="Double-Share" className="bg-white">Double Share</option>
+                    <option value="Four-Share" className="bg-white">Four Share</option>
+                    <option value="Six-Share" className='bg-white'>Six Share</option>
                   </Field>
                   <ErrorMessage name="roomType" component="div" className="text-red-500" />
                 </div>
