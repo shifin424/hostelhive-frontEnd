@@ -10,8 +10,8 @@ import { GiVerticalBanner } from 'react-icons/gi'
 
 const SideBar = () => {
     const menus = [
-        { name: 'DASHBOARD', link: '/superAdmin/dashboard', icon: RxDashboard },
-        { name: 'REQUEST', link: '/superAdmin/request', icon: TbMessages },
+        { name: 'DASHBOARD', link: '/admin/dashboard', icon: RxDashboard },
+        { name: 'REQUEST', link: '/admin/request', icon: TbMessages },
         { name: 'HOSTEL MANAGEMENT', link: '/request', icon: BiMessageAltEdit },//margin true
         { name: 'BANNER', link: '/cool', icon: GiVerticalBanner },
         { name: 'LOGOUT', link: '/lo', icon: BiLogOutCircle },

@@ -21,14 +21,14 @@ function AddHostelButton() {
     if (status === "Pending") {
       message.error("hostel is not approved")
     } else if (status === "Approved") {
-      navigate('/hostelAdmin/hostel-listing/dashboard')
+      navigate('/hostel/hostel-listing/dashboard')
     }
   }
   return (
     <>
       <div>
         <div className='flex justify-end pt-16 pb-10'>
-          <Link to='/hostelAdmin/add-hostel'>
+          <Link to='/hostel/add-hostel'>
             <button className='btn btn-info'>Add Hostel</button>
           </Link>
         </div>

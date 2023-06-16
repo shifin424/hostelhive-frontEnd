@@ -34,7 +34,7 @@ function Login() {
         } else {
           localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
           message.success('logged in successfully.')
-          navigate('/hostelAdmin/dashboard');
+          navigate('/hostel/dashboard');
         }
       })
       .catch((err) => {

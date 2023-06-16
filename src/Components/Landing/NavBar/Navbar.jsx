@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('HostelAdminToken');
+    localStorage.removeItem('');
     navigate('/hostelAdmin/login');
   };
 
@@ -72,7 +72,7 @@ function Navbar() {
                   <button
                     id="dropdownNavbarLink"
                     data-dropdown-toggle="dropdownNavbar"
-                    className="flex items-center justify-between w-full py-2 pl-3 pr-4 rounded text-black rounded"
+                    className="flex items-center justify-between w-full py-2 pl-3 pr-4  text-black rounded"
                   >
                     Account
                     <svg
@@ -92,7 +92,7 @@ function Navbar() {
                   <div
                     id="dropdownNavbar"
                     className={`${isOpen ? 'block' : 'hidden'
-                      } z-10 absolute right-0 mt-2 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+                      } z-10 absolute right-0 mt-2 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:white dark:bg-white`}
                   >
                     <ul
                       className="py-2 text-sm text-gray-700 dark:text-gray-400"
@@ -101,28 +101,19 @@ function Navbar() {
                       <li>
                         <Link
                           to={"/hostelAdmin/register"}
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className="block px-4 py-2 hover:bg-gray-100 text-black hover:bg-[#0e53ca] dark:hover:text-white"
                         >
                           HostelAdmin
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        <Link to={'/signup'}
+                          className="block px-4 py-2 hover:bg-gray-100 text-black dark:hover:bg-[#0e53ca] dark:hover:text-white"
                         >
                           Student
                         </Link>
                       </li>
                     </ul>
-                    <div className="py-1">
-                      <a
-                        href="#"
-                        onClick={handleLogout}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                      >
-                        Sign out
-                      </a>
-                    </div>
                   </div>
                 </li>
               )}

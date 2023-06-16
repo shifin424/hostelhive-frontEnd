@@ -3,20 +3,19 @@ import axios from '../axios'
 
 
 export const adminLoginApi = (formData) =>{
-    return axios.post('/superAdmin/login',formData)
+    return axios.post('/admin/login',formData)
 }
 
 export const hostelRequestApi = (headers) => {
-    return axios.get('/superAdmin/hostel-request', { headers });
+    return axios.get('/admin/hostel-request', { headers });
 };
 
 export const hostelApprovalApi = (id,headers) =>{
-    return axios.patch(`/superAdmin/approve-hostel/${id}`,{},{headers})
+    return axios.patch(`/admin/approve-hostel/${id}`,{},{headers})
 }
 
 export const hostelRejectedApi = (id, headers, description) => {
-    console.log(id,666);
-    return axios.patch(`/superAdmin/reject-hostel/${id}`, { description }, { headers });
+    return axios.patch(`/admin/reject-hostel/${id}`, { description }, { headers });
   };
   
 

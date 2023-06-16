@@ -73,7 +73,7 @@ function Singnup() {
 
 
   const goBack = () => {
-    navigate('/hostelAdmin/login')
+    navigate('/hostel/login')
   };
 
   return (

@@ -6,6 +6,7 @@ import { MdLogin } from 'react-icons/md';
 function HostelDetails() {
 
   const hostelOverView = useSelector(state => state.hostelView.hostelData);
+  console.log(hostelOverView,"this is the data");
 
 
 
@@ -51,7 +52,10 @@ function HostelDetails() {
                 Hostel Location: {hostelOverView?.location}
               </p>
               <p className="text-lg text-white mb-2 font-semibold">
-                Hostel Admission Fee: 1000
+                Hostel Admission Fee: {hostelOverView?.admissionFees}
+              </p>
+              <p className="text-lg text-white mb-2 font-semibold">
+                Hostel Type : {hostelOverView?.hostelType}
               </p>
               <p className="text-lg text-white mb-2 font-semibold">
                 Hostel Fee : 6000

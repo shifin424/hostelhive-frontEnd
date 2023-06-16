@@ -49,7 +49,7 @@ function Body() {
       if(responce.data.status){
         const jwtToken = responce.data.token;
         localStorage.setItem("adminToken",jwtToken);
-        navigate('/superAdmin/dashBoard');
+        navigate('/admin/dashBoard');
       }else{
         setError(responce.data.errors)
       }

@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 
 const GlobalSideBar = () => {
   const menus = [
-    { name: 'DASHBOARD', link: '/hostelAdmin/dashboard', icon: RxDashboard },
-    { name: 'HOSTELS', link: '/hostelAdmin/hostel-listing', icon: TbMessages },
+    { name: 'DASHBOARD', link: '/hostel/dashboard', icon: RxDashboard },
+    { name: 'HOSTELS', link: '/hostel/hostel-listing', icon: TbMessages },
     { name: 'STUDENT REQUESTS', link: '', icon: TbMessages },
     { name: 'VACATING LETTERS', link: '', icon: BsEnvelopePaper },
     { name: 'LEAVE LETTERS', link: '', icon: ImNewspaper },

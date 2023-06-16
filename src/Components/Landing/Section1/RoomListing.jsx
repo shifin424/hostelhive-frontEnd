@@ -14,7 +14,7 @@ function RoomListing() {
   const handleViewDetails = async(hostelId, roomType) => {
     try{
       await dispatch(RoomData({ hostelId, roomType }));
-      navigate('/hostel-details/room-booking')
+      navigate('/room-booking')
     }catch(err){
       console.log(err);
     }

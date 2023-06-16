@@ -12,8 +12,8 @@ import { Link } from 'react-router-dom';
 
 function SingleHostelSideBar() {
     const menus = [
-        { name: 'DASHBOARD', link: '/hostelAdmin/hostel-listing/dashboard', icon: RxDashboard },
-        { name: 'ROOMS', link: '/hostelAdmin/hostel-listing/rooms', icon: FaBed },
+        { name: 'DASHBOARD', link: '/hostel/hostel-listing/dashboard', icon: RxDashboard },
+        { name: 'ROOMS', link: '/hostel/hostel-listing/rooms', icon: FaBed },
         { name: 'STUDENT REQUESTS', link: '', icon:RiMessage2Fill  },
         { name: 'STUDENT MANAGMENTS', link: '', icon:FaBed},
         { name: 'FOOD SYSTEMS', link: '', icon: IoFastFoodSharp },

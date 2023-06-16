@@ -2,9 +2,11 @@ import React from 'react'
 
 function DashBoard() {
   return (
-   <div>
-    
-   </div>
+  <>
+  <div className='flex justify-center'>
+    <h1 className='text-3xl text-black'>Dashboard</h1>
+  </div>
+  </>
   )
 }
 

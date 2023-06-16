@@ -6,9 +6,9 @@ export default function AdminVerificaion({children}){
 
     useEffect(()=>{
         if(!localStorage.getItem('adminToken')){
-            navigate('/superAdmin/login')
+            navigate('/admin/login')
         }else{
-            navigate('/superAdmin/dashBoard')
+            navigate('/admin/dashBoard')
         }
     
     },[])

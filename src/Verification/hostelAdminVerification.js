@@ -9,12 +9,12 @@ export default function HostelAdminVerification({ children }) {
         if (!localStorage.getItem("HostelAdminToken")) {
 
             console.log(location.pathname)
-            if (location.pathname !== "/hostelAdmin/register" && location.pathname !== "/hostelAdmin/otpVerification")
+            if (location.pathname !== "/hostel/register" && location.pathname !== "/hostel/otpVerification")
 
-                navigate("/hostelAdmin/login");
+                navigate("/hostel/login");
         } else {
                 
-            navigate('/hostelAdmin/dashboard')
+            navigate('/hostel/dashboard')
         }
     }, []);
 

@@ -31,7 +31,7 @@ function Section2() {
     const viewHostelData = async (id) => {
         try {
          await dispatch(hostelView(id))
-         navigate('/hostel-details/over-view')
+         navigate('/over-view')
 
         } catch (error) {
             console.log(error);
