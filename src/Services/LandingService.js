@@ -11,3 +11,7 @@ export const hostelSingleViewApi =(id) =>{
 export const hostelRoomDetails = (id,roomType)=>{
     return axios.post(`/hostel-room-data/${id}`,roomType)
 }
+
+export const StudentSignupApi = (values) =>{
+    return axios.post('/signup',values)
+}

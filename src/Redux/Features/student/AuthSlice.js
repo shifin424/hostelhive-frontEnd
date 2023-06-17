@@ -1,0 +1,64 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { StudentSignupApi } from '../../../Services/LandingService'
+
+
+
+const initialState = {
+    AuthData: [],
+    isLoading: false,
+    isSuccess: false,
+    isError: false,
+    message: "",
+    confimObj: "",
+    error: ""
+}
+
+export const StudentAuth = createAsyncThunk(
+
+    "AuthData/StudentAuth",
+    async (values) => {
+        try {
+            const response = await StudentSignupApi(values)
+            console.log(response.data, "hello");
+            if (response) {
+                console.log(response.data);
+            }
+            return response.data
+        } catch (err) {
+            console.log(err);
+        }
+    }
+)
+
+export const AuthSlice = createSlice({
+    name: "AuthData",
+    initialState,
+    reducers: {
+        reset: (state) => {
+            state = initialState
+        },
+        otpConfirmObj: (state, action) =>{
+            state.confimObj = action.payload
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(StudentAuth.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(StudentAuth.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.AuthData = action.payload;
+            })
+            .addCase(StudentAuth.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+
+            })
+    }
+})
+
+export const { reset, otpConfirmObj } = AuthSlice.actions
+export default AuthSlice.reducer

@@ -10,7 +10,7 @@ function Navbar() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+ 
   const handleLogout = () => {
     localStorage.removeItem('');
     navigate('/hostelAdmin/login');

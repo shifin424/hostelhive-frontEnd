@@ -193,6 +193,19 @@ sup {
   margin-top: 10px;
 }
 
+@media (max-width: 600px) {
+  /* Adjust styles for smaller screens */
+}
+
+/* Styles for screens between 600px and 1200px */
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* Adjust styles for medium-sized screens */
+}
+
+/* Styles for screens larger than 1200px */
+@media (min-width: 1200px) {
+  /* Adjust styles for larger screens */
+}
 .carousel-indicator {
   width: 12px;
   height: 12px;
