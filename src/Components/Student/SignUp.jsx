@@ -3,10 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import image from '../../assets/images/loginImage.jpg';
 import setUpRecaptcha  from '../../Contex/UserAuth'
- import {StudentAuth, otpConfirmObj} from '../../Redux/Features/student/AuthSlice'
+import {StudentAuth, otpConfirmObj} from '../../Redux/Features/student/AuthSlice'
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
+
 
 
 
@@ -75,8 +77,8 @@ function SignUp() {
                 <Field
                   className="p-2 rounded-xl border bg-white"
                   type="text"
-                  name="FullName"
-                  placeholder="full Name"
+                  name="fullName"
+                  placeholder="Full Name"
                 />
                 <ErrorMessage
                   name="fullName"

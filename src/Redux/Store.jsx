@@ -39,6 +39,8 @@ const studentAuthPersistConfig = {
 }
 
 
+
+
 const persistedHostelReducer = persistReducer(hostelPersistConfig,hostelReducer)
 const persistedRoomReducer = persistReducer(roomPersistConfig,roomReducer)
 const persistedHostelViewReducer = persistReducer(hostelViewPersistConfig,hostelViewReducer)
