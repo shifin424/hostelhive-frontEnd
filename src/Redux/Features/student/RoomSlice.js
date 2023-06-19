@@ -12,9 +12,9 @@ const initialState = {
 }
 export const RoomData = createAsyncThunk(
     'roomDetails/fetchRoomData',
-    async ({ hostelId, roomType }) => {
+    async ({ hostelId,id, roomType }) => {
       try {
-        const response = await hostelRoomDetails(hostelId, { room_type: roomType });
+        const response = await hostelRoomDetails(hostelId,id, { room_type: roomType });
         if (response) {
           console.log(response.data);
         }

@@ -7,18 +7,24 @@ import { message } from 'antd';
 import { Navigate } from 'react-router-dom';
 
 function RoomBooking() {
-    const roomDetails = useSelector(state => state.roomsDetils.roomDetails.roomData);
+    const roomDetails = useSelector(state => state.roomsDetils.roomDetails);
+    console.log(roomDetails.StudentData);
    const  navigate = useNavigate()
     const token = localStorage.getItem('StudentToken');
  
 
     const handleBookNow = () => {
         if (token) {
-        message.success("Entering to payment page")
+            roomDetails.StudentData.isRequested === false
+                ? navigate('/dummy-page') 
+                : !roomDetails.StudentData.isVerified
+                    ? message.info('Request is still processing') 
+                    : message.success('Entering to payment page');
         } else {
             navigate('/login');
         }
     };
+    
 
     return (
         <>
@@ -28,7 +34,7 @@ function RoomBooking() {
                 </h1>
             </div>
             <div className="bg-white pb-10">
-                {roomDetails.map((room, index) => (
+                {roomDetails.roomData.map((room, index) => (
                     <li
                         key={index}
                         className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16 lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20"
