@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 function Login() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState("");
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [error, setError] = useState("");
 
   const navigate = useNavigate()
 

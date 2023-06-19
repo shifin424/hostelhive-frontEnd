@@ -19,3 +19,7 @@ export const StudentSignupApi = (values) =>{
 export const StudentOtpApi = (StudentAuth) =>{
     return axios.post('/otp',StudentAuth)
 }
+
+export const studentLoginApi = (values) =>{
+    return axios.post('/login',values)
+}

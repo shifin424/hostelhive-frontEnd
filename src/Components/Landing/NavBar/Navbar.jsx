@@ -5,15 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const token = localStorage.getItem('student');
+  const token = localStorage.getItem('StudentToken');
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
  
   const handleLogout = () => {
-    localStorage.removeItem('');
-    navigate('/hostelAdmin/login');
+    localStorage.removeItem('StudentToken');
+    navigate('/login');
   };
 
   return (
@@ -107,7 +107,7 @@ function Navbar() {
                         </Link>
                       </li>
                       <li>
-                        <Link to={'/signup'}
+                        <Link to={'/login'}
                           className="block px-4 py-2 hover:bg-gray-100 text-black dark:hover:bg-[#0e53ca] dark:hover:text-white"
                         >
                           Student

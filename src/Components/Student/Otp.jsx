@@ -5,14 +5,16 @@ import image from '../../assets/images/loginImage.jpg';
 import { message } from 'antd';
 import { otpData } from '../../Redux/Features/student/OtpSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik'; // Added import statement for Formik
+import { useFormik } from 'formik'; 
 
 function Otp() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState('');
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
-  const { StudentAuth } = useSelector((state) => state.studentAuth.AuthData.response);
+  const  StudentAuth  = useSelector((state) => state.studentAuth.AuthData.response);
+  const confimObj = useSelector((state) => state.studentAuth.confimObj)
+  console.log(confimObj);
   const dispatch = useDispatch();
 
   console.log(StudentAuth, 'student auth');
@@ -23,17 +25,21 @@ function Otp() {
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-
+    console.log(value);
+  
     if (!/^\d*$/.test(value)) {
       setError('Only numbers are allowed');
       return;
     }
-
+  
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
     setError('');
-
+  
+    const updatedFormikOtp = updatedOtp.join(''); 
+    formik.setFieldValue('otp', updatedFormikOtp); 
+  
     if (value !== '') {
       if (index === otp.length - 1) {
         submitButtonRef.current.focus();
@@ -42,6 +48,7 @@ function Otp() {
       }
     }
   };
+  
 
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && otp[index] === '') {
@@ -63,15 +70,11 @@ function Otp() {
   const handleSubmit = (e) => {
     const otpValue = otp.join('');
 
-    if (formik.isValid) {
-      const data = {
-        otpCode: otpValue,
-      };
-
+console.log(otpValue);
+      confimObj.confirm(otpValue)
       dispatch(otpData(StudentAuth));
       navigate('/login');
       message.success('OTP verified successfully');
-    }
   };
 
   return (

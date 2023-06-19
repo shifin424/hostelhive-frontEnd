@@ -2,10 +2,23 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaRegUser } from 'react-icons/fa';
 import { IoBedOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
+import { Navigate } from 'react-router-dom';
 
 function RoomBooking() {
     const roomDetails = useSelector(state => state.roomsDetils.roomDetails.roomData);
+   const  navigate = useNavigate()
+    const token = localStorage.getItem('StudentToken');
+ 
+
+    const handleBookNow = () => {
+        if (token) {
+        message.success("Entering to payment page")
+        } else {
+            navigate('/login');
+        }
+    };
 
     return (
         <>
@@ -53,8 +66,11 @@ function RoomBooking() {
                                     </div>
                                     <span className="px-1 text-gray-600 text-lg">/month</span>
                                 </div>
-                                <button className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300">
-                                    <Link >Book Now</Link>
+                                <button
+                                    className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300"
+                                    onClick={handleBookNow}
+                                >
+                                    Book Now
                                 </button>
                                 <div>
                                     <div className="flex items-center gap-1.5">

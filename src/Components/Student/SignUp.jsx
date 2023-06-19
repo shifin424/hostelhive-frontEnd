@@ -6,7 +6,7 @@ import setUpRecaptcha  from '../../Contex/UserAuth'
 import {StudentAuth, otpConfirmObj} from '../../Redux/Features/student/AuthSlice'
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -167,9 +167,9 @@ function SignUp() {
             <div className="mt-6 text-xs text-gray-400">
               <hr className="border-gray-400" />
               <p className="text-center">Already have an account?</p>
-              <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300 text-[#002D74]">
+              <Link to={'/login'} className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300 text-[#002D74]">
                 Login
-              </button>
+              </Link>
             </div>
           </div>
 
