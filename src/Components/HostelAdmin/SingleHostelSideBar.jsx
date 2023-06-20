@@ -14,7 +14,7 @@ function SingleHostelSideBar() {
     const menus = [
         { name: 'DASHBOARD', link: '/hostel/hostel-listing/dashboard', icon: RxDashboard },
         { name: 'ROOMS', link: '/hostel/hostel-listing/rooms', icon: FaBed },
-        { name: 'STUDENT REQUESTS', link: '', icon:RiMessage2Fill  },
+        { name: 'STUDENT REQUESTS', link: '/hostel/hostel-listing/requests', icon:RiMessage2Fill  },
         { name: 'STUDENT MANAGMENTS', link: '', icon:FaBed},
         { name: 'FOOD SYSTEMS', link: '', icon: IoFastFoodSharp },
         { name: 'LEAVE LETTERS', link: '', icon: SlEnvolopeLetter },

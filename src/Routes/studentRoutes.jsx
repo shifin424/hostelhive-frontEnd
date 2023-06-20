@@ -1,12 +1,11 @@
 import { Route,Routes } from "react-router-dom";
-import SignUpPage from "../Pages/Landing/SignUpPage";
+import RequestPage from "../Pages/Students/RequestPage";
 
 
 const StudentRoutes = () => {
     return (
       <Routes>
-        {/* <Route path="/signup" element={<SignUpPage/>}></Route>   */}
-        
+         <Route path='/request/:id' element={<RequestPage/>}></Route> 
       </Routes>
     );
   };

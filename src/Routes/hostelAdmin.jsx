@@ -12,6 +12,7 @@ import AddHostelButton from "../Components/HostelAdmin/AddHostelButton";
 import SingleDashboard from "../Pages/HostelAdmin/SingleDashboard";
 import SingleHostelLayouts from "../Components/HostelAdmin/SingleHostelLayouts";
 import RoomsListing from "../Pages/HostelAdmin/RoomsListing";
+import RequestsPage from "../Pages/HostelAdmin/RequestsPage";
 
 
 const hostelRoutes = () => {
@@ -31,6 +32,7 @@ const hostelRoutes = () => {
       <Route element={<SingleHostelLayouts />}>
         <Route path="/hostel-listing/dashboard" element={<SingleDashboard />}></Route>
         <Route path="/hostel-listing/rooms" element={<RoomsListing/>}></Route>
+        <Route path="/hostel-listing/requests" element={<RequestsPage/>}></Route>
       </Route>
 
     </Routes>

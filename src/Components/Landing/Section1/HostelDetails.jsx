@@ -6,9 +6,6 @@ import { MdLogin } from 'react-icons/md';
 function HostelDetails() {
 
   const hostelOverView = useSelector(state => state.hostelView.hostelData);
-  console.log(hostelOverView,"this is the data");
-
-
 
     return (
         

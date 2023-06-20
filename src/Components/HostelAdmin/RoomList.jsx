@@ -20,6 +20,7 @@ function RoomList() {
   return (
     <div className="flex justify-center">
       <div className="w-4/5">
+        
         <h1 className="text-3xl font-bold text-[#002D7A] mb-4 "  >Room Listing</h1>
         <div className="overflow-x-auto">
           {rooms.length < 1 ? (

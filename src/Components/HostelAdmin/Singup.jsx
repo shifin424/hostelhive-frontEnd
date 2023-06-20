@@ -61,7 +61,7 @@ function Singnup() {
             } else {
                 console.log('form submitted');
                 message.success('Form submitted successfully!'); 
-                navigate('/hostelAdmin/otpVerification');
+                navigate('/hostel/otpVerification');
             }
         })
         .catch((err) => {

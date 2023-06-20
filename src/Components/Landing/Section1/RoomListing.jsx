@@ -23,7 +23,7 @@ function RoomListing() {
 
   };
 
-  const  id  = JSON.parse(localStorage.getItem('StudentToken')).id
+  const  id = JSON.parse(localStorage.getItem('StudentToken')).id
 
 
   return (

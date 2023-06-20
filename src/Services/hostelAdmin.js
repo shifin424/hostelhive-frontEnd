@@ -31,4 +31,8 @@ export const hostelRoomData = (headers,hostelId) => {
      return axios.get(`/hostel/room-data/${hostelId}`,{headers})
 }
 
+// export const FetchRequestData = (headers) =>{
+//     return axios.get('/fetchRequestData',headers)
+//   }
+
 

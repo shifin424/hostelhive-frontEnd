@@ -22,3 +22,4 @@ export const StudentOtpApi = (StudentAuth) =>{
 export const studentLoginApi = (values) =>{
     return axios.post('/login',values)
 }
+

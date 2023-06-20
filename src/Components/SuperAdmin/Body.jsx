@@ -45,7 +45,6 @@ function Body() {
     };
 
     adminLoginApi(formData).then((responce)=>{
-     console.log(formData)
       if(responce.data.status){
         const jwtToken = responce.data.token;
         localStorage.setItem("adminToken",jwtToken);

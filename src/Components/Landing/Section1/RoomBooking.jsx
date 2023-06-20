@@ -4,27 +4,50 @@ import { FaRegUser } from 'react-icons/fa';
 import { IoBedOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import { Navigate } from 'react-router-dom';
+
+import swal from 'sweetalert';
 
 function RoomBooking() {
     const roomDetails = useSelector(state => state.roomsDetils.roomDetails);
-    console.log(roomDetails.StudentData);
-   const  navigate = useNavigate()
+    const  navigate = useNavigate()
     const token = localStorage.getItem('StudentToken');
  
 
-    const handleBookNow = () => {
+   
+    const handleBookNow = (id) => {
         if (token) {
-            roomDetails.StudentData.isRequested === false
-                ? navigate('/dummy-page') 
-                : !roomDetails.StudentData.isVerified
-                    ? message.info('Request is still processing') 
-                    : message.success('Entering to payment page');
+            if (roomDetails.StudentData.isRequested === false) {
+                swal({
+                    title: 'Verification Required',
+                    text: 'Need to verify your data',
+                    icon: 'warning',
+                    buttons: {
+                        cancel: {
+                            text: 'Cancel',
+                            className: 'swal-button swal-button--cancel',
+                            value: 'cancel',
+                        },
+                        ok: {
+                            text: 'OK',
+                            className: 'swal-button swal-button--confirm',
+                            value: 'ok',
+                        },
+                    },
+                }).then((value) => {
+                    if (value === 'ok') {
+                        navigate(`/student/request/${id}`);
+                    }
+                });
+            } else if (!roomDetails.StudentData.isVerified) {
+                message.info('Request is still processing');
+            } else {
+                message.success('Entering to payment page');
+            }
         } else {
             navigate('/login');
         }
     };
-    
+
 
     return (
         <>
@@ -74,7 +97,7 @@ function RoomBooking() {
                                 </div>
                                 <button
                                     className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300"
-                                    onClick={handleBookNow}
+                                    onClick={() => handleBookNow(room._id)}
                                 >
                                     Book Now
                                 </button>

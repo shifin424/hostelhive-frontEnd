@@ -44,7 +44,7 @@ function AddHostelButton() {
             {hostels?.map((hostel) => (
               <div
                 key={hostel._id}
-                className="max-w-xs sm:max-w-sm bg-white border pb-16 border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
+                className="max-w-xs sm:max-w-sm bg-[#2265da] border pb-16  border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
               >
                 <a href="#">
                   <img
@@ -59,7 +59,7 @@ function AddHostelButton() {
                       {hostel.hostelName}
                     </h5>
                   </a>
-                  <p className="mb-3 text-sm sm:text-base font-normal text-gray-700 dark:text-gray-400">
+                  <p className="mb-3 text-sm sm:text-base font-normal text-white text-gray-700 dark:text-gray-400">
                     Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
                   </p>
                   <div

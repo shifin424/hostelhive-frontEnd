@@ -58,7 +58,6 @@ const AddHostel = () => {
     admissionFees: Yup.number().required('Admission Fees is required'),
   });
   
-
   const handleSubmit = (values) => {
     const data = new FormData();
     data.append('title', values.title);

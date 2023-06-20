@@ -9,6 +9,7 @@ import OtpPage from "../Pages/Landing/OtpPage";
 
 
 
+
 const LandingPageRoutes = () => {
     return (
       <Routes>

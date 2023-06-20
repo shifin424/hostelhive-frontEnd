@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { navigate, useNavigate } from 'react-router-dom';
 import { hostelRoomApi, hostelRoomData } from '../../Services/hostelAdmin';
-import { useDispatch ,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { roomData } from '../../Redux/Features/hostel/roomSlice';
 
 function Rooms() {
@@ -26,9 +26,9 @@ function Rooms() {
           Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
         };
         const hostelId = hostels[0]._id;
-        dispatch(roomData({headers, hostelId}))
+        dispatch(roomData({ headers, hostelId }))
       } catch (error) {
-        setError(error.message); 
+        setError(error.message);
       }
     };
     fetchRoomData();
@@ -78,7 +78,7 @@ function Rooms() {
         return words.length <= 25;
       }),
   });
-  
+
 
   const handleSubmit = (values, { resetForm }) => {
     const formData = new FormData();
@@ -100,7 +100,7 @@ function Rooms() {
       },
     };
 
-    console.log(formData, headers,"texting");
+    console.log(formData, headers, "texting");
     hostelRoomApi(formData, headers, hostelId)
       .then((response) => {
         if (response.data.error) {
@@ -127,9 +127,18 @@ function Rooms() {
   return (
     <div>
       <div className="flex justify-end pt-16 pb-10">
+        {/* <div className="filter-container mr-10  ">
+    <select className="filter-select w-32 h-8 bg-white border border-black">
+      <option value="">Filter</option>
+      <option value="vacant">Vacant</option>
+      <option value="reserved">Reserved</option>
+      <option value="occupied">Occupied</option>
+    </select>
+  </div> */}
         <button className="btn btn-info" onClick={showModal}>
           Add Rooms
         </button>
+
       </div>
 
       <Modal

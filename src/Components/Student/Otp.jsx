@@ -14,7 +14,6 @@ function Otp() {
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
   const  StudentAuth  = useSelector((state) => state.studentAuth.AuthData.response);
   const confimObj = useSelector((state) => state.studentAuth.confimObj)
-  console.log(confimObj);
   const dispatch = useDispatch();
 
   console.log(StudentAuth, 'student auth');
