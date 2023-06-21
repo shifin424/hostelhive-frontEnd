@@ -3,7 +3,7 @@ import { hostelAdminApi } from '../../../Services/hostelAdmin'
 
 
 const initialState = {
-    Auth: [],
+    adminAuthData: [],
     isLoading: false,
     isSuccess: false,
     isError: false,
@@ -13,20 +13,22 @@ const initialState = {
 
 
 export const AuthData = createAsyncThunk(
-    "Auth/AuthData",
+    "adminAuthData/AuthData",
     async (values) => {
         try {
             const response = await hostelAdminApi(values);
             return response.data;
         } catch (err) {
             console.log(err);
+            return err;
         }
     }
+   
 );
 
 
 export const AuthSlice = createSlice({
-    name: "Auth",
+    name: "adminAuthData",
     initialState,
     reducers: {
         reset: (state) => {
@@ -39,15 +41,16 @@ export const AuthSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(AuthData.fulfilled, (state, action) => {
+                console.log(action.payload,"here fulfled");
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.Auth = action.payload;
+                state.adminAuthData = action.payload;
             })
             .addCase(AuthData.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
+                console.log(action.payload,"hererere");
                 state.message = action.payload;
-
             })
     }
 })

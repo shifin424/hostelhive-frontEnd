@@ -10,7 +10,6 @@ function Login() {
     const [error, setError] = useState("");
 
   const navigate = useNavigate()
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string().required('Password is required'),
@@ -98,7 +97,7 @@ function Login() {
       </Formik>
       <p className="text-center mt-4 text-gray-700">
         Don't have an account?{" "}
-        <Link to={'/hostelAdmin/register'}
+        <Link to={'/hostel/register'}
           className="text-blue-500 hover:text-blue-800 font-bold"
           href="#"
         >

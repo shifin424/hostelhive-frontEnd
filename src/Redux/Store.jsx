@@ -24,7 +24,7 @@ const hostelViewPersistConfig = {
 }
 
 const AuthPersistConfig = {
-    key:"Auth",
+    key:"adminAuth",
     storage
 }
 
@@ -55,7 +55,7 @@ const rootReducer = {
     hostel:persistedHostelReducer,
     room:persistedRoomReducer,
     hostelView:persistedHostelViewReducer,
-    auth:persistedAuthReducer,
+    adminAuth:persistedAuthReducer,
     roomsDetils:persistedRoomDataReducer,
     studentAuth:persistedStudentAuthReducer
 

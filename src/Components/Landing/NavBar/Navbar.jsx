@@ -100,15 +100,15 @@ function Navbar() {
                     >
                       <li>
                         <Link
-                          to={"/hostelAdmin/register"}
-                          className="block px-4 py-2 hover:bg-gray-100 text-black hover:bg-[#0e53ca] dark:hover:text-white"
+                          to={"/hostel/login"}
+                          className="block px-4 py-2  text-black hover:bg-[#0e53ca] dark:hover:text-white"
                         >
                           HostelAdmin
                         </Link>
                       </li>
                       <li>
                         <Link to={'/login'}
-                          className="block px-4 py-2 hover:bg-gray-100 text-black dark:hover:bg-[#0e53ca] dark:hover:text-white"
+                          className="block px-4 py-2  text-black dark:hover:bg-[#0e53ca] dark:hover:text-white"
                         >
                           Student
                         </Link>

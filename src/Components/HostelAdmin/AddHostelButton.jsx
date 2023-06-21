@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, message } from 'antd';
 import { hostelDataApi } from '../../Services/hostelAdmin';
+import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { allHostel } from '../../Redux/Features/hostel/hostelSlice';
@@ -19,7 +20,7 @@ function AddHostelButton() {
 
   const handleNavigate = (status) => {
     if (status === "Pending") {
-      message.error("hostel is not approved")
+      toast.error("hostel is not approved")
     } else if (status === "Approved") {
       navigate('/hostel/hostel-listing/dashboard')
     }
