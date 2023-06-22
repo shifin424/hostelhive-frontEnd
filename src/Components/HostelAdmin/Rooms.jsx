@@ -14,10 +14,8 @@ function Rooms() {
   const [previewImage, setPreviewImage] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { hostels } = useSelector(state => state.hostel)
 
-  console.log(hostels, "redux");
-
+  const { hostels } = useSelector(state => state?.adminHostelData)
 
   useEffect(() => {
     const fetchRoomData = async () => {
@@ -100,7 +98,6 @@ function Rooms() {
       },
     };
 
-    console.log(formData, headers, "texting");
     hostelRoomApi(formData, headers, hostelId)
       .then((response) => {
         if (response.data.error) {

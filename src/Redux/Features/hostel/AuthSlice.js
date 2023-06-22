@@ -41,7 +41,6 @@ export const AuthSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(AuthData.fulfilled, (state, action) => {
-                console.log(action.payload,"here fulfled");
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.adminAuthData = action.payload;
@@ -49,7 +48,6 @@ export const AuthSlice = createSlice({
             .addCase(AuthData.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
-                console.log(action.payload,"hererere");
                 state.message = action.payload;
             })
     }

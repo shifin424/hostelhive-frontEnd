@@ -6,6 +6,7 @@ import { MdLogin } from 'react-icons/md';
 function HostelDetails() {
 
   const hostelOverView = useSelector(state => state.hostelView.hostelData);
+  console.log(hostelOverView,"inside theover view <<<<<<<< ");
 
     return (
         
@@ -26,7 +27,7 @@ function HostelDetails() {
           <div className="flex text-center">
             <div className="w-1/2">
               <img
-                src={hostelOverView?.hostelImage.url}
+                src={hostelOverView?.hostelImage?.url}
                 alt="Hostel"
                 className="w-full h-full rounded-md object-cover custom-image"
               />

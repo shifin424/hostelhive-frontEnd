@@ -9,7 +9,7 @@ import roomDatareducer  from './Features/student/RoomSlice'
 import studentAuthReducer from './Features/student/AuthSlice'
 
 const hostelPersistConfig = {
-    key:"hostel",
+    key:"adminHostelData",
     storage
 };
 
@@ -52,7 +52,7 @@ const persistedStudentAuthReducer = persistReducer(studentAuthPersistConfig,stud
 
 
 const rootReducer = {
-    hostel:persistedHostelReducer,
+    adminHostelData:persistedHostelReducer,
     room:persistedRoomReducer,
     hostelView:persistedHostelViewReducer,
     adminAuth:persistedAuthReducer,

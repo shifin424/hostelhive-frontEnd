@@ -10,7 +10,9 @@ import { allHostel } from '../../Redux/Features/hostel/hostelSlice';
 function AddHostelButton() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { hostels } = useSelector(state => state.hostel)
+  const { hostels } = useSelector(state => state?.adminHostelData)
+  console.log(hostels,"hostel data");
+
   useEffect(() => {
     const headers = {
       Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
@@ -60,7 +62,7 @@ function AddHostelButton() {
                       {hostel.hostelName}
                     </h5>
                   </a>
-                  <p className="mb-3 text-sm sm:text-base font-normal text-white text-gray-700 dark:text-gray-400">
+                  <p className="mb-3 text-sm sm:text-base font-normal  text-gray-400 dark:text-gray-400">
                     Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
                   </p>
                   <div

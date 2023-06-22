@@ -8,6 +8,7 @@ import { message } from 'antd';
 import { BiCurrentLocation } from 'react-icons/bi';
 import { Modal, Button } from 'antd';
 import LocationNew from './LocationNew';
+import { toast } from 'react-toastify';
 
 const AddHostel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,7 +29,7 @@ const AddHostel = () => {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Hostel Name is required'),
-    location: Yup.string().test('location', 'Location is required', function(value) {
+    location: Yup.string().test('location', 'Location is required', function (value) {
       const { selectedPlace } = this.parent;
       if (selectedPlace && selectedPlace.length > 0) {
         return !!value;
@@ -36,17 +37,17 @@ const AddHostel = () => {
       return true;
     }),
     description: Yup.string()
-    .trim()
-    .required('Description is required')
-    .test('minWords', 'Description must have at least 50 words', (value) => {
-      if (!value) return false;
-      const words = value.split(' ');
-      return words.length >= 50;
-    }).test('maxWords', 'Description must have at most 90 words', (value) => {
-      if (!value) return true;
-      const words = value.split(' ');
-      return words.length <= 90;
-    }),
+      .trim()
+      .required('Description is required')
+      .test('minWords', 'Description must have at least 50 words', (value) => {
+        if (!value) return false;
+        const words = value.split(' ');
+        return words.length >= 50;
+      }).test('maxWords', 'Description must have at most 90 words', (value) => {
+        if (!value) return true;
+        const words = value.split(' ');
+        return words.length <= 90;
+      }),
     file: Yup.mixed()
       .required('Image is required')
       .test('fileFormat', 'Invalid image format', (value) => {
@@ -57,14 +58,11 @@ const AddHostel = () => {
     hostelType: Yup.string().required('Hostel Type is required'),
     admissionFees: Yup.number().required('Admission Fees is required'),
   });
-  
+
   const handleSubmit = (values) => {
     const data = new FormData();
     data.append('title', values.title);
-    data.append(
-      'location',
-      selectedPlace !== '' ? selectedPlace : values.location
-    );
+    data.append('location', selectedPlace !== '' ? selectedPlace : values.location);
     data.append('description', values.description);
     data.append('image', values.file);
     data.append('latitude', lat);
@@ -75,8 +73,7 @@ const AddHostel = () => {
     const headers = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken'))
-          .token,
+        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
       },
     };
 
@@ -88,7 +85,7 @@ const AddHostel = () => {
         }
       })
       .catch((error) => {
-        message.error('An error occurred while adding the hostel');
+        toast.error('An error occurred while adding the hostel');
       });
   };
 
@@ -120,7 +117,7 @@ const AddHostel = () => {
             <div className="flex">
               <div className="w-1/2 pr-4">
                 <div className="mb-4 aspect-w-1 aspect-h-1">
-                  <Field name="file" >
+                  <Field name="file">
                     {({ form, field }) => (
                       <>
                         {field.value ? (
@@ -141,10 +138,7 @@ const AddHostel = () => {
                           id="image"
                           accept="image/*"
                           onChange={(event) => {
-                            form.setFieldValue(
-                              field.name,
-                              event.currentTarget.files[0]
-                            );
+                            form.setFieldValue(field.name, event.currentTarget.files[0]);
                           }}
                           className="py-2 px-4 border border-gray-700 rounded bg-white w-full"
                         />
@@ -158,27 +152,23 @@ const AddHostel = () => {
                   />
                 </div>
                 <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-semibold mb-2"
-                >
-                  Hostel Fee
-                </label>
-                <Field
-                  type="text"
-                  id="hosteadmissionFeeslFee"
-                  name="admissionFees"
-                  placeholder="Enter Admission fee"
-                  className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white"
-                />
-                <ErrorMessage
-                  name="admissionFees"
-                  component="div"
-                  className="text-red-500"
-                />
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Hostel Fee
+                  </label>
+                  <Field
+                    type="text"
+                    id="hosteadmissionFeeslFee"
+                    name="admissionFees"
+                    placeholder="Enter Admission fee"
+                    className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white"
+                  />
+                  <ErrorMessage
+                    name="admissionFees"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
               </div>
-              </div>
-
-              
 
               <div className="w-1/2">
                 <div className="mb-4">
@@ -188,7 +178,6 @@ const AddHostel = () => {
                   >
                     Hostel Name
                   </label>
-
                   <Field
                     type="text"
                     id="input1"
@@ -210,31 +199,31 @@ const AddHostel = () => {
                     Location
                     <button
                       type="button"
-                      className="bg-[#002D7A] hover:bg-[#4873d8] px-2  ml-2 rounded-md text-white  active:bg-[#D0DFFF] focus:outline-none focus:ring focus:ring-[#10244e]"
+                      className="bg-[#002D7A] hover:bg-[#4873d8] px-2  ml-2 rounded-md text-white
+                        active:bg-[#D0DFFF] focus:outline-none focus:ring focus:ring-[#10244e]"
                       onClick={handleModalOpen}
                     >
                       Get Location
                     </button>
                   </label>
-
                   {selectedPlace !== '' ? (
-                  <div className="border border-gray-800 text-[#002D7A] rounded-sm flex  py-2 px-4  bg-white">
-                    <span className="mt-1">
-                      <BiCurrentLocation />
-                    </span>
-                    {selectedPlace}
-                  </div>
-                ) : (
-                  <Field
-                  type="text"
-                  id="location"
-                  name="location"
-                  placeholder="Your selected location displays here"
-                  component="input"
-                  className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white mt-2"
-                  disabled
-                />
-                )}
+                    <div className="border border-gray-800 text-[#002D7A] rounded-sm flex  py-2 px-4  bg-white">
+                      <span className="mt-1">
+                        <BiCurrentLocation />
+                      </span>
+                      {selectedPlace}
+                    </div>
+                  ) : (
+                    <Field
+                      type="text"
+                      id="location"
+                      name="location"
+                      placeholder="Your selected location displays here"
+                      component="input"
+                      className="py-2 px-4 border border-gray-600 text-gray-700 rounded w-full bg-white mt-2"
+                      disabled
+                    />
+                  )}
                   <ErrorMessage
                     name="location"
                     component="div"
@@ -290,7 +279,9 @@ const AddHostel = () => {
             <div className="flex justify-center mt-5">
               <button
                 type="submit"
-                className="bg-[#002D7A] hover:bg-[#4873d8] py-4 px-11 rounded-full text-white font-bold active:bg-[#D0DFFF] focus:outline-none focus:ring focus:ring-[#10244e]"
+                className="bg-[#002D7A] hover:bg-[#4873d8] py-4 px-11 rounded-full
+                 text-white font-bold active:bg-[#D0DFFF] focus:outline-none focus:ring
+                  focus:ring-[#10244e]"
               >
                 Submit
               </button>
@@ -314,7 +305,7 @@ const AddHostel = () => {
             Submit
           </Button>,
         ]}
-        bodyStyle={{ height: '420px'}}
+        bodyStyle={{ height: '420px' }}
         width={800}
       >
         <h1>Choose your location</h1>

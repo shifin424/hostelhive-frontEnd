@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { hostelAdminApi } from '../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { message } from 'antd'
 import { AuthData } from '../../Redux/Features/hostel/AuthSlice';
 
@@ -45,9 +45,18 @@ function Singnup() {
       .required('Confirm Password is required')
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
     mobileNumber: yup
-      .string()
-      .required('Mobile Number is required')
-      .matches(/^\d{10}$/, 'Mobile Number must be exactly 10 digits'),
+    .number()
+    .required('Mobile Number is required')
+    .typeError('Mobile Number must be a number')
+    .integer('Mobile Number must be an integer')
+    .positive('Mobile Number must be a positive number')
+    .test('len', 'Mobile Number must be exactly 10 digits', (val) => {
+      if (val) {
+        const numberString = String(val);
+        return numberString.length === 10;
+      }
+      return false;
+    }),
     qualification: yup.string().required('Required'),
     gender: yup.string().required('Required'),
   });
@@ -56,7 +65,6 @@ function Singnup() {
     dispatch(AuthData(values))
         .then((response) => { 
           if (response.payload.response.data) {
-              console.log("asdfghjkl;",response.payload.response.data);
                 toast.error(response.payload.response.data.message);
             } else {
                 console.log('form submitted');

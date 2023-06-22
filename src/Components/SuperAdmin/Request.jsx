@@ -19,7 +19,6 @@ function Request() {
         };
         const response = await hostelRequestApi(headers);
         if (response) {
-          console.log(response.data);
           setRequests(response.data);
         } else {
           console.log(response);
