@@ -16,7 +16,6 @@ export const roomData = createAsyncThunk(
     async ({headers, hostelId}) => {
         try {
             const response = await hostelRoomData(headers, hostelId)
-            console.log(response.data,"hello");
             return response.data
         } catch (err) {
             console.log(err);

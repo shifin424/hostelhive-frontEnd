@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
 
 function RoomList() {
-  const rooms = useSelector(state => state.room.rooms);
+  const rooms = useSelector(state => state?.room?.rooms);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
@@ -21,7 +21,7 @@ function RoomList() {
     <div className="flex justify-center">
       <div className="w-4/5">
         
-        <h1 className="text-3xl font-bold text-[#002D7A] mb-4 "  >Room Listing</h1>
+        <h1 className="text-3xl font-bold text-[#002D7A] mb-4">Room Listing</h1>
         <div className="overflow-x-auto">
           {rooms.length < 1 ? (
             <div className=' flex justify-center'><p  className='text-4xl text-black font-semibold'>No rooms added yet.</p></div>

@@ -18,7 +18,6 @@ function GlobalNavbar() {
       navigate('/hostel/login')
     }
   
-  
   return (
     <div>
     <nav className="bg-white w-full shadow-lg ">
@@ -74,7 +73,7 @@ function GlobalNavbar() {
               <button
                 id="dropdownNavbarLink"
                 data-dropdown-toggle="dropdownNavbar"
-                className="flex items-center justify-between w-full py-2 pl-3 pr-4 rounded text-black rounded"
+                className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-black rounded"
               >
                 Account
                 <svg

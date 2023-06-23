@@ -16,14 +16,17 @@ function Rooms() {
   const dispatch = useDispatch();
 
   const { hostels } = useSelector(state => state?.adminHostelData)
+  console.log(hostels,"checking in room");
+  const hostelId = useSelector(state =>state?.adminHostelData?.hostelId)
 
   useEffect(() => {
     const fetchRoomData = async () => {
       try {
         const headers = {
-          Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
+          Authorization: JSON.parse(localStorage.getItem("HostelAdminToken"))?.token
         };
-        const hostelId = hostels[0]._id;
+
+        
         dispatch(roomData({ headers, hostelId }))
       } catch (error) {
         setError(error.message);

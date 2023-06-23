@@ -5,7 +5,7 @@ import { hostelDataApi } from '../../Services/hostelAdmin';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { allHostel } from '../../Redux/Features/hostel/hostelSlice';
+import { addHostelId, allHostel } from '../../Redux/Features/hostel/hostelSlice';
 
 function AddHostelButton() {
   const navigate = useNavigate()
@@ -20,11 +20,12 @@ function AddHostelButton() {
     dispatch(allHostel(headers))
   }, []);
 
-  const handleNavigate = (status) => {
+  const handleNavigate = (status,hostelId) => {
     if (status === "Pending") {
       toast.error("hostel is not approved")
     } else if (status === "Approved") {
-      navigate('/hostel/hostel-listing/dashboard')
+      dispatch(addHostelId(hostelId))
+      navigate(`/hostel/hostel-listing/dashboard?hostelId=${hostelId}`)
     }
   }
   return (
@@ -47,7 +48,8 @@ function AddHostelButton() {
             {hostels?.map((hostel) => (
               <div
                 key={hostel._id}
-                className="max-w-xs sm:max-w-sm bg-[#2265da] border pb-16  border-gray-200 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
+                className="max-w-xs sm:max-w-sm bg-[#2265da] border pb-16  border-gray-200
+                 rounded-lg shadow dark:bg-[#002D7A] dark:border-gray-700 m-2"
               >
                 <a href="#">
                   <img
@@ -66,7 +68,7 @@ function AddHostelButton() {
                     Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
                   </p>
                   <div
-                    onClick={() => handleNavigate(hostel.isApproved)}
+                    onClick={() => handleNavigate(hostel.isApproved, hostel._id)}
                     className="inline-flex items-center px-3 py-2 text-sm cursor-pointer font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Enter

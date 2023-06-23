@@ -1,15 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { FetchRequestData } from '../../Services/hostelAdmin';
+import { FetchRequestData, studentApprovalApi } from '../../Services/hostelAdmin';
 import { useSelector } from 'react-redux';
+import { Button, Modal ,message} from 'antd';
 
 function StudentRequests() {
-  const {hostels} = useSelector(state => state.adminHostelData)
-  console.log(hostels,"hostel datas");
-  const hostelId = hostels[0]._id
-  console.log(hostelId,"here hostel id");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [Requests, setRequests] = useState([])
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const { hostels } = useSelector(state => state.adminHostelData)
+  const hostelId = useSelector(state => state?.adminHostelData.hostelId)
 
-  const [Requests,setRequests] = useState([])
-  
+console.log(Requests,"front end request data");
+  const showModal = (requestData) => {
+    setSelectedRequest(requestData);
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const approveHostel = async (id) => {
+    try {
+      const headers = {
+        Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
+      };
+      await studentApprovalApi(id, headers);
+      message.success('Hostel approved successfully');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchRequestData = async () => {
@@ -17,10 +40,10 @@ function StudentRequests() {
         const headers = {
           Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
         };
-        const response = await FetchRequestData(headers);
+        const response = await FetchRequestData(headers, hostelId);
         if (response) {
           console.log(response.data);
-          setRequests(response.data);
+          setRequests(response.data.StudentRequestData);
         } else {
           console.log(response);
         }
@@ -33,87 +56,56 @@ function StudentRequests() {
 
 
   return (
-    // <div>
-    //   <div className="flex justify-center">
-    //     <div className="w-4/5 mt-16">
-    //       <h1 className="text-3xl font-bold text-[#002D7A] mb-4">Student Requests</h1>
-    //       <div className="overflow-x-auto">
+    <>
 
+      <div className='container mt-20'>
+        <div className="overflow-x-auto">
+          <table className="w-full bg-white rounded-lg overflow-hidden ">
+            <thead className="bg-[#4874BF]">
+              <tr>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">NO</th>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Hostel Name</th>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Email</th>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Status</th>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Details</th>
+                <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+  {Requests?.map((request, index) => (
+    <tr className="bg-gray-200" key={request._id}>
+      <td className="p-3 text-gray-500 font-semibold">{index + 1}</td>
+      <td className="p-3 text-gray-500 font-semibold">{/* Populate hostel name */}</td>
+      <td className="p-3 text-gray-500 font-semibold">{request?.email}</td>
+      <td className="p-3  font-semibold text-red-600"></td>
+      <td className="p-3 font-semibold border-black">
+        <Button type="primary" className="btn btn-outline text-black" onClick={() => showModal(request)}>
+          View
+        </Button>
+      </td>
+      <td className="p-3 flex flex-col sm:flex-row">
+        <button className="btn btn-success" onClick={() => approveHostel(request._id)}>Approve</button>
+        <button className="btn btn-error ml-5">Reject</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
 
-    //         <table className="w-full bg-white rounded-lg overflow-hidden ">
-    //           <thead className="bg-[#4874BF]">
-    //             <tr >
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">NO</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Student Name</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Email</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Status</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">View</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Approve</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Reject</th>
-    //               {/* <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Status</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Image</th>
-    //               <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Action</th> */}
-    //             </tr>
-    //           </thead>
-    //           <tbody>
-    //             <tr className='bg-gray-200' >
-    //               <td className="p-3 text-gray-500 font-semibold">1</td>
-    //               <td className="p-3 text-gray-500 font-semibold">muhammed shifin</td>
-    //               <td className="p-3 text-gray-500 font-semibold">shifin@gmail.com</td>
-    //               <td className="p-3 text-gray-500 font-semibold">Pending</td>
-    //               <td className="p-3 font-semibold">
-    //                 <button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View</button>
-    //               </td>
-    //               <td>
-    //                 <button className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Approve</button>
-    //               </td>
-    //               <td>
-    //                 <button className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reject</button>
-    //               </td>
-    //             </tr>
-    //           </tbody>
-    //         </table>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-  <div className='container mt-20'>
-    <div className="overflow-x-auto">
-      <table className="w-full bg-white rounded-lg overflow-hidden ">
-        <thead className="bg-[#4874BF]">
-          <tr>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">NO</th>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Hostel Name</th>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Email</th>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Status</th>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Details</th>
-            <th className="p-3 text-white text-sm font-bold tracking-wide text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr  className="bg-gray-200">
-              <td className="p-3 text-gray-500 font-semibold">1</td>
-              <td className="p-3 text-gray-500 font-semibold">comfort hostel</td>
-              <td className="p-3 text-gray-500 font-semibold">shifin@gmail.com</td>
-              <td className="p-3  font-semibold text-red-600">Pending</td>
-              <td className="p-3 font-semibold border-black">
-                <button className="btn btn-outline btn-info">
-                  View
-                </button>
-              </td>
-              <td className="p-3 flex flex-col sm:flex-row">
-                <button className="btn btn-success" >
-                  Approve
-                </button>
-                <button className="btn btn-error ml-5" >
-                  Reject
-                </button>
-              </td>
-            </tr>
-        </tbody>
-        </table>
+          </table>
         </div>
-        </div>
+      </div>
+      <Modal title="Student Info" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+  {selectedRequest && (
+    <>
+      <p className='text-md text-black font-popins'>Full Name : {selectedRequest.fullName}</p>
+      <p className='text-md text-black font-popins'>Email : {selectedRequest.email}</p>
+      <p className='text-md text-black font-popins'>Gender : {selectedRequest.gender}</p>
+      <p className='text-md text-black font-popins'>Phone : {selectedRequest.phone}</p>
+      <p className='text-md text-black font-popins'>Address : {selectedRequest.address.houseName}, {selectedRequest.address.area}, {selectedRequest.address.city}, {selectedRequest.address.pincode}</p>
+    </>
+  )}
+</Modal>
+    </>
   );
 }
 

@@ -31,9 +31,12 @@ export const hostelRoomData = (headers,hostelId) => {
      return axios.get(`/hostel/room-data/${hostelId}`,{headers})
 }
 
-export const FetchRequestData = (headers) =>{
-console.log(headers,"service headers");
-    return axios.get('/hostel/fetchRequestData',{headers})
+export const FetchRequestData = (headers,hostelId) =>{
+    return axios.get(`/hostel/fetchRequestData/${hostelId}`,{headers})
   }
+
+  export const studentApprovalApi = (id, headers) => {
+    return axios.patch(`/hostel/student-approval/${id}`, {}, { headers });
+  };
 
 

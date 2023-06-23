@@ -7,6 +7,7 @@ const initialState = {
     isLoading: false,
     isSuccess: false,
     isError: false,
+    hostelId:"",
     message: "",
     error: ""
 }
@@ -31,6 +32,9 @@ export const hostelSlice = createSlice({
     reducers: {
         reset: (state) => {
             state = initialState
+        },
+        addHostelId :(state,action)=>{
+            state.hostelId = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -52,5 +56,5 @@ export const hostelSlice = createSlice({
     }
 })
 
-export const { reset } = hostelSlice.actions
+export const { reset ,addHostelId} = hostelSlice.actions
 export default hostelSlice.reducer
