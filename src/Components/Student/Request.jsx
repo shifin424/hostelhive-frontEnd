@@ -11,6 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Request() {
 
+  const { hostelView } = useSelector(state => state)
+  const hostelId = hostelView.hostelData._id
+
   const { id } = useParams();
   const navigate = useNavigate()
 
@@ -42,7 +45,7 @@ function Request() {
   };
 
   const headers = {
-    Authorization: JSON.parse(localStorage.getItem("StudentToken")).token
+    Authorization: JSON.parse(localStorage.getItem("StudentToken"))?.token
   };
 
 
@@ -51,9 +54,9 @@ function Request() {
       const requestValues = {
         ...values,
       };
-  
-      const response = await StudentRequestApi(headers, requestValues, id);
-  
+
+      const response = await StudentRequestApi(headers, requestValues, id,hostelId);
+
       if (response.status !== 200) {
         message.error("Error occurred while submitting the form");
         return;
@@ -61,11 +64,11 @@ function Request() {
       message.success("Request Submitted Successfully");
       navigate('/over-view');
     } catch (error) {
-      message.error( error.response.data.message);
+      message.error(error.response.data.message);
     }
   };
-  
-  
+
+
 
   return (
     <div className="flex justify-center items-center h-screen">

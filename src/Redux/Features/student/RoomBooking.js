@@ -1,21 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { hostelRoomDetails } from '../../../Services/LandingService'
-
+import { RoomBookingApi } from '../../../Services/studentsServices'
 
 const initialState = {
-    roomDetails: [],
+    bookingDetails: [],
     isLoading: false,
     isSuccess: false,
     isError: false,
     message: "",
     error: ""
 }
-export const RoomData = createAsyncThunk(
-    'roomDetails/fetchRoomData',
-    async ({ hostelId, roomType }) => {
-      console.log(hostelId,roomType,"thunk data");
+
+export const BookingData = createAsyncThunk(
+    'bookingDetails/BookingData',
+    async ({headers}) => {
       try {
-        const response = await hostelRoomDetails(hostelId, { room_type: roomType });
+        const response = await RoomBookingApi(headers);
         if (response) {
           console.log(response.data);
         }
@@ -27,25 +26,25 @@ export const RoomData = createAsyncThunk(
     }
   );
 
-export const RoomSlice = createSlice({
-    name: "RoomDatas",
+  export const RoomBookingSlice = createSlice({
+    name: "BookingData",
     initialState,
     reducers: {
-      reducers: {
-        reset: () => initialState, 
-      },
+        reset: (state) => {
+            state = initialState
+        }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(RoomData.pending, (state) => {
+            .addCase(BookingData.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(RoomData.fulfilled, (state,action) => {
+            .addCase(BookingData.fulfilled, (state,action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.roomDetails = action.payload;
+                state.bookingDetails = action.payload;
             })
-            .addCase(RoomData.rejected, (state, action) => {
+            .addCase(BookingData.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
@@ -54,5 +53,5 @@ export const RoomSlice = createSlice({
     }
 })
 
-export const { reset } = RoomSlice.actions
-export default RoomSlice.reducer
+export const { reset } = RoomBookingSlice.actions
+export default RoomBookingSlice.reducer

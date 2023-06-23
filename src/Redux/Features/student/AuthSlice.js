@@ -19,7 +19,7 @@ export const StudentAuth = createAsyncThunk(
     async (values) => {
         try {
             const response = await StudentSignupApi(values)
-            console.log(response.data, "hello");
+            console.log(response.data, "here the signup responce data");
             if (response) {
                 console.log(response.data);
             }

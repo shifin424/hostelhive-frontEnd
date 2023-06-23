@@ -8,8 +8,8 @@ export const hostelSingleViewApi =(id) =>{
     return axios.get(`/hostel-over-view/${id}`)
 }
 
-export const hostelRoomDetails = (hostelId, id, roomType) => {
-    return axios.post(`/hostel-room-data/${hostelId}/${id}`, roomType);
+export const hostelRoomDetails = (hostelId, roomType) => {
+    return axios.post(`/hostel-room-data/${hostelId}`, roomType);
   };
 export const StudentSignupApi = (values) =>{
     return axios.post('/signup',values)

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import { reset as roomBookingDataReset } from '../../../Redux/Features/student/RoomBooking';
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = localStorage.getItem('StudentToken');
 
   const toggleDropdown = () => {
@@ -13,6 +17,7 @@ function Navbar() {
  
   const handleLogout = () => {
     localStorage.removeItem('StudentToken');
+    dispatch(roomBookingDataReset())
     navigate('/login');
   };
 

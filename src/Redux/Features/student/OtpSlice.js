@@ -12,12 +12,11 @@ const initialState = {
 }
 
 export const otpData = createAsyncThunk(
-
     "otp/otpData",
     async (StudentAuth) => {
         try {
             const response = await StudentOtpApi(StudentAuth)
-            console.log(response.data, "hello");
+            console.log(response.data, "otp data responce");
             if (response) {
                 console.log(response.data);
             }

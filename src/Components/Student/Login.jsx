@@ -22,6 +22,7 @@ function Login() {
         if (response.data.error) {
           setError(response.data.error);
         } else {
+          console.log(response.data,'data from backend ');
           localStorage.setItem('StudentToken', JSON.stringify(response.data));
           message.success('logged in successfully.');
           navigate('/');

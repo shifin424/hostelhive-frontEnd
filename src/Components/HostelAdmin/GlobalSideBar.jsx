@@ -21,7 +21,7 @@ const GlobalSideBar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 fixed mt-[4.5rem]`}>
+    <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4`}>
       <div className="py-3 flex justify-end">
         <CgMenuRightAlt
           size={26}

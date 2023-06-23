@@ -11,27 +11,19 @@ function RoomListing() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-
-  const handleViewDetails = async (hostelId, id, roomType) => {
-    try {
-      await dispatch(RoomData({ hostelId, id, roomType }));
+ 
+  const handleViewDetails = async(hostelId, roomType) => {
+    console.log(hostelId,roomType,"front end");
+    try{
+      await dispatch(RoomData({ hostelId, roomType }));
       navigate('/room-booking')
-    } catch (err) {
+    }catch(err){
       console.log(err);
     }
-
+  
 
   };
 
-  const studentToken = localStorage.getItem('StudentToken');
-  let id;
-
-  if (studentToken) {
-    const parsedToken = JSON.parse(studentToken);
-    id = parsedToken.id;
-  } else {
-    id = null;
-  }
 
 
   return (
@@ -65,7 +57,7 @@ function RoomListing() {
               <div className="card-actions justify-center flex items-center">
                 <Link
                   className="mr-1 font-bold text-[#002D7A]"
-                  onClick={() => handleViewDetails(hostelRoomData._id, id, room.room_type)}
+                  onClick={() => handleViewDetails(hostelRoomData._id, room.room_type)}
                 >
                   View Details
                 </Link>

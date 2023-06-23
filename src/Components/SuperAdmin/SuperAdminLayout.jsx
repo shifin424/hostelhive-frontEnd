@@ -13,7 +13,7 @@ function SuperAdminLayout() {
   const menus = [
     { name: 'DASHBOARD', link: '/dashboard', icon: RxDashboard },
     { name: 'REQUEST', link: '/request', icon: TbMessages },
-    { name: 'HOSTEL MANAGEMENT', link: '/request', icon: BiMessageAltEdit },//margin true
+    { name: 'HOSTEL MANAGEMENT', link: '/request', icon: BiMessageAltEdit },
     { name: 'BANNER', link: '/cool', icon: GiVerticalBanner },
     { name: 'LOGOUT', link: '/lo', icon: BiLogOutCircle },
 
@@ -26,7 +26,7 @@ function SuperAdminLayout() {
       <section className="flex flex-col sm:flex-row ">
         <SideBar />
 
-        <div className="bg-white p-4 sm:p-8 flex-grow">
+        <div className="bg-black p-4 sm:p-8 flex-grow">
           <Outlet />
         </div>
       </section>

@@ -7,7 +7,7 @@ function GlobalHostelLayout() {
   return (
     <>
     <GlobalNavbar />
-    <section className="flex flex-col sm:flex-row ">
+    <section className="flex">
       <GlobalSideBar />
 
       <div className="bg-white p-4 sm:p-8 flex-grow">

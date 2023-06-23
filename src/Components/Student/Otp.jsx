@@ -6,6 +6,7 @@ import { message } from 'antd';
 import { otpData } from '../../Redux/Features/student/OtpSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik'; 
+import { toast } from 'react-toastify';
 
 function Otp() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -13,6 +14,7 @@ function Otp() {
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
   const  StudentAuth  = useSelector((state) => state.studentAuth.AuthData.response);
+  console.log(StudentAuth,"here student data in redux");
   const confimObj = useSelector((state) => state.studentAuth.confimObj)
   const dispatch = useDispatch();
 
@@ -66,16 +68,19 @@ function Otp() {
     },
   });
 
-  const handleSubmit = (e) => {
-    const otpValue = otp.join('');
-
-console.log(otpValue);
-      confimObj.confirm(otpValue)
+  const handleSubmit = async (e) => {
+    try {
+      const otpValue = otp.join('');
+      confimObj.confirm(otpValue);
       dispatch(otpData(StudentAuth));
       navigate('/login');
       message.success('OTP verified successfully');
+    } catch (error) {
+      console.error('Error detected in Firebase:', error);
+      toast.error('An error occurred in Firebase. Please try again later.');
+    }
   };
-
+  
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center  ">

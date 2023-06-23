@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { hostelInfoApi,hostelSingleViewApi } from '../../../Services/LandingService';
+import { hostelInfoApi, hostelSingleViewApi } from '../../../Services/LandingService';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -30,8 +30,8 @@ function Section2() {
 
     const viewHostelData = async (id) => {
         try {
-        await  dispatch(hostelView(id))
-         navigate('/over-view')
+            await dispatch(hostelView(id))
+            navigate('/over-view')
 
         } catch (error) {
             console.log(error);
@@ -68,7 +68,7 @@ function Section2() {
                                 </div>
                             </div>
                             <div className="card-actions justify-center flex items-center">
-                                <Link  onClick={() => viewHostelData(hostel._id)} className="mr-1 font-bold text-[#002D7A]">
+                                <Link onClick={() => viewHostelData(hostel._id)} className="mr-1 font-bold text-[#002D7A]">
                                     Book Rooms
                                 </Link>
                                 <MdOutlineDoubleArrow className="text-[#002D7A]" />

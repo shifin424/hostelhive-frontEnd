@@ -1,52 +1,74 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaRegUser } from 'react-icons/fa';
 import { IoBedOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-
+import { BookingData } from '../../../Redux/Features/student/RoomBooking';
 import swal from 'sweetalert';
 
-function RoomBooking() {
-    const roomDetails = useSelector(state => state.roomsDetils.roomDetails);
-    const  navigate = useNavigate()
-    const token = localStorage.getItem('StudentToken');
- 
 
-   
-    const handleBookNow = (id) => {
-        if (token) {
-            if (roomDetails.StudentData.isRequested === false) {
+function RoomBooking() {
+    const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
+    const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0])
+    console.log(bookingStatus.isRequested,"redux data");
+    const dispatch = useDispatch()
+    const  navigate = useNavigate()
+
+    
+    const token = JSON.parse(localStorage.getItem('StudentToken'))?.token;
+
+
+    const handleBookNow = async (id) => {
+
+      if (token) { 
+        const headers = {
+          headers: {
+            Authorization: token,
+          },
+        };
+          await dispatch(BookingData({ headers }))
+            .then((response) => {
+              if (bookingStatus && bookingStatus?.isRequested === false) {
                 swal({
-                    title: 'Verification Required',
-                    text: 'Need to verify your data',
-                    icon: 'warning',
-                    buttons: {
-                        cancel: {
-                            text: 'Cancel',
-                            className: 'swal-button swal-button--cancel',
-                            value: 'cancel',
-                        },
-                        ok: {
-                            text: 'OK',
-                            className: 'swal-button swal-button--confirm',
-                            value: 'ok',
-                        },
+                  title: 'Verification Required',
+                  text: 'Need to verify your data',
+                  icon: 'warning',
+                  buttons: {
+                    cancel: {
+                      text: 'Cancel',
+                      className: 'swal-button swal-button--cancel',
+                      value: 'cancel',
                     },
+                    ok: {
+                      text: 'OK',
+                      className: 'swal-button swal-button--confirm',
+                      value: 'ok',
+                    },
+                  },
                 }).then((value) => {
-                    if (value === 'ok') {
-                        navigate(`/student/request/${id}`);
+                  if (value === 'ok') {
+                    if (!bookingStatus?.isRequested) {
+                      navigate(`/student/request/${id}`);
+                    } else {
+                      message.info('Request is still processing');
                     }
+                  }
                 });
-            } else if (!roomDetails.StudentData.isVerified) {
+              } else if (bookingStatus && !bookingStatus?.isVerified) {
                 message.info('Request is still processing');
-            } else {
-                message.success('Entering to payment page');
-            }
+              } else {
+                message.success('Entering payment page');
+              }
+            })
+            .catch((error) => {
+              console.error('Dispatch error:', error);
+            });
         } else {
-            navigate('/login');
+          navigate('/login');
         }
-    };
+      };
+      
 
 
     return (
@@ -57,7 +79,7 @@ function RoomBooking() {
                 </h1>
             </div>
             <div className="bg-white pb-10">
-                {roomDetails.roomData.map((room, index) => (
+                {roomDetails?.roomData?.map((room, index) => (
                     <li
                         key={index}
                         className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16 lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20"
