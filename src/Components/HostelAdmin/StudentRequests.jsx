@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { FetchRequestData, studentApprovalApi } from '../../Services/hostelAdmin';
+import { FetchRequestData, StudentRejectedApi, studentApprovalApi } from '../../Services/hostelAdmin';
 import { useSelector } from 'react-redux';
-import { Button, Modal ,message} from 'antd';
+import { Button, Modal, message } from 'antd';
 
 function StudentRequests() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [Requests, setRequests] = useState([])
   const [selectedRequest, setSelectedRequest] = useState(null);
-  const { hostels } = useSelector(state => state.adminHostelData)
+  const [selectedRequestId, setSelectedRequestId] = useState(null);
+  const [rejectModalVisible, setRejectModalVisible] = useState(false);
+  const [rejectDescription, setRejectDescription] = useState('');
+
+  const { hostels } = useSelector(state => state?.adminHostelData)
   const hostelId = useSelector(state => state?.adminHostelData.hostelId)
 
-console.log(Requests,"front end request data");
   const showModal = (requestData) => {
     setSelectedRequest(requestData);
     setIsModalOpen(true);
@@ -29,6 +32,38 @@ console.log(Requests,"front end request data");
       };
       await studentApprovalApi(id, headers);
       message.success('Hostel approved successfully');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRejectSubmit = () => {
+    rejectHostel();
+    setRejectModalVisible(false);
+    setRejectDescription('');
+  };
+
+  const handleRejectCancel = () => {
+    setRejectModalVisible(false);
+    setRejectDescription('');
+  };
+
+  const handleRejectButton = (requestId) => {
+    setSelectedRequestId(requestId);
+    setRejectModalVisible(true);
+  };
+  
+  const handleRejectDescriptionChange = (event) => {
+    setRejectDescription(event.target.value);
+  };
+
+  const rejectHostel = async () => {
+    try {
+      const headers = {
+        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token
+      };
+      await StudentRejectedApi(selectedRequestId, headers, rejectDescription);
+      message.success('Hostel rejected successfully');
     } catch (error) {
       console.log(error);
     }
@@ -72,39 +107,58 @@ console.log(Requests,"front end request data");
               </tr>
             </thead>
             <tbody>
-  {Requests?.map((request, index) => (
-    <tr className="bg-gray-200" key={request._id}>
-      <td className="p-3 text-gray-500 font-semibold">{index + 1}</td>
-      <td className="p-3 text-gray-500 font-semibold">{/* Populate hostel name */}</td>
-      <td className="p-3 text-gray-500 font-semibold">{request?.email}</td>
-      <td className="p-3  font-semibold text-red-600"></td>
-      <td className="p-3 font-semibold border-black">
-        <Button type="primary" className="btn btn-outline text-black" onClick={() => showModal(request)}>
-          View
-        </Button>
-      </td>
-      <td className="p-3 flex flex-col sm:flex-row">
-        <button className="btn btn-success" onClick={() => approveHostel(request._id)}>Approve</button>
-        <button className="btn btn-error ml-5">Reject</button>
-      </td>
-    </tr>
-  ))}
-</tbody>
+              {Requests?.map((request, index) => (
+                <tr className="bg-gray-200" key={request._id}>
+                  <td className="p-3 text-gray-500 font-semibold">{index + 1}</td>
+                  <td className="p-3 text-gray-500 font-semibold">{request?.hostelId?.hostelName}</td>
+                  <td className="p-3 text-gray-500 font-semibold">{request?.email}</td>
+                  <td className="p-3  font-semibold text-red-600">Pending</td>
+                  <td className="p-3 font-semibold border-black">
+                    <Button type="primary" className="btn btn-outline text-black" onClick={() => showModal(request)}>
+                      View
+                    </Button>
+                  </td>
+                  <td className="p-3 flex flex-col sm:flex-row">
+                    <button className="btn btn-success" onClick={() => approveHostel(request._id)}>Approve</button>
+                    <button className="btn btn-error ml-5" onClick={() => handleRejectButton(request._id)}>Reject</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
 
           </table>
         </div>
       </div>
       <Modal title="Student Info" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-  {selectedRequest && (
-    <>
-      <p className='text-md text-black font-popins'>Full Name : {selectedRequest.fullName}</p>
-      <p className='text-md text-black font-popins'>Email : {selectedRequest.email}</p>
-      <p className='text-md text-black font-popins'>Gender : {selectedRequest.gender}</p>
-      <p className='text-md text-black font-popins'>Phone : {selectedRequest.phone}</p>
-      <p className='text-md text-black font-popins'>Address : {selectedRequest.address.houseName}, {selectedRequest.address.area}, {selectedRequest.address.city}, {selectedRequest.address.pincode}</p>
-    </>
-  )}
-</Modal>
+        {selectedRequest && (
+          <>
+            <p className='text-md text-black font-popins'>Full Name : {selectedRequest.fullName}</p>
+            <p className='text-md text-black font-popins'>Email : {selectedRequest.email}</p>
+            <p className='text-md text-black font-popins'>Gender : {selectedRequest.gender}</p>
+            <p className='text-md text-black font-popins'>Phone : {selectedRequest.phone}</p>
+            <p className='text-md text-black font-popins'>Address : {selectedRequest.address.houseName},
+              {selectedRequest.address.area}, {selectedRequest.address.city},
+              {selectedRequest.address.pincode}</p>
+          </>
+        )}
+      </Modal>
+
+      <Modal
+        title="Reject Hostel"
+        visible={rejectModalVisible}
+        onOk={handleRejectSubmit}
+        onCancel={handleRejectCancel}
+        className="custom-modal"
+      >
+        <p className="mb-2 text-slate-600">Description</p>
+        <textarea
+          className="w-full h-40 border border-gray-700 rounded-lg p-2 bg-white"
+          name="reject-reason"
+          placeholder="Enter the reason for rejection..."
+          value={rejectDescription}
+          onChange={handleRejectDescriptionChange}
+        />
+      </Modal>
     </>
   );
 }

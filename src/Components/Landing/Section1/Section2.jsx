@@ -16,7 +16,6 @@ function Section2() {
             try {
                 const response = await hostelInfoApi();
                 if (response && response.data && Array.isArray(response.data)) {
-                    console.log(response.data);
                     setDetails(response.data);
                 } else {
                     console.log(response);

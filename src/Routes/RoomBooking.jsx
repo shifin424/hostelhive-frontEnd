@@ -8,25 +8,20 @@ import OtpPage from "../Pages/Landing/OtpPage";
 import RequestPage from "../Pages/Students/RequestPage";
 import PaymentPage from "../Pages/Students/PaymentPage";
 import StudentVerificaion from "../Verification/studentVerification";
-import RoomBookingRoutes from "./RoomBooking";
 
 
 
 
 
 
-const LandingPageRoutes = () => {
+const RoomBookingRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/over-view" element={<HostelOverView />}></Route>
-      <Route path="/signup" element={<SignUpPage />}></Route>
-      <Route path='/login' element={<LoginPage />}></Route>
-      <Route path="/otp-page" element={<OtpPage />}></Route>
-      <Route path="/room-booking" element={<RoomBookings />}></Route>
-      <Route path='/room-booking/*' element={<RoomBookingRoutes />}>  </Route>
+     <Route path='/request/:id' element={<StudentVerificaion><RequestPage /></StudentVerificaion>}></Route>
+     <Route path='/rent-payment' element={<StudentVerificaion><PaymentPage /></StudentVerificaion>}></Route>
     </Routes>
   );
 };
 
-export default LandingPageRoutes;
+export default RoomBookingRoutes;
+
