@@ -55,7 +55,7 @@ function RoomBooking() {
               }
             });
           } else if (bookingStatus && bookingStatus.isVerified) {
-            navigate(`/room-booking/rent-payment`);
+            navigate(`/room-booking/rent-payment/${id}`);
           } else {
             message.info('Request is still processing');
           }

@@ -18,7 +18,7 @@ const RoomBookingRoutes = () => {
   return (
     <Routes>
      <Route path='/request/:id' element={<StudentVerificaion><RequestPage /></StudentVerificaion>}></Route>
-     <Route path='/rent-payment' element={<StudentVerificaion><PaymentPage /></StudentVerificaion>}></Route>
+     <Route path='/rent-payment/:id' element={<StudentVerificaion><PaymentPage /></StudentVerificaion>}></Route>
     </Routes>
   );
 };

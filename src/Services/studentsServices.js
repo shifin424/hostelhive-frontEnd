@@ -8,4 +8,10 @@ export const RoomBookingApi = (headers) =>{
   return axios.get('/student/room-booking',headers)
 }
 
+export const fetchPaymentInfo = (headers,id) =>{
+  console.log(headers,id ,"in student api checking");
+  return axios.get(`/student/payment-data/${id}`,{headers})
+}
+
+
  
