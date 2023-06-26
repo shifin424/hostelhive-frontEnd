@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Pagination } from 'antd';
 
 function RoomList() {
-  const rooms = useSelector(state => state?.room?.rooms);
+  const rooms = useSelector((state) => state?.room?.rooms);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleModalOpen = (image) => {
     setSelectedImage(image);
@@ -17,15 +21,65 @@ function RoomList() {
     setModalVisible(false);
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); 
+  };
+
+  const filteredRooms = rooms.filter((room) => {
+    if (filter === 'all') {
+      return room.roomNo.includes(searchTerm);
+    } else {
+      return room.status === filter && room.roomNo.includes(searchTerm); 
+    }
+  });
+
+  const pageNumbers = Math.ceil(filteredRooms.length / itemsPerPage);
+
+  const firstIndex = (currentPage - 1) * itemsPerPage;
+  const lastIndex = Math.min(firstIndex + itemsPerPage, filteredRooms.length);
+  const currentRooms = filteredRooms.slice(firstIndex, lastIndex);
+
   return (
     <div className="flex justify-center">
       <div className="w-4/5">
-        
         <h1 className="text-3xl font-bold text-[#002D7A] mb-4">Room Listing</h1>
-        <div className="overflow-x-auto">
-          {rooms.length < 1 ? (
-            <div className=' flex justify-center'><p  className='text-4xl text-black font-semibold'>No rooms added yet.</p></div>
-            
+        <div>
+          <div className="flex justify-between mb-4">
+            <div className="flex items-center">
+              <select
+                value={filter}
+                onChange={handleFilterChange}
+                className="border  px-4 py-2 border-black bg-white text-black rounded-md"
+              >
+                <option value="all">All</option>
+                <option value="vacant">Vacant</option>
+                <option value="occupied">Occupied</option>
+                <option value="reserved">Reserved</option>
+              </select>
+             
+            </div>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="border px-4 py-2 border-black bg-white text-black rounded-md"
+              placeholder="Search Room No"
+            />
+          </div>
+          {currentRooms.length < 1 ? (
+            <div className="flex justify-center">
+              <p className="text-4xl mt-10 text-black font-semibold">No Matched Result Found</p>
+            </div>
           ) : (
             <table className="w-full bg-white rounded-lg overflow-hidden">
               <thead className="bg-[#4874BF]">
@@ -41,20 +95,21 @@ function RoomList() {
                 </tr>
               </thead>
               <tbody>
-                {rooms.map((room, index) => (
+                {currentRooms.map((room, index) => (
                   <tr className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'} key={room._id}>
-                    <td className="p-3 text-gray-500 font-semibold">{index + 1}</td>
+                    <td className="p-3 text-gray-500 font-semibold">{firstIndex + index + 1}</td>
                     <td className="p-3 text-gray-500 font-semibold">{room.roomNo}</td>
                     <td className="p-3 text-gray-500 font-semibold">{room.roomType}</td>
                     <td className="p-3 text-gray-500 font-semibold">{room.capacity}</td>
                     <td className="p-3 text-gray-500 font-semibold">0</td>
                     <td
-                      className={`p-3 font-semibold ${room.status === 'vacant'
+                      className={`p-3 font-semibold ${
+                        room.status === 'vacant'
                           ? 'text-red-600'
                           : room.status === 'occupied'
-                            ? 'text-green-600'
-                            : 'text-orange-600'
-                        }`}
+                          ? 'text-green-600'
+                          : 'text-orange-600'
+                      }`}
                     >
                       {room.status}
                     </td>
@@ -71,6 +126,15 @@ function RoomList() {
               </tbody>
             </table>
           )}
+          <div className="flex justify-center mt-4">
+            <Pagination
+              current={currentPage}
+              total={filteredRooms.length}
+              pageSize={itemsPerPage}
+              onChange={handlePageChange}
+              showSizeChanger={false}
+            />
+          </div>
         </div>
       </div>
       <Modal visible={modalVisible} onCancel={handleModalClose} footer={null}>

@@ -10,7 +10,7 @@ import { addHostelId, allHostel } from '../../Redux/Features/hostel/hostelSlice'
 function AddHostelButton() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { hostels } = useSelector(state => state?.adminHostelData)
+  const { hostels } = useSelector(state => state.adminHostelData)
   console.log(hostels,"hostel data");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function AddHostelButton() {
     }
   }
   return (
-    <>
+   
       <div>
         <div className='flex justify-end pt-16 pb-10'>
           <Link to='/hostel/add-hostel'>
@@ -92,7 +92,6 @@ function AddHostelButton() {
           </div>
         )}
       </div>
-    </>
   );
 
 }

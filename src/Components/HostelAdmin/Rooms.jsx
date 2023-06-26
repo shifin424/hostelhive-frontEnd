@@ -117,7 +117,6 @@ function Rooms() {
       });
   };
 
-
   const handleImageChange = (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
     setFieldValue('image', file);
@@ -126,19 +125,10 @@ function Rooms() {
 
   return (
     <div>
-      <div className="flex justify-end pt-16 pb-10">
-        {/* <div className="filter-container mr-10  ">
-    <select className="filter-select w-32 h-8 bg-white border border-black">
-      <option value="">Filter</option>
-      <option value="vacant">Vacant</option>
-      <option value="reserved">Reserved</option>
-      <option value="occupied">Occupied</option>
-    </select>
-  </div> */}
+      <div className="flex justify-end  pb-2">
         <button className="btn btn-info" onClick={showModal}>
           Add Rooms
         </button>
-
       </div>
 
       <Modal
@@ -169,7 +159,7 @@ function Rooms() {
             setIsModalOpen(false);
           }}
         >
-          {({ isValid, dirty, setFieldValue }) => (
+          {({  setFieldValue }) => (
             <Form className="p-6 space-y-6">
               <div className="flex space-x-4 flex-col sm:flex-row sm:space-x-4">
                 <div className="w-full sm:w-1/2">

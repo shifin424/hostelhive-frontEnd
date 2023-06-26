@@ -18,7 +18,7 @@ function SingleHostelNavbar() {
   
   return (
     <div>
-    <nav className="bg-white  w-full shadow-lg ">
+    <nav className="bg-white  w-full  border-b shadow-lg ">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
         <a href="#" className="flex items-center">
           <img className="w-32 h-14 absolute left-4" src={require('../../assets/images/hostel-logo.png')} alt="logo" />

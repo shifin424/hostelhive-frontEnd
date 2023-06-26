@@ -26,7 +26,7 @@ function SuperAdminLayout() {
       <section className="flex flex-col sm:flex-row ">
         <SideBar />
 
-        <div className="bg-black p-4 sm:p-8 flex-grow">
+        <div className="bg-white p-4 sm:p-8 flex-grow">
           <Outlet />
         </div>
       </section>
