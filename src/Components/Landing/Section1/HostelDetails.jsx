@@ -11,12 +11,12 @@ function HostelDetails() {
     return (
         
         <div>
-  <div className="bg-white w-full h-44 pt-28">
+  <div className="bg-white w-full h-44 pt-9">
     <h1 className="ml-10 text-3xl text-[#002D7A] font-bold font-popins">Hostel OverView</h1>
   </div>
 
-  <div className='bg-white flex justify-center pb-10'>
-    <div className='flex justify-center mt-10 pt-10 w-[70rem] h-[40rem] bg-[#4B76C2] rounded-2xl'>
+  <div className='bg-white flex justify-center pb-5'>
+    <div className='flex justify-center  pt-10 w-[70rem] h-[40rem] bg-[#4B76C2] rounded-2xl'>
       
         <div
           className="custom-modal"

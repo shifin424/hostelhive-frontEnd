@@ -15,7 +15,6 @@ export const hostelAdminLogin = (values) => {
 }
 
 export const addHostelApi = (data, headers) => {
-    console.log(data, "inservice file");
     return axios.post('/hostel/add-Hostel', data, headers)
 }
 

@@ -15,7 +15,7 @@ function OtpVerification() {
 
   const [hostelAdmins, SetHostelAdmin] = useState(null);
 
-  const AuthData = useSelector(state => state.adminAuth.adminAuthData);
+  const AuthData = useSelector(state => state?.adminAuth?.adminAuthData);
 
   useEffect(() => {
     SetHostelAdmin(AuthData);

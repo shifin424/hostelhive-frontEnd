@@ -31,10 +31,10 @@ export const AuthSlice = createSlice({
     name: "adminAuthData",
     initialState,
     reducers: {
-        reset: (state) => {
+        adminAuthDataReset: (state) => {
             state = initialState
         }
-    },
+      },
     extraReducers: (builder) => {
         builder
             .addCase(AuthData.pending, (state) => {
@@ -53,5 +53,5 @@ export const AuthSlice = createSlice({
     }
 })
 
-export const { reset } = AuthSlice.actions
+export const { adminAuthDataReset } = AuthSlice.actions
 export default AuthSlice.reducer

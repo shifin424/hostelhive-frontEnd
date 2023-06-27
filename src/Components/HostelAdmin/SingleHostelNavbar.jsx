@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {adminAuthDataReset} from '../../Redux/Features/hostel/AuthSlice'
+import {allHostelReset} from '../../Redux/Features/hostel/hostelSlice'
+import {AdminRoomReset} from '../../Redux/Features/hostel/roomSlice'
+import { useDispatch } from 'react-redux';
 
 function SingleHostelNavbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate= useNavigate()
+    const dispatch = useDispatch()
   
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
   
     const handleLogout =()=>{
+      dispatch(allHostelReset())
+      dispatch(adminAuthDataReset())
+      dispatch(AdminRoomReset())
       localStorage.removeItem('HostelAdminToken')
       navigate('/hostel/login')
     }

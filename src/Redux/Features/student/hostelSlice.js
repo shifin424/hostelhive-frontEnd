@@ -36,10 +36,10 @@ export const HostelSlice = createSlice({
     name: "HostelView",
     initialState,
     reducers: {
-        reset: (state) => {
+        StudentHostelReset: (state) => {
             state = initialState
-        }
-    },
+        },
+      },
     extraReducers: (builder) => {
         builder
             .addCase(hostelView.pending, (state) => {
@@ -59,7 +59,7 @@ export const HostelSlice = createSlice({
     }
 })
 
-export const { reset } = HostelSlice.actions
+export const { StudentHostelReset } = HostelSlice.actions
 export default HostelSlice.reducer
 
 

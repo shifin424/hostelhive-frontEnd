@@ -7,17 +7,14 @@ import { message } from 'antd';
 import { BookingData } from '../../../Redux/Features/student/RoomBooking';
 import swal from 'sweetalert';
 
-
 function RoomBooking() {
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0])
-  console.log(bookingStatus.isRequested, "redux data");
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
+  console.log(bookingStatus?.isRequested, "redux data");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-
-  const token = JSON.parse(localStorage.getItem('StudentToken'))?.token;
-
+  const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
 
   const handleBookNow = async (id) => {
     if (token) {
@@ -68,8 +65,7 @@ function RoomBooking() {
     }
   };
 
-
-
+  const filteredRooms = roomDetails?.roomData?.filter(room => room?.occupants < room?.capacity);
 
   return (
     <>
@@ -79,59 +75,63 @@ function RoomBooking() {
         </h1>
       </div>
       <div className="bg-white pb-10">
-        {roomDetails?.roomData?.map((room, index) => (
-          <li
-            key={index}
-            className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16 lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20"
-          >
-            <div className="overflow-hidden rounded-md lg:w-2/6">
-              <img className="w-full h-full" src={room.url} alt="room"></img>
-            </div>
-            <div className="p-5 grid lg:grid-cols-2 w-full">
-              <div className="grid gap-4">
-                <div className="text-2xl font-bold text-[#002D7A]">
-                  {room.title}
-                </div>
-                <div className="flex-wrap  text-gray-600 text-xl">
-                  {room.description}
-                </div>
-                <div className="flex flex-wrap items-center text-gray-900 text-xl gap-6 sm:gap-6">
-                  <div className="flex gap-2 items-center">
-                    <div>
-                      <FaRegUser />
-                    </div>
-                    <div>{room.occupants} Sleep</div>
+        {filteredRooms.length === 0 ? (
+          <p className="text-red-500 text-center mt-5 text-2xl font-bold">Every Room is Full No Any Rooms available </p>
+        ) : (
+          filteredRooms.map((room, index) => (
+            <li
+              key={index}
+              className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16 lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20"
+            >
+              <div className="overflow-hidden rounded-md lg:w-2/6">
+                <img className="w-full h-full" src={room.url} alt="room"></img>
+              </div>
+              <div className="p-5 grid lg:grid-cols-2 w-full">
+                <div className="grid gap-4">
+                  <div className="text-2xl font-bold text-[#002D7A]">
+                    {room.title}
                   </div>
-                  <div className="flex gap-2 items-center">
-                    <div>
-                      <IoBedOutline size={25} />
+                  <div className="flex-wrap  text-gray-600 text-xl">
+                    {room.description}
+                  </div>
+                  <div className="flex flex-wrap items-center text-gray-900 text-xl gap-6 sm:gap-6">
+                    <div className="flex gap-2 items-center">
+                      <div>
+                        <FaRegUser />
+                      </div>
+                      <div>{room.occupants} Sleep</div>
                     </div>
-                    <div>{room.capacity}</div>
+                    <div className="flex gap-2 items-center">
+                      <div>
+                        <IoBedOutline size={25} />
+                      </div>
+                      <div>{room.capacity}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid gap-6 py-5 lg:py-0 lg:flex lg:flex-col lg:items-end lg:justify-between">
+                  <div className="">
+                    <div className="text-3xl font-bold inline-block lg:text-4xl text-gray-800 lg:font-extrabold">
+                      ₹{room.rent}
+                    </div>
+                    <span className="px-1 text-gray-600 text-lg">/month</span>
+                  </div>
+                  <button
+                    className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300"
+                    onClick={() => handleBookNow(room._id)}
+                  >
+                    Book Now
+                  </button>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-green-500 font-bold">Available</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="grid gap-6 py-5 lg:py-0 lg:flex lg:flex-col lg:items-end lg:justify-between">
-                <div className="">
-                  <div className="text-3xl font-bold inline-block lg:text-4xl text-gray-800 lg:font-extrabold">
-                    ₹{room.rent}
-                  </div>
-                  <span className="px-1 text-gray-600 text-lg">/month</span>
-                </div>
-                <button
-                  className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300"
-                  onClick={() => handleBookNow(room._id)}
-                >
-                  Book Now
-                </button>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-green-500 font-bold">Available</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+        )}
       </div>
     </>
   );

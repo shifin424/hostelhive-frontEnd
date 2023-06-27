@@ -4,7 +4,7 @@ import Navbar from '../../Components/Landing/NavBar/Navbar'
 
 function RoomBookings() {
   return (
-    <div className='bg-white pb-36'>
+    <div className='bg-white w-full h-screen pb-36'>
         <Navbar/>
       <RoomBooking/>
     </div>

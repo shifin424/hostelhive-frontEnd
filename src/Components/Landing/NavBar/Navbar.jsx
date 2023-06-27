@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
-import { reset as roomBookingDataReset } from '../../../Redux/Features/student/RoomBooking';
+import { useDispatch } from 'react-redux'
+import { RoomDetialsReset } from '../../../Redux/Features/student/RoomBooking';
+import { StudentAuthReset } from '../../../Redux/Features/student/AuthSlice';
+import { StudentRoomReset } from '../../../Redux/Features/student/RoomSlice'
+import {StudentHostelReset} from '../../../Redux/Features/student/hostelSlice'
+
+
+
 
 
 function Navbar() {
@@ -14,10 +20,13 @@ function Navbar() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
- 
+
   const handleLogout = () => {
     localStorage.removeItem('StudentToken');
-    dispatch(roomBookingDataReset())
+    dispatch(StudentRoomReset())
+    dispatch(RoomDetialsReset())
+    dispatch(StudentAuthReset())
+    dispatch(StudentHostelReset())
     navigate('/login');
   };
 

@@ -27,10 +27,10 @@ export const RoomSlice = createSlice({
     name: "Rooms",
     initialState,
     reducers: {
-        reset: (state) => {
+        AdminRoomReset: (state) => {
             state = initialState
         }
-    },
+      },
     extraReducers: (builder) => {
         builder
             .addCase(roomData.pending, (state) => {
@@ -50,5 +50,5 @@ export const RoomSlice = createSlice({
     }
 })
 
-export const { reset } = RoomSlice.actions
+export const { AdminRoomReset } = RoomSlice.actions
 export default RoomSlice.reducer

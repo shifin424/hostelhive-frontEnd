@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchPaymentInfo, paymentApi, paymentDataApi } from '../../Services/studentsServices';
-import {message} from 'antd'
+import { message } from 'antd'
+import image from '../../assets/images/hostel-logo.png'
+import { toast } from 'react-toastify';
+
 
 function Payment() {
   const [details, setDetails] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate()
 
-  console.log(details, "logged data");
+
 
   useEffect(() => {
     const headers = {
@@ -53,21 +56,19 @@ function Payment() {
   }, []);
 
   async function handleClick() {
-    let orderId =
-      "OD" + Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+    let orderId = "OD" + Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
     if (!res) {
       alert("razorpay SDK failed to load. Are you online?");
     }
 
-   
     let paymetRes = {
       order_id: orderId,
       amount: details.totalRent,
       currency: "INR",
-      payment_capture: 1,
-    };
+      payment_capture: 1,
+    };
 
     const headers = {
       headers: {
@@ -75,7 +76,7 @@ function Payment() {
       },
     };
 
-    const responce = await paymentApi(headers,paymetRes);
+    const responce = await paymentApi(headers, paymetRes);
     console.log(responce, "responce of the payment");
 
     if (!responce.data.data) alert("Server error. Are you online?");
@@ -86,34 +87,44 @@ function Payment() {
         amount: responce.data.data.amount,
         name: "Hostel Hive",
         description: "Wallet Transaction",
-        image: "http://localhost:1337/logo.png",
+        image: image,
         order_id: responce.data.data.id,
 
         handler: async function (response) {
-         
-            let rentPayment = {
-              room_id: id,
-              rentAmount: details.totalRent,
-              rentpaymentMonth: getCurrentMonthAndYear()
-            };
 
-            const responce = await paymentDataApi({
-              orderId: response.razorpay_order_id,
-              rentPayment,
-              headers,
-            }).then(()=>{
-              navigate("/success");
-            }).catch((err)=>{
-             message.error("Error occured")
-            })
+          let rentPayment = {
+            room_id: id,
+            rentAmount: details.totalRent,
+            monthOfPayment: getCurrentMonthAndYear()
+          };
+
+          const paymentResponse = await paymentDataApi({
+            orderId: response.razorpay_order_id,
+            rentPayment,
+            headers,
+          });
+          console.log(paymentResponse,'<<<<<<<<<');
+
+          if (paymentResponse.data.data.order) {
+           
+            const tokenData = paymentResponse.data.data.tokenData;
           
+            localStorage.removeItem('StudentToken');
+            localStorage.setItem('StudentToken', JSON.stringify(tokenData));
+
+
+            toast.success('Your payment has been completed.');
+            navigate('/student/profile')
+          } else {
+            toast.error('Your payment has been cancelled');
+          }
         },
         prefill: {
           name: "Muhammed shifin",
-          email: "HostelHive@gmai.com",
+          email: "HostelHive@gmail.com",
           contact: "9999999999",
         },
-        theme: { color: "#1f5215" },
+        theme: { color: "#002D7A" },
       };
 
       const paymentObject = new window.Razorpay(options);

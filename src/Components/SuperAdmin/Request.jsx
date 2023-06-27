@@ -88,6 +88,11 @@ function Request() {
 
   return (
     <div className="overflow-x-auto">
+        {requests.length === 0 ? (
+          <div className='flex justify-center'>
+        <p className='text-black text-2xl mt-24'>Your request list is empty or no requests available.</p>
+        </div>
+      ) : (
       <table className="w-full bg-white rounded-lg overflow-hidden">
         <thead className="bg-[#4874BF]">
           <tr>
@@ -123,6 +128,7 @@ function Request() {
           ))}
         </tbody>
       </table>
+      )}
 
       {requests.map((item) => (
         <Modal
@@ -178,6 +184,7 @@ function Request() {
         />
       </Modal>
     </div>
+    
   );
 }
 

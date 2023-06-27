@@ -31,10 +31,10 @@ export const OtpSlice = createSlice({
     name: "otpData",
     initialState,
     reducers: {
-        reset: (state) => {
+        StudentOtpReset: (state) => {
             state = initialState
-        }
-    },
+        },
+      },
     extraReducers: (builder) => {
         builder
             .addCase(otpData.pending, (state) => {
@@ -54,5 +54,5 @@ export const OtpSlice = createSlice({
     }
 })
 
-export const { reset } = OtpSlice.actions
+export const { StudentOtpReset } = OtpSlice.actions
 export default OtpSlice.reducer

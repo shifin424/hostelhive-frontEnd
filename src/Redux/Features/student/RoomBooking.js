@@ -30,9 +30,9 @@ export const BookingData = createAsyncThunk(
     name: "BookingData",
     initialState,
     reducers: {
-        reset: (state) => {
-            state = initialState
-        }
+      RoomDetialsReset: (state) => {
+        state = initialState
+      }
     },
     extraReducers: (builder) => {
         builder
@@ -53,5 +53,5 @@ export const BookingData = createAsyncThunk(
     }
 })
 
-export const { reset } = RoomBookingSlice.actions
+export const { RoomDetialsReset } = RoomBookingSlice.actions
 export default RoomBookingSlice.reducer

@@ -64,8 +64,8 @@ function Singnup() {
   const handleSubmit = (values) => {
     dispatch(AuthData(values))
         .then((response) => { 
-          if (response.payload.response.data) {
-                toast.error(response.payload.response.data.message);
+          if (response?.payload?.response?.data) {
+                toast.error(response?.payload?.response?.data?.message);
             } else {
                 console.log('form submitted');
                 message.success('Form submitted successfully!'); 

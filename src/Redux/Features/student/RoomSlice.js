@@ -31,9 +31,9 @@ export const RoomSlice = createSlice({
     name: "RoomDatas",
     initialState,
     reducers: {
-      reducers: {
-        reset: () => initialState, 
-      },
+      StudentRoomReset: (state) => {
+        state = initialState
+    }
     },
     extraReducers: (builder) => {
         builder
@@ -54,5 +54,5 @@ export const RoomSlice = createSlice({
     }
 })
 
-export const { reset } = RoomSlice.actions
+export const { StudentRoomReset } = RoomSlice.actions
 export default RoomSlice.reducer

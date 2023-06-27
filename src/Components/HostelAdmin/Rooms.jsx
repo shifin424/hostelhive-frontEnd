@@ -92,8 +92,6 @@ function Rooms() {
     formData.append('description', values.description)
     formData.append('title', values.title)
 
-    const hostelId = hostels[0]._id
-
     const headers = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -103,7 +101,9 @@ function Rooms() {
 
     hostelRoomApi(formData, headers, hostelId)
       .then((response) => {
+        console.log(response,"here rooms responce");
         if (response.data.error) {
+          console.log(response.data.error);
           toast.error(response.data.error);
           setError(response.data.error);
         } else {
@@ -111,9 +111,9 @@ function Rooms() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
         setError(err.response.data.error || 'An error occurred');
-        toast.error(err.response.data.error || 'An error occurred');
+        toast.error(err.response.data.message || 'An error occurred');
       });
   };
 

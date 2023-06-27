@@ -16,7 +16,7 @@ useEffect(() => {
       if (token.role === 'guest') {
         navigate(`${location.pathname}`);
       } else if (token.role === 'resident') {
-        navigate('/student/dashboard');
+        navigate('/student/profile');
       } else {
         navigate('/404');
       }

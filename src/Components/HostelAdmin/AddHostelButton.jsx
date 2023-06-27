@@ -31,7 +31,7 @@ function AddHostelButton() {
   return (
    
       <div>
-        <div className='flex justify-end pt-16 pb-10'>
+        <div className='flex justify-end  pb-10'>
           <Link to='/hostel/add-hostel'>
             <button className='btn btn-info'>Add Hostel</button>
           </Link>

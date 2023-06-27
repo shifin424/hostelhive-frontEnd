@@ -19,7 +19,7 @@ export const paymentApi = (headers, paymentResponce) => {
 }
 
 
-export const paymentDataApi = (headers) => {
-  // return axios.post('/student/payment-request',headers)
+export const paymentDataApi = ({ orderId, rentPayment, headers }) => {
+  return axios.post('/student/payment-verification', { orderId, rentPayment }, headers);
 }
- 
+

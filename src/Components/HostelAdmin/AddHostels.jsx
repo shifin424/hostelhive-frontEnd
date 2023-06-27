@@ -106,7 +106,7 @@ const AddHostel = () => {
   };
 
   return (
-    <div className="bg-[#ffff] py-4 pb-16">
+    <div className="bg-[#ffff]  pb-16">
       <div className="max-w-3xl mx-auto p-4 bg-[#93b8f9] rounded-lg shadow-2xl mt-14  pb-10 px-10 py-10">
         <Formik
           initialValues={initialValues}
