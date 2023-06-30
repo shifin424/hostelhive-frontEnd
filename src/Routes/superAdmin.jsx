@@ -4,6 +4,7 @@ import DashBoard from '../Pages/SuperAdmin/Home'
 import Request from "../Pages/SuperAdmin/HostelRequests";
 import SuperAdminLayout from "../Components/SuperAdmin/SuperAdminLayout";
 import AdminVerificaton from '../Verification/superAdminVerification'
+import HostelManagmentPage from "../Pages/SuperAdmin/HostelManagmentPage";
 
 
 
@@ -14,6 +15,7 @@ const AdminRoutes = () => {
       <Route element={<SuperAdminLayout />} >
         <Route path="/dashBoard" element={<AdminVerificaton> <DashBoard/></AdminVerificaton>}></Route>
         <Route path="/request" element={<AdminVerificaton> <Request/></AdminVerificaton> }></Route>
+        <Route path="/hostel-managment" element={<AdminVerificaton><HostelManagmentPage/></AdminVerificaton>}></Route>
       </Route>
     </Routes>
   );

@@ -16,7 +16,7 @@ function HostelDetails() {
   </div>
 
   <div className='bg-white flex justify-center pb-5'>
-    <div className='flex justify-center  pt-10 w-[70rem] h-[40rem] bg-[#4B76C2] rounded-2xl'>
+    <div className='flex justify-center pt-10 w-[70rem] h-[40rem] bg-[#4B76C2] rounded-2xl'>
       
         <div
           className="custom-modal"

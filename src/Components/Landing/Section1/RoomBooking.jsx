@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaRegUser } from 'react-icons/fa';
 import { IoBedOutline } from 'react-icons/io5';
@@ -16,52 +16,58 @@ function RoomBooking() {
 
   const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
 
-  const handleBookNow = async (id) => {
-    if (token) {
-      const headers = {
-        headers: {
-          Authorization: token,
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        const headers = {
+          headers: {
+            Authorization: token,
+          },
+        };
+        try {
+          await dispatch(BookingData({ headers }));
+        } catch (error) {
+          console.error('Dispatch error:', error);
+        }
+      } else {
+        navigate('/login');
+      }
+    };
+
+    fetchData();
+  }, [dispatch, navigate, token]);
+
+  const handleBookNow = (id) => {
+    if (bookingStatus && bookingStatus.isRequested === false) {
+      swal({
+        title: 'Verification Required',
+        text: 'Need to verify your data',
+        icon: 'warning',
+        buttons: {
+          cancel: {
+            text: 'Cancel',
+            className: 'swal-button swal-button--cancel',
+            value: 'cancel',
+          },
+          ok: {
+            text: 'OK',
+            className: 'swal-button swal-button--confirm',
+            value: 'ok',
+          },
         },
-      };
-      await dispatch(BookingData({ headers }))
-        .then((response) => {
-          if (bookingStatus && bookingStatus.isRequested === false) {
-            swal({
-              title: 'Verification Required',
-              text: 'Need to verify your data',
-              icon: 'warning',
-              buttons: {
-                cancel: {
-                  text: 'Cancel',
-                  className: 'swal-button swal-button--cancel',
-                  value: 'cancel',
-                },
-                ok: {
-                  text: 'OK',
-                  className: 'swal-button swal-button--confirm',
-                  value: 'ok',
-                },
-              },
-            }).then((value) => {
-              if (value === 'ok') {
-                if (!bookingStatus.isRequested) {
-                  navigate(`/room-booking/request/${id}`);
-                } else {
-                  message.info('Request is still processing');
-                }
-              }
-            });
-          } else if (bookingStatus && bookingStatus.isVerified) {
-            navigate(`/room-booking/rent-payment/${id}`);
+      }).then((value) => {
+        if (value === 'ok') {
+          if (!bookingStatus.isRequested) {
+            navigate(`/room-booking/request/${id}`);
           } else {
             message.info('Request is still processing');
           }
-        })
-        .catch((error) => {
-          console.error('Dispatch error:', error);
-        });
+        }
+      });
+    } else if (bookingStatus && bookingStatus.isVerified) {
+      navigate(`/room-booking/rent-payment/${id}`);
     } else {
-      navigate('/login');
+      message.info('Request is still processing');
     }
   };
 
