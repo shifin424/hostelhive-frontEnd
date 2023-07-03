@@ -22,6 +22,14 @@ export const hostelStatusApi = (headers) =>{
     return axios.get('/admin/fetchHostelData',{headers})
 }
 
+export const hostelBlockingApi = (id,headers)=>{
+    return axios.patch(`/admin/block-hostel/${id}`,{},{headers})
+}
+
+export const hostelUnlockApi = (id,headers)=>{
+    return axios.patch(`/admin/unblock-hostel/${id}`,{},{headers})
+}
+
 
 
 

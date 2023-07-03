@@ -42,4 +42,15 @@ export const StudentRejectedApi = (id, headers, description) =>{
 return axios.patch(`/hostel/student-rejection/${id}`,{description} ,{headers})
 }
 
+export const FoodMenuApi = (headers) =>{
+    return axios.get('/hostel/fetch-food-menu',headers)
+}
+
+export const editFoodMenuApi = (headers,values,id) =>{
+    console.log(id,"id<<<<<<<<<<");
+    return axios.put(`/hostel/edit-food-menu/${id }`,{values},{headers})
+}
+
+
+
 
