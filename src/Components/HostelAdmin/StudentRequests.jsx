@@ -91,7 +91,10 @@ function StudentRequests() {
 
   return (
     <>
-      <div className="container mt-20">
+      <div className="container">
+        <div>
+          <h1 className='pb-5 text-[#002D7A] font-bold text-2xl'>Student Request</h1>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg overflow-hidden">
             {requests.length > 0 && (

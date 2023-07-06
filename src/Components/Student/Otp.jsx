@@ -11,36 +11,31 @@ import { toast } from 'react-toastify';
 function Otp() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState('');
+  const [isInvalidOtp, setIsInvalidOtp] = useState(false);
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
-  const  StudentAuth  = useSelector((state) => state.studentAuth.AuthData.response);
-  console.log(StudentAuth,"here student data in redux");
-  const confimObj = useSelector((state) => state.studentAuth.confimObj)
+  const  StudentAuth  = useSelector((state) => state?.studentAuth?.AuthData?.response);
+  const confimObj = useSelector((state) => state.studentAuth.confimObj);
   const dispatch = useDispatch();
-
-  console.log(StudentAuth, 'student auth');
-
   const submitButtonRef = useRef(null);
-
   const navigate = useNavigate();
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-    console.log(value);
-  
     if (!/^\d*$/.test(value)) {
       setError('Only numbers are allowed');
+      setIsInvalidOtp(true);
       return;
     }
-  
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
     setError('');
-  
-    const updatedFormikOtp = updatedOtp.join(''); 
-    formik.setFieldValue('otp', updatedFormikOtp); 
-  
+    setIsInvalidOtp(false);
+
+    const updatedFormikOtp = updatedOtp.join('');
+    formik.setFieldValue('otp', updatedFormikOtp);
+
     if (value !== '') {
       if (index === otp.length - 1) {
         submitButtonRef.current.focus();
@@ -49,7 +44,6 @@ function Otp() {
       }
     }
   };
-  
 
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && otp[index] === '') {
@@ -69,18 +63,23 @@ function Otp() {
   });
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isInvalidOtp) {
+      setError('Invalid OTP');
+      return;
+    }
     try {
       const otpValue = otp.join('');
-      confimObj.confirm(otpValue);
+      await confimObj.confirm(otpValue);
       dispatch(otpData(StudentAuth));
       navigate('/login');
       message.success('OTP verified successfully');
     } catch (error) {
-      console.error('Error detected in Firebase:', error);
-      toast.error('An error occurred in Firebase. Please try again later.');
+      console.error('Error occurred during OTP confirmation:', error);
+    toast.error("Invalid otp ")
     }
   };
-  
+
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center  ">
@@ -105,7 +104,7 @@ function Otp() {
                 ))}
               </div>
 
-              {error && <div className="text-red-500 text-xs">{error}</div>}
+              {isInvalidOtp && <div className="text-red-500 text-xs">Invalid OTP</div>}
 
               <button
                 className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"

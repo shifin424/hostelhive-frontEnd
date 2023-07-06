@@ -77,7 +77,6 @@ function Payment() {
     };
 
     const responce = await paymentApi(headers, paymetRes);
-    console.log(responce, "responce of the payment");
 
     if (!responce.data.data) alert("Server error. Are you online?");
     else {
@@ -103,8 +102,7 @@ function Payment() {
             rentPayment,
             headers,
           });
-          console.log(paymentResponse,'<<<<<<<<<');
-
+        
           if (paymentResponse.data.data.order) {
            
             const tokenData = paymentResponse.data.data.tokenData;

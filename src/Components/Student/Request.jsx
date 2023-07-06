@@ -62,7 +62,7 @@ function Request() {
         return;
       }
       message.success("Request Submitted Successfully");
-      navigate('/over-view');
+      navigate('/room-booking');
     } catch (error) {
       message.error(error.response.data.message);
     }

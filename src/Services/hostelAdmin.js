@@ -30,6 +30,10 @@ export const hostelRoomData = (headers, hostelId) => {
     return axios.get(`/hostel/room-data/${hostelId}`, { headers })
 }
 
+export const editRoomApi = (headers,id)=>{
+    return axios.get(`/hostel/edit-room-data/${id}`,{headers})
+}
+
 export const FetchRequestData = (headers, hostelId) => {
     return axios.get(`/hostel/fetchRequestData/${hostelId}`, { headers })
 }
@@ -42,13 +46,33 @@ export const StudentRejectedApi = (id, headers, description) =>{
 return axios.patch(`/hostel/student-rejection/${id}`,{description} ,{headers})
 }
 
-export const FoodMenuApi = (headers) =>{
-    return axios.get('/hostel/fetch-food-menu',headers)
+export const FoodMenuApi = (headers,id) =>{
+    console.log(id,"checked point 2");
+return axios.get(`/hostel/fetch-food-menu/${id}`,{headers})
 }
 
 export const editFoodMenuApi = (headers,values,id) =>{
-    console.log(id,"id<<<<<<<<<<");
     return axios.put(`/hostel/edit-food-menu/${id }`,{values},{headers})
+}
+
+export const StudentDataApi = (headers,id) =>{
+    return axios.get(`/hostel/fetch-student-data/${id}`,{headers})
+}
+
+export const studentBlockingApi = (headers,id) =>{
+    return axios.patch(`/hostel/block-student/${id}`,{},{headers})
+}
+
+export const studentUnBlockingApi = (headers,id)=>{
+    return axios.patch(`/hostel/unblock-student/${id}`,{},{headers})
+}
+
+export const studentDeleteApi = (headers,id) =>{
+    return axios.patch(`/hostel/delete-student/${id}`,{},{headers})
+}
+
+export const addFoodmenuApi = (headers,values,id) =>{
+    return axios.post(`/hostel/add-food-menu/${id}`,{values},{headers})
 }
 
 

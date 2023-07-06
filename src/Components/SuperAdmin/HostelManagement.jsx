@@ -27,12 +27,12 @@ function HostelManagement() {
         fetchHostelData();
     }, []);
 
-    const BlockHostel = async (id) => {
+    const BlockHostel = async (id,adminId) => {
         try {
             const headers = {
                 Authorization: localStorage.getItem('adminToken'),
             };
-            await hostelBlockingApi(id, headers);
+            await hostelBlockingApi(id, headers,adminId);
             toast.success('Hostel Blocked Successfully');
             setStatus(!status);
         } catch (error) {
@@ -40,12 +40,12 @@ function HostelManagement() {
         }
     };
 
-    const UnlockHostel = async (id) => {
+    const UnlockHostel = async (id,adminId) => {
         try {
             const headers = {
                 Authorization: localStorage.getItem('adminToken'),
             };
-            await hostelUnlockApi(id, headers);
+            await hostelUnlockApi(id, headers,adminId);
             toast.success('Hostel Unlocked Successfully');
             setStatus(!status);
         } catch (error) {
@@ -55,17 +55,18 @@ function HostelManagement() {
 
     const toggleBlockStatus = async (index) => {
         const updatedHostelData = [...hostelData];
-        const hostelId = updatedHostelData[index]._id; 
-
+        const hostelId = updatedHostelData[index]._id;
+        const adminId = updatedHostelData[index].adminData._id; 
+    
         if (updatedHostelData[index].isBlocked) {
-            await UnlockHostel(hostelId);
+          await UnlockHostel(hostelId, adminId); 
         } else {
-            await BlockHostel(hostelId);
+          await BlockHostel(hostelId, adminId);
         }
-
+    
         updatedHostelData[index].isBlocked = !updatedHostelData[index].isBlocked;
         setHostelData(updatedHostelData);
-    };
+      };
 
     return (
         <>

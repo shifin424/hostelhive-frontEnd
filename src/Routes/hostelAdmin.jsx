@@ -12,6 +12,7 @@ import SingleHostelLayouts from "../Components/HostelAdmin/SingleHostelLayouts";
 import RoomsListing from "../Pages/HostelAdmin/RoomsListing";
 import RequestsPage from "../Pages/HostelAdmin/RequestsPage";
 import FoodSystem from "../Pages/HostelAdmin/FoodSystem";
+import StudentManagmentPage from "../Pages/HostelAdmin/StudentManagmentPage";
 
 
 const hostelRoutes = () => {
@@ -32,6 +33,7 @@ const hostelRoutes = () => {
         <Route path="/hostel-listing/rooms" element={<RoomsListing />}></Route>
         <Route path="/hostel-listing/requests" element={<RequestsPage />}></Route>
         <Route path='/hostel-listing/food-menu' element={<FoodSystem/>}></Route>
+        <Route path='/hostel-listing/student-managment' element={<StudentManagmentPage/>}></Route>
       </Route>
 
     </Routes>

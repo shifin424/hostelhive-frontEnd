@@ -4,6 +4,7 @@ import { hostelAdminLogin } from '../../Services/hostelAdmin'
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import { toast } from 'react-toastify';
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -27,7 +28,8 @@ function Login() {
     hostelAdminLogin(values)
       .then((response) => {
         if (response.data.error) {
-          setError(response.data.error);
+          //setError(response.data.error);
+          console.log(response.data.error);
         } else {
           localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
           message.success('logged in successfully.')
@@ -35,8 +37,9 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log(err)
-        setError(err.response.data.error || "An error occurred");
+        console.log(err.response.data.message)
+        toast.error(err.response.data.message)
+        //setError(err.response.data.error || "An error occurred");
       });
   };
 

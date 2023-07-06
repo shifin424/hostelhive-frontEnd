@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { studentLoginApi } from '../../Services/LandingService';
 import { message } from 'antd';
 import image from '../../assets/images/singupImage2.jpg';
+import {toast} from 'react-toastify'
 
 function Login() {
   const [error, setError] = useState('');
@@ -13,13 +14,19 @@ function Login() {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number'
+    )
+    .required('Password is required'),
   });
 
   const handleSubmit = (values) => {
     studentLoginApi(values)
       .then((response) => {
         if (response.data.error) {
+          console.log(response.data.message);
           setError(response.data.error);
         } else {
           console.log(response.data,'data from backend ');
@@ -29,10 +36,12 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.message);
+       toast.error(err.response.data.message)
         setError(err.response.data.error || 'An error occurred');
       });
   };
+
 
   return (
     <>

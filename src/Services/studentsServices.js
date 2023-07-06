@@ -23,3 +23,15 @@ export const paymentDataApi = ({ orderId, rentPayment, headers }) => {
   return axios.post('/student/payment-verification', { orderId, rentPayment }, headers);
 }
 
+export const complaintApi = (headers,values,id)=>{
+  return axios.post(`/student/student-complaint/${id}`,{values},{headers})
+}
+
+export const fetchComplaintData = (headers,id) =>{
+  return axios.get(`/student/student-complaint-data/${id}`,{headers})
+}
+
+export const MenuDataApi = (headers,id) =>{
+  return axios.get(`/student/fetch-food-menu/${id}`,{headers})
+}
+

@@ -1,31 +1,34 @@
-
 import React, { useState } from 'react';
-import { RxDashboard } from 'react-icons/rx';
-import { FaBed } from 'react-icons/fa';
-import { CgMenuRightAlt } from 'react-icons/cg';
-import { RiMessage2Fill } from 'react-icons/ri';
+import {CgProfile} from 'react-icons/cg'
 import { SlEnvolopeLetter } from 'react-icons/sl';
+import { CgMenuRightAlt } from 'react-icons/cg';
+import { MdOutlineReviews } from 'react-icons/md';
+import { CgTimer } from 'react-icons/cg';
 import {GiScrollQuill}  from 'react-icons/gi'
+import {MdOutlinePayment} from 'react-icons/md'
 import {IoFastFoodSharp} from  'react-icons/io5'
+import {SiHomeadvisor} from 'react-icons/si'
 import { MdOutlineReportProblem } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-function SingleHostelSideBar() {
+function StudentSideBar() {
     const menus = [
-        { name: 'DASHBOARD', link: '/hostel/hostel-listing/dashboard', icon: RxDashboard },
-        { name: 'ROOMS', link: '/hostel/hostel-listing/rooms', icon: FaBed },
-        { name: 'STUDENT REQUESTS', link: '/hostel/hostel-listing/requests', icon:RiMessage2Fill  },
-        { name: 'STUDENT MANAGMENTS', link: '/hostel/hostel-listing/student-managment', icon:FaBed},
-        { name: 'FOOD SYSTEMS', link: '/hostel/hostel-listing/food-menu', icon: IoFastFoodSharp },
-        { name: 'LEAVE LETTERS', link: '', icon: SlEnvolopeLetter },
-        { name: 'VACATING LETTERS', link: '', icon: GiScrollQuill },
-        { name: 'COMPLAINTS', link: '', icon: MdOutlineReportProblem },
+        { name: 'PROFILE', link: '/student/profile', icon: CgProfile },
+        { name: 'FOOD MENU', link: '/student/menu', icon: IoFastFoodSharp },
+        { name: 'HOSTEL RENT', link: '', icon: MdOutlinePayment },
+        { name: 'RENT HISTORY', link: '', icon: CgTimer },
+        { name: 'REVIEWS', link: '', icon: MdOutlineReviews },
+        { name: 'LEAVE LETTER', link: '', icon: SlEnvolopeLetter },
+        { name: 'COMPLAINTS', link: '/student/complaints', icon: MdOutlineReportProblem },
+        { name: 'VACATING LETTER', link: '', icon: GiScrollQuill },
+        { name: 'GO TO HOME', link: '', icon: SiHomeadvisor },
+        
       ];
     
       const [open, setOpen] = useState(true);
     
       return (
-        <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 `}>
+        <div className={`bg-[#002D7A] h-[91.3vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-16 left-0 `}>
           <div className="py-3 flex justify-end">
             <CgMenuRightAlt
               size={26}
@@ -74,4 +77,4 @@ function SingleHostelSideBar() {
       );
 }
 
-export default SingleHostelSideBar
+export default StudentSideBar
