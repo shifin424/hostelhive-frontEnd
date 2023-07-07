@@ -28,7 +28,7 @@ function StudentSideBar() {
       const [open, setOpen] = useState(true);
     
       return (
-        <div className={`bg-[#002D7A] h-[91.3vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-16 left-0 `}>
+        <div className={`bg-[#002D7A] h-[100vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-0 left-0 `}>
           <div className="py-3 flex justify-end">
             <CgMenuRightAlt
               size={26}

@@ -4,8 +4,7 @@ import { MenuDataApi } from '../../Services/studentsServices';
 
 function FoodMenu() {
   const [foodData, setFoodData] = useState([]);
-  console.log(foodData.menuData,"<<<< listing data checking");
-
+ 
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
   const hostelId = bookingStatus.hostelId;
 
@@ -33,9 +32,9 @@ function FoodMenu() {
   return (
     <>
       <div>
-        <h1 className='text-[#002D74] font-bold text-2xl '>Food Menu </h1>
+        <h1 className='text-[#002D74] font-bold text-2xl pb-5 '>Food Menu </h1>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <table className="w-full bg-white rounded-lg overflow-hidden">
           {foodData.length > 0 && (
             <thead className="bg-[#4874BF]">
