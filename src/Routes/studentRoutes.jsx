@@ -7,6 +7,7 @@ import ProfilePage from "../Pages/Students/ProfilePage";
 import StudentLayout from "../Components/Student/StudentLayout";
 import ComplaintPage from "../Pages/Students/ComplaintPage";
 import FoodMenuPage from "../Pages/Students/FoodMenuPage";
+import LeaveLetterPage from "../Pages/Students/LeaveLetterPage";
 
 
 
@@ -17,6 +18,7 @@ const StudentRoutes = () => {
       <Route path='/profile' element={<StudentVerificaion><ProfilePage /></StudentVerificaion> }></Route>
       <Route path='/complaints' element={<StudentVerificaion><ComplaintPage/></StudentVerificaion>}></Route>
       <Route path="/menu" element={<StudentVerificaion><FoodMenuPage/></StudentVerificaion>}></Route>
+      <Route path='/leave-letter' element={<StudentVerificaion><LeaveLetterPage/></StudentVerificaion>}></Route>
       </Route>
     </Routes>
   );

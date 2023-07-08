@@ -35,3 +35,11 @@ export const MenuDataApi = (headers,id) =>{
   return axios.get(`/student/fetch-food-menu/${id}`,{headers})
 }
 
+export const leaveLetterApi = (headers,values,id)=>{
+  return axios.post(`/student/add-leave-letter/${id}`,{values},{headers})
+}
+
+export const fetchLeaveLetter = (headers,id)=>{
+  return axios.get(`/student/fetch-leave-letter/${id}`,{headers})
+}
+

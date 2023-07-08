@@ -18,9 +18,9 @@ function StudentSideBar() {
         { name: 'HOSTEL RENT', link: '', icon: MdOutlinePayment },
         { name: 'RENT HISTORY', link: '', icon: CgTimer },
         { name: 'REVIEWS', link: '', icon: MdOutlineReviews },
-        { name: 'LEAVE LETTER', link: '', icon: SlEnvolopeLetter },
+        { name: 'LEAVE LETTER', link: '/student/leave-letter', icon: SlEnvolopeLetter },
         { name: 'COMPLAINTS', link: '/student/complaints', icon: MdOutlineReportProblem },
-        { name: 'VACATING LETTER', link: '', icon: GiScrollQuill },
+        { name: 'VACATING LETTER', link: '/student/leave-letter', icon: GiScrollQuill },
         { name: 'GO TO HOME', link: '', icon: SiHomeadvisor },
         
       ];

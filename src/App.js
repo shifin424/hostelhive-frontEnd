@@ -7,6 +7,7 @@ import Landing from "./Pages/Landing/Landing";
 import LandingPageRoutes from './Routes/LandingPageRoute'
 import AdminRoutes from "./Routes/superAdmin";
 import HostelRoutes from './Routes/hostelAdmin';
+import  './App.css'
 import { ToastContainer } from "react-toastify";
 
 
