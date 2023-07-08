@@ -16,10 +16,10 @@ function SingleHostelSideBar() {
         { name: 'ROOMS', link: '/hostel/hostel-listing/rooms', icon: FaBed },
         { name: 'STUDENT REQUESTS', link: '/hostel/hostel-listing/requests', icon:RiMessage2Fill  },
         { name: 'STUDENT MANAGMENTS', link: '/hostel/hostel-listing/student-managment', icon:FaBed},
-        { name: 'FOOD SYSTEMS', link: '/hostel/hostel-listing/food-menu', icon: IoFastFoodSharp },
+        { name: 'FOOD MENU', link: '/hostel/hostel-listing/food-menu', icon: IoFastFoodSharp },
         { name: 'LEAVE LETTERS', link: '', icon: SlEnvolopeLetter },
         { name: 'VACATING LETTERS', link: '', icon: GiScrollQuill },
-        { name: 'COMPLAINTS', link: '', icon: MdOutlineReportProblem },
+        { name: 'COMPLAINTS', link: '/hostel/hostel-listing/complaints', icon: MdOutlineReportProblem },
       ];
     
       const [open, setOpen] = useState(true);

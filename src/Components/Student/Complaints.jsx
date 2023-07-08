@@ -9,12 +9,11 @@ import { toast } from 'react-toastify';
 function Complaints() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
-  console.log(details,"<<<<<<checking");
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
   useEffect(() => {
     const headers = {
-      Authorization: JSON.parse(localStorage.getItem("StudentToken")).token
+      Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
     };
 
     const fetchComplaints = async () => {
@@ -22,11 +21,11 @@ function Complaints() {
         console.log(headers, hostelId);
         const response = await fetchComplaintData(headers, hostelId);
 
-        if (response.data) {
-          console.log(response.data);
-          setDetails(response.data.data);
+        if (response?.data) {
+          console.log(response?.data);
+          setDetails(response?.data?.data);
         } else {
-          console.log(response.data);
+          console.log(response?.data);
         }
       } catch (error) {
         console.log(error);
@@ -41,8 +40,6 @@ function Complaints() {
   };
 
   const handleOk = async (values) => {
-    console.log(values);
-
     const headers = {
       Authorization: JSON.parse(localStorage.getItem("StudentToken"))?.token
     };
@@ -92,13 +89,13 @@ function Complaints() {
       </thead>
       <tbody>
         {details.map((complaint, index) => (
-          <tr className="bg-gray-200" key={complaint.id}>
+          <tr className="bg-gray-200" key={complaint?.id}>
             <td className="p-3 text-gray-500 font-semibold">{index + 1}</td>
-            <td className="p-3 text-gray-500 font-semibold">{complaint.complaintType}</td>
-            <td className="p-3 text-gray-500 font-semibold">{complaint.complaintDescription}</td>
-            <td className="p-3 font-semibold text-red-600">{complaint.status}</td>
-            <td className="p-3 font-semibold border-black">{complaint.createdAt}</td>
-            <td className="p-3 font-semibold border-black">{complaint.adminResponse}</td>
+            <td className="p-3 text-gray-500 font-semibold">{complaint?.complaintType}</td>
+            <td className="p-3 text-gray-500 font-semibold">{complaint?.complaintDescription}</td>
+            <td className={`p-3 font-semibold ${complaint?.status === 'New' ? 'text-red-600' : complaint?.status === 'Resolved' ? 'text-green-600' : 'text-orange-400'}`}>{complaint?.status}</td>
+            <td className="p-3 text-gray-500 font-semibold">{complaint?.createdAt}</td>
+            <td className="p-3 text-gray-500 font-semibold">{complaint?.adminResponse}</td>
           </tr>
         ))}
       </tbody>

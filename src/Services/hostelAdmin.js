@@ -75,6 +75,14 @@ export const addFoodmenuApi = (headers,values,id) =>{
     return axios.post(`/hostel/add-food-menu/${id}`,{values},{headers})
 }
 
+export const complaintsListingApi = (headers,id) =>{
+    return axios.get(`/hostel/complaints-data/${id}`,{headers})
+}
+
+export const editComplaintApi = (headers,values,id) =>{
+    console.log(headers,values,id,"in service");
+    return axios.patch(`/hostel/edit-complaints-data/${id}`,{values},{headers})
+}
 
 
 

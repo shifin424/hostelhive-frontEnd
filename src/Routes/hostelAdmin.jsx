@@ -13,6 +13,7 @@ import RoomsListing from "../Pages/HostelAdmin/RoomsListing";
 import RequestsPage from "../Pages/HostelAdmin/RequestsPage";
 import FoodSystem from "../Pages/HostelAdmin/FoodSystem";
 import StudentManagmentPage from "../Pages/HostelAdmin/StudentManagmentPage";
+import ComplaintsPage from "../Pages/HostelAdmin/ComplaintsPage";
 
 
 const hostelRoutes = () => {
@@ -34,6 +35,7 @@ const hostelRoutes = () => {
         <Route path="/hostel-listing/requests" element={<RequestsPage />}></Route>
         <Route path='/hostel-listing/food-menu' element={<FoodSystem/>}></Route>
         <Route path='/hostel-listing/student-managment' element={<StudentManagmentPage/>}></Route>
+        <Route path='/hostel-listing/complaints' element={<ComplaintsPage/>}></Route> 
       </Route>
 
     </Routes>
