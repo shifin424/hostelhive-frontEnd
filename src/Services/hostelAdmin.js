@@ -84,5 +84,9 @@ export const editComplaintApi = (headers,values,id) =>{
     return axios.patch(`/hostel/edit-complaints-data/${id}`,{values},{headers})
 }
 
+export const LeaveDataApi = (headers,id)=>{
+    return axios.get(`/hostel/fetch-leave-data/${id}`,{headers})
+}
+
 
 

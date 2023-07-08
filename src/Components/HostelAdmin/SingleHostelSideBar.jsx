@@ -17,7 +17,7 @@ function SingleHostelSideBar() {
         { name: 'STUDENT REQUESTS', link: '/hostel/hostel-listing/requests', icon:RiMessage2Fill  },
         { name: 'STUDENT MANAGMENTS', link: '/hostel/hostel-listing/student-managment', icon:FaBed},
         { name: 'FOOD MENU', link: '/hostel/hostel-listing/food-menu', icon: IoFastFoodSharp },
-        { name: 'LEAVE LETTERS', link: '', icon: SlEnvolopeLetter },
+        { name: 'LEAVE LETTERS', link: '/hostel/hostel-listing/leave-letter', icon: SlEnvolopeLetter },
         { name: 'VACATING LETTERS', link: '', icon: GiScrollQuill },
         { name: 'COMPLAINTS', link: '/hostel/hostel-listing/complaints', icon: MdOutlineReportProblem },
       ];
