@@ -123,7 +123,7 @@ function LeaveLetter() {
                             details.map((LeaveDatas, index) => (
                                 <tr
                                     role="row"
-                                    className="odd:bg-white even:bg-gray-100"
+                                    className="odd:bg-white even:bg-gray-200"
                                     key={LeaveDatas._id}
                                 >
                                     <td

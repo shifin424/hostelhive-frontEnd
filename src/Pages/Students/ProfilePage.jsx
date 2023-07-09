@@ -3,7 +3,7 @@ import Profile from '../../Components/Student/Profile'
 
 function ProfilePage() {
   return (
-    <div className='bg-white w-full h-screen'>
+    <div>
       <Profile/>
     </div>
   )
