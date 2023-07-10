@@ -1,5 +1,5 @@
 import React from 'react'
-import FoodMenu from '../../Components/Student/FoodMenu'
+import FoodMenu from '../../Components/Student/FoodMenu/FoodMenu'
 
 function FoodMenuPage() {
   return (

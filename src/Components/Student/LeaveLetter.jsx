@@ -9,14 +9,13 @@ function LeaveLetter() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [details, setDetails] = useState([])
     const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
-    const hostelId = bookingStatus.hostelId
-    console.log(details,"<<< checkkig");
+    const hostelId = bookingStatus?.hostelId
+
 
     useEffect(() => {
         const headers = {
             Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
         };
-
         const leaveData = async () => {
             try {
                 console.log(headers, hostelId);
