@@ -1,0 +1,21 @@
+@media (max-width: 640px) {
+  .overflow-x-auto {
+    overflow-x: scroll;
+  }
+  .table-responsive {
+    width: 100%;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border-collapse: collapse;
+  }
+  .table-responsive table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table-responsive th,
+  .table-responsive td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

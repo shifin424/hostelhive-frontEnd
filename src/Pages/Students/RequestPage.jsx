@@ -1,5 +1,5 @@
 import React from 'react'
-import Request from '../../Components/Student/Request'
+import Request from '../../Components/Student/Request/Request'
 import { useNavigate } from 'react-router-dom'
 
 function RequestPage() {

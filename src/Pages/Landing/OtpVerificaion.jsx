@@ -1,5 +1,5 @@
 import React from 'react'
-import OtpVerification from '../../Components/HostelAdmin/OtpPage'
+import OtpVerification from '../../Components/HostelAdmin/Otp/OtpPage'
 
 function OtpVerificaion() {
   return (

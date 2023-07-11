@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../Pages/SuperAdmin/Login";
 import DashBoard from '../Pages/SuperAdmin/Home'
 import Request from "../Pages/SuperAdmin/HostelRequests";
-import SuperAdminLayout from "../Components/SuperAdmin/SuperAdminLayout";
+import SuperAdminLayout from "../Components/SuperAdmin/Layouts/SuperAdminLayout";
 import AdminVerificaton from '../Verification/superAdminVerification'
 import HostelManagmentPage from "../Pages/SuperAdmin/HostelManagmentPage";
 

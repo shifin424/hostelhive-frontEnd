@@ -1,5 +1,5 @@
 import React from 'react'
-import SingleHostelDashboard from '../../Components/HostelAdmin/SingleHostelDashboard'
+import SingleHostelDashboard from '../../Components/HostelAdmin/Dashboards/SingleHostelDashboard'
 
 function SingleDashboard() {
   return (

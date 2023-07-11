@@ -1,5 +1,5 @@
 import React from 'react'
-import Request from '../../Components/SuperAdmin/Request'
+import Request from '../../Components/SuperAdmin/Requests/Request'
 
 function HostelRequests() {
   return (

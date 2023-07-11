@@ -1,5 +1,5 @@
 import React from 'react'
-import Complaints from '../../Components/Student/Complaints'
+import Complaints from '../../Components/Student/Complaints/Complaints'
 
 function ComplaintPage() {
   return (

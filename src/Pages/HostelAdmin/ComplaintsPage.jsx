@@ -1,5 +1,5 @@
 import React from 'react'
-import Complaints from '../../Components/HostelAdmin/Complaints'
+import Complaints from '../../Components/HostelAdmin/Complaints/Complaints'
 
 function ComplaintsPage() {
   return (

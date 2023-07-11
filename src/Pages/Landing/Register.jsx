@@ -1,5 +1,5 @@
 import React from 'react'
-import Singnup from '../../Components/HostelAdmin/Singup'
+import Singnup from '../../Components/HostelAdmin/Auth/Singup'
 
 function Register() {
   return (

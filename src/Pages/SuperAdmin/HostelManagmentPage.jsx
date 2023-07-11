@@ -1,5 +1,5 @@
 import React from 'react'
-import HostelManagement from '../../Components/SuperAdmin/HostelManagement'
+import HostelManagement from '../../Components/SuperAdmin/HostelManagment/HostelManagement'
 
 function HostelManagmentPage() {
   return (

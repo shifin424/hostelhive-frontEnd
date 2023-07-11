@@ -1,5 +1,5 @@
 import React from 'react'
-import StudentRequests from '../../Components/HostelAdmin/StudentRequests'
+import StudentRequests from '../../Components/HostelAdmin/Request/StudentRequests'
 
 
 

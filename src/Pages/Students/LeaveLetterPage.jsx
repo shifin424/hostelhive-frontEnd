@@ -1,5 +1,5 @@
 import React from 'react'
-import LeaveLetter from '../../Components/Student/LeaveLetter'
+import LeaveLetter from '../../Components/Student/LeaveLetter/LeaveLetter'
 
 function LeaveLetterPage() {
   return (

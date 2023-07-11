@@ -19,8 +19,9 @@ export const paymentApi = (headers, paymentResponce) => {
 }
 
 
-export const paymentDataApi = ({ orderId, rentPayment, headers }) => {
-  return axios.post('/student/payment-verification', { orderId, rentPayment }, headers);
+export const paymentDataApi = ({ orderId, rentPayment, headers,id }) => {
+  console.log(orderId,"<<<<<",rentPayment,"<<<<",headers,"<<<<",id);
+  return axios.post(`/student/payment-verification/${id}`, { orderId, rentPayment }, headers);
 }
 
 export const complaintApi = (headers,values,id)=>{
@@ -41,5 +42,9 @@ export const leaveLetterApi = (headers,values,id)=>{
 
 export const fetchLeaveLetter = (headers,id)=>{
   return axios.get(`/student/fetch-leave-letter/${id}`,{headers})
+}
+
+export const rentHistoryApi = (headers,id) =>{
+  return axios.get(`/student/fetch-rent-history/${id}`,{headers})
 }
 

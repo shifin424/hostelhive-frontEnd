@@ -5,10 +5,10 @@ import Login from '../Pages/HostelAdmin/LoginPage'
 import AddHostel from '../Pages/HostelAdmin/AddHostel'
 import HostelAdmin from '../Verification/hostelAdminVerification'
 import DashBoard from "../Pages/HostelAdmin/DashBoard";
-import GlobalHostelLayout from "../Components/HostelAdmin/GlobalHostelLayout";
-import AddHostelButton from "../Components/HostelAdmin/AddHostelButton";
+import GlobalHostelLayout from "../Components/HostelAdmin/Layouts/GlobalHostelLayout";
+import AddHostelButton from "../Components/HostelAdmin/AddHostel/AddHostelButton";
 import SingleDashboard from "../Pages/HostelAdmin/SingleDashboard";
-import SingleHostelLayouts from "../Components/HostelAdmin/SingleHostelLayouts";
+import SingleHostelLayouts from "../Components/HostelAdmin/Layouts/SingleHostelLayouts";
 import RoomsListing from "../Pages/HostelAdmin/RoomsListing";
 import RequestsPage from "../Pages/HostelAdmin/RequestsPage";
 import FoodSystem from "../Pages/HostelAdmin/FoodSystem";

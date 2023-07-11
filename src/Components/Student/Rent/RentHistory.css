@@ -1,0 +1,31 @@
+@media (max-width: 600px) {
+    .overflow-x-auto {
+      overflow-x: auto;
+    }
+  
+    .w-full {
+      width: 100%;
+    }
+  
+    .text-base {
+      font-size: 14px;
+    }
+  
+    .p-3 {
+      padding: 8px;
+    }
+    
+    .break-words {
+      word-break: break-word;
+    }
+    
+    .odd:bg-white,
+    .even:bg-gray-50 {
+      background-color: inherit;
+    }
+    
+    .hover:bg-gray-200 {
+      background-color: inherit;
+    }
+  }
+  

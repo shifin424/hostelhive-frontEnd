@@ -1,5 +1,5 @@
 import React from 'react'
-import FoodMenu from '../../Components/HostelAdmin/FoodMenu'
+import FoodMenu from '../../Components/HostelAdmin/FoodMenu/FoodMenu'
 
 function FoodSystem() {
   return (

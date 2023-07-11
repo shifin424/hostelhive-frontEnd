@@ -1,5 +1,5 @@
 import React from 'react'
-import Payment from '../../Components/Student/Payment'
+import Payment from '../../Components/Student/Payment/Payment'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../Components/Landing/NavBar/Navbar'
 
