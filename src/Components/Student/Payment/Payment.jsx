@@ -12,13 +12,14 @@ function Payment() {
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
   const hostelId = bookingStatus?.hostelId
   const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate()
 
 
 
   useEffect(() => {
     const headers = {
-      Authorization: JSON.parse(localStorage.getItem("StudentToken")).token
+      Authorization: JSON.parse(localStorage.getItem("StudentToken"))?.token
     };
     console.log(headers, "front end token ");
 
@@ -58,7 +59,7 @@ function Payment() {
     loadScript("https://checkout.razorpay.com/v1/checkout.js");
   }, []);
 
-  async function handleClick(id) {
+  async function handleClick() {
     let orderId = "OD" + Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -93,27 +94,25 @@ function Payment() {
         order_id: responce.data.data.id,
 
         handler: async function (response) {
-
           let rentPayment = {
             room_id: id,
             rentAmount: details.totalRent,
             monthOfPayment: getCurrentMonthAndYear()
           };
-
           const paymentResponse = await paymentDataApi({
             orderId: response.razorpay_order_id,
             rentPayment,
             headers,
-           id
+            hostelId
           });
-        
-          if (paymentResponse.data.data.order) {
-           
+          console.log(paymentResponse);
+
+          if (paymentResponse?.data?.data?.order) {
+
             const tokenData = paymentResponse.data.data.tokenData;
-          
+
             localStorage.removeItem('StudentToken');
             localStorage.setItem('StudentToken', JSON.stringify(tokenData));
-
 
             toast.success('Your payment has been completed.');
             navigate('/student/profile')
@@ -165,7 +164,7 @@ function Payment() {
           <div className="flex justify-center py-7">
             <button
               className="bg-[#235784] text-white w-5/6 py-2 font-bold text-lg rounded-md transform hover:scale-110 transition duration-300"
-              onClick={() => handleClick(hostelId)}
+              onClick={() => handleClick()}
             >
               Make Payment
             </button>

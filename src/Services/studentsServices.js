@@ -19,9 +19,9 @@ export const paymentApi = (headers, paymentResponce) => {
 }
 
 
-export const paymentDataApi = ({ orderId, rentPayment, headers,id }) => {
-  console.log(orderId,"<<<<<",rentPayment,"<<<<",headers,"<<<<",id);
-  return axios.post(`/student/payment-verification/${id}`, { orderId, rentPayment }, headers);
+export const paymentDataApi = ({ orderId, rentPayment, headers,hostelId }) => {
+  console.log(orderId,"<<<<<",rentPayment,"<<<<",headers,"<<<<",hostelId);
+  return axios.post(`/student/payment-verification/${hostelId}`, { orderId, rentPayment }, headers);
 }
 
 export const complaintApi = (headers,values,id)=>{
@@ -48,3 +48,6 @@ export const rentHistoryApi = (headers,id) =>{
   return axios.get(`/student/fetch-rent-history/${id}`,{headers})
 }
 
+export const fetchRentDueData = (headers)=>{
+return axios.get('/student/fetch-rent-due-data',{headers})
+}

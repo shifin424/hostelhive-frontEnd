@@ -20,7 +20,7 @@ function StudentSideBar() {
     { name: 'REVIEWS', link: '', icon: MdOutlineReviews },
     { name: 'LEAVE LETTER', link: '/student/leave-letter', icon: SlEnvolopeLetter },
     { name: 'COMPLAINTS', link: '/student/complaints', icon: MdOutlineReportProblem },
-    { name: 'VACATING LETTER', link: '/student/leave-letter', icon: GiScrollQuill },
+    { name: 'VACATING LETTER', link: '', icon: GiScrollQuill },
     { name: 'GO TO HOME', link: '/', icon: SiHomeadvisor },
   ];
 

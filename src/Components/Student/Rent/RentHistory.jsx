@@ -4,10 +4,10 @@ import { rentHistoryApi } from '../../../Services/studentsServices';
 import { useSelector } from 'react-redux';
 
 function RentHistory() {
-  const [details,setDetails] = useState([])
+  const [details, setDetails] = useState([])
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
   const hostelId = bookingStatus.hostelId
-  console.log(details,"<<< checking front end data");
+  console.log(details, "<<< checking front end data");
 
   useEffect(() => {
     const headers = {
@@ -19,7 +19,7 @@ function RentHistory() {
         const response = await rentHistoryApi(headers, hostelId);
 
         if (response.data) {
-          setDetails(response.data);
+          setDetails(response.data.rentData);
         } else {
           console.log(response.data);
         }
@@ -27,7 +27,6 @@ function RentHistory() {
         console.log(error);
       }
     };
-
     fetchRentHistory();
   }, []);
 
@@ -38,95 +37,108 @@ function RentHistory() {
       </div>
 
 
-       <div className="overflow-x-auto rounded-lg shadow">
+      <div className="overflow-x-auto rounded-lg shadow">
         <table role="table" className="w-full">
-          <thead className="bg-[#4874BF] text-white">
-            <tr role="row">
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-                No 
-              </th>
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-                Payment Id
-              </th>
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-                user Id
-              </th>
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-              Rent Amount
-              </th>
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-                Month Of Payment
-              </th>
-              <th
-                role="columnheader"
-                className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
-              >
-                Date Of Payment
-              </th>
-            </tr>
-          </thead>
+          {details?.length > 0 && (
+            <thead className="bg-[#4874BF] text-white">
+              <tr role="row">
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  No
+                </th>
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  Payment Id
+                </th>
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  Student Name
+                </th>
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  Rent Amount
+                </th>
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  Month Of Payment
+                </th>
+                <th
+                  role="columnheader"
+                  className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300"
+                >
+                  Date Of Payment
+                </th>
+              </tr>
+            </thead>
+          )}
           <tbody role="rowgroup" className="bg-white">
-            <tr
-              role="row"
-              className="odd:bg-white even:bg-gray-50 hover:bg-gray-200"
-            >
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-                1
-              </td>
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-               64afjlafjlajoiooeouqor
-              </td>
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-                 64afjlafjlajoiooeouqor
-              </td>
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-                ₹ 5000
-              </td>
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-               july 
-              </td>
-              <td
-                role="cell"
-                className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
-              >
-                12-15-2023
-              </td>
-            </tr>
+            {details?.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="p-3 text-gray-500 text-2xl font-bold text-center">
+                  No data available
+                </td>
+              </tr>
+            ) : (
+              details?.map((rentDatas, index) => (
+                <tr
+                  role="row"
+                  className="odd:bg-white even:bg-gray-50 hover:bg-gray-200"
+                >
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                    key={rentDatas?._id}
+                  >
+                    {index + 1}
+                  </td>
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                  >
+                    {rentDatas?._id}
+                  </td>
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                  >
+                  {rentDatas?.student?.fullName}
+                  </td>
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                  >
+                  ₹{rentDatas?.rentAmount}
+                  </td>
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                  >
+                    {rentDatas?.monthOfPayment}
+                  </td>
+                  <td
+                    role="cell"
+                    className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words"
+                  >
+                   {rentDatas?.createdAt}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
-      
+
 
 
 
