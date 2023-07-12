@@ -252,7 +252,7 @@ function Navbar() {
     <Link to="/student/leave-letter">Leave Letter</Link>
   </Menu.Item>
   <Menu.Item key="8">
-    <Link to="/vacating-letter">Vacating Letter</Link>
+    <Link to="/student/vacating-letter">Vacating Letter</Link>
   </Menu.Item>
 </Menu>
   );
