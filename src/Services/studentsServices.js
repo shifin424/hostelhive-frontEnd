@@ -51,3 +51,8 @@ export const rentHistoryApi = (headers,id) =>{
 export const fetchRentDueData = (headers)=>{
 return axios.get('/student/fetch-rent-due-data',{headers})
 }
+
+export const vacatingLetter = (headers,values,id)=>{
+  console.log(headers,values,id);
+  return axios.post(`/student/post-vacating-data/${id}`,{values},{headers})
+}

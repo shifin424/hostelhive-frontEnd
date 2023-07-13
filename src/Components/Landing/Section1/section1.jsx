@@ -13,7 +13,7 @@ function Section1() {
       if (currentIndex < textToDisplay.length) {
         setText((prevText) => prevText + textToDisplay[currentIndex]);
         currentIndex++;
-        setTimeout(displayText,80 ); // Decreased the delay to 50 milliseconds
+        setTimeout(displayText,80 ); 
       } else {
         setShowButton(true);
       }
@@ -23,7 +23,7 @@ function Section1() {
   }, []);
 
   return (
-    <div className="w-full bg-white pb-10 pt-5">
+    <div className="w-full bg-white pb-10 pt-5 mt-10">
       <div className="w-full md:flex h-auto bg-white items-start">
         <div className="md:w-1/2 md:h-96 bg-white md:order-2">
           <img
