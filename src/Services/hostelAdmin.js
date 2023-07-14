@@ -88,6 +88,10 @@ export const LeaveDataApi = (headers,id)=>{
     return axios.get(`/hostel/fetch-leave-data/${id}`,{headers})
 }
 
+export const VacateDataApi = ( headers,id)=>{
+    return axios.get(`/hostel/fetch-vacate-letters/${id}`,{headers})
+}
+
 
 
 
