@@ -4,8 +4,8 @@ import Globaldashboard from '../../Components/HostelAdmin/Dashboards/GlobalDashb
 
 function DashBoard() {
   return (
-    <div className='bg-white w-full h-screen'>
-<Globaldashboard/>
+    <div >
+      <Globaldashboard />
     </div>
   )
 }

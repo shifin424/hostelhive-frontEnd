@@ -5,7 +5,7 @@ import StudentRequests from '../../Components/HostelAdmin/Request/StudentRequest
 
 function RequestsPage() {
   return (
-    <div className='bg-white w-full h-screen'>
+    <div >
       <StudentRequests/>
     </div>
   )

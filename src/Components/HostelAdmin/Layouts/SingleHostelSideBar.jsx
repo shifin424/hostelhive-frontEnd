@@ -18,14 +18,14 @@ function SingleHostelSideBar() {
         { name: 'STUDENT MANAGMENTS', link: '/hostel/hostel-listing/student-managment', icon:FaBed},
         { name: 'FOOD MENU', link: '/hostel/hostel-listing/food-menu', icon: IoFastFoodSharp },
         { name: 'LEAVE LETTERS', link: '/hostel/hostel-listing/leave-letter', icon: SlEnvolopeLetter },
-        { name: 'VACATING LETTERS', link: '', icon: GiScrollQuill },
+        { name: 'VACATING LETTERS', link: '/hostel/hostel-listing/vacate-letters', icon: GiScrollQuill },
         { name: 'COMPLAINTS', link: '/hostel/hostel-listing/complaints', icon: MdOutlineReportProblem },
       ];
     
       const [open, setOpen] = useState(true);
     
       return (
-        <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 `}>
+        <div className={`bg-[#002D7A]  h-[100vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-0 left-0 `}>
           <div className="py-3 flex justify-end">
             <CgMenuRightAlt
               size={26}

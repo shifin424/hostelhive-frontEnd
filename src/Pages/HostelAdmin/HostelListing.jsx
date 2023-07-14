@@ -3,7 +3,7 @@ import AddHostelButton from '../../Components/HostelAdmin/AddHostelButton'
 
 function HostelListing() {
   return (
-    <div className='bg-white'>
+    <div >
       <AddHostelButton/>
     </div>
   )
