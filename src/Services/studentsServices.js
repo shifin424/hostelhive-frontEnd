@@ -61,3 +61,7 @@ export const roomRatingApi = (headers,values,id)=>{
   console.log(headers,values,id);
   return axios.post(`/student/add-room-review/${id}`,{values},{headers})
 }
+
+export const fetchProfileData = (headers) =>{
+  return axios.get('/student/fetch-profile-data',{headers})
+}

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 function Review() {
   const roomData = useSelector(state => state?.roomsDetils?.roomDetails?.roomData[0]);
-  console.log(roomData,"<<<<")
+  console.log(roomData, "<<<<")
 
   const roomId = roomData._id
   const initialValues = {
@@ -31,11 +31,11 @@ function Review() {
       const response = await roomRatingApi(headers, values, roomId)
       console.log(response);
       if (response.data.error) {
-       toast.error("Somthing went wrong please try agin later")
+        toast.error("Somthing went wrong please try agin later")
       } else {
         toast.success("Successfully Submitted a Review")
       }
-    }catch(error){
+    } catch (error) {
       toast.error(error.response.data.error)
     }
 

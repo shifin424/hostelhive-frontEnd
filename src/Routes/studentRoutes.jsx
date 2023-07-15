@@ -12,6 +12,7 @@ import RentHistoryPage from "../Pages/Students/RentHistoryPage";
 import RentDuePage from "../Pages/Students/RentDuePage";
 import VacatingPage from "../Pages/Students/VacatingPage";
 import ReviewPage from "../Pages/Students/ReviewPage";
+import EditProfilePage from "../Pages/Students/EditProfilePage";
 
 
 
@@ -27,6 +28,7 @@ const StudentRoutes = () => {
       <Route path='/rent-due' element={<StudentVerificaion><RentDuePage/></StudentVerificaion>}></Route>
       <Route path='/vacating-letter' element={<StudentVerificaion><VacatingPage/></StudentVerificaion>}></Route>
       <Route path='/review' element={<StudentVerificaion><ReviewPage/></StudentVerificaion>}></Route>
+      <Route path='/edit-profile' element={<StudentVerificaion><EditProfilePage/></StudentVerificaion>}></Route>
       </Route>
     </Routes>
   );
