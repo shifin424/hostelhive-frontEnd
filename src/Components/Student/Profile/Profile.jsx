@@ -6,6 +6,7 @@ import { fetchProfileData } from '../../../Services/studentsServices';
 function Profile() {
   const [details,setDetails] = useState('')
 
+
   useEffect(() => {
     const headers = {
         Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
@@ -26,7 +27,6 @@ function Profile() {
 
     ProfileData();
 }, []);
-
   return (
     <>
       <div className="flex justify-between p-3">
