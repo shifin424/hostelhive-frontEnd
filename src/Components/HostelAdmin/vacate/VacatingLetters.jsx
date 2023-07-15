@@ -41,19 +41,19 @@ function VacatingLetters() {
                 <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   No
                 </th>
-                <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
+                <th colSpan={2} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   Student Id
                 </th>
-                <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
+                <th colSpan={3} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   Student Name
                 </th>
-                <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
+                <th colSpan={4} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   Hostel Id
                 </th>
-                <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
+                <th colSpan={5} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   Date of vacate
                 </th>
-                <th colSpan={1} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
+                <th colSpan={6} role="columnheader" className="p-3 text-base font-semibold text-center tracking-wide border-b border-gray-300">
                   Reason
                 </th>
               </tr>

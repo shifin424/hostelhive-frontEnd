@@ -20,7 +20,7 @@ function FoodMenu() {
         };
         const response = await MenuDataApi(headers, hostelId);
         if (response) {
-          console.log(response.data.menuData);
+          console.log(response?.data.menuData);
           setFoodData(response.data.menuData);
         } else {
           console.log(response);

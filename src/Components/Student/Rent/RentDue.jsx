@@ -39,7 +39,7 @@ function RentDue() {
 
       <div>
         <div className="flex justify-between p-3 mt-5">
-          <h1 className="flex text-2xl text-[#002D74] font-bold text-center">Payment Info</h1>
+          <h1 className="flex text-2xl text-[#002D74] font-bold text-center">Rent Due</h1>
         </div>
         {details?.length === 0 ? (
           <tr>

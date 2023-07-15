@@ -56,3 +56,8 @@ export const vacatingLetter = (headers,values,id)=>{
   console.log(headers,values,id);
   return axios.post(`/student/post-vacating-data/${id}`,{values},{headers})
 }
+
+export const roomRatingApi = (headers,values,id)=>{
+  console.log(headers,values,id);
+  return axios.post(`/student/add-room-review/${id}`,{values},{headers})
+}

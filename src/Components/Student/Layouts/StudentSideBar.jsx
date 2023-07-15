@@ -17,7 +17,7 @@ function StudentSideBar() {
     { name: 'FOOD MENU', link: '/student/menu', icon: IoFastFoodSharp },
     { name: 'HOSTEL RENT', link: '/student/rent-due', icon: MdOutlinePayment },
     { name: 'RENT HISTORY', link: '/student/rent-history', icon: CgTimer },
-    { name: 'REVIEWS', link: '', icon: MdOutlineReviews },
+    { name: 'REVIEWS', link: '/student/review', icon: MdOutlineReviews },
     { name: 'LEAVE LETTER', link: '/student/leave-letter', icon: SlEnvolopeLetter },
     { name: 'COMPLAINTS', link: '/student/complaints', icon: MdOutlineReportProblem },
     { name: 'VACATING LETTER', link: '/student/vacating-letter', icon: GiScrollQuill },
