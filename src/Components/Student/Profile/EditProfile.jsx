@@ -1,23 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import image from '../../../assets/images/student-profile.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { editProfileApi, fetchProfileData } from '../../../Services/studentsServices';
+import { editProfileApi, fetchProfileData, imageUploadApi } from '../../../Services/studentsServices';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
+import { AiOutlineCloudUpload } from 'react-icons/ai'
+import { ProfileData } from '../../../Redux/Features/student/ProfileSlice'
+
 
 function EditProfile() {
   const [details, setDetails] = useState(null);
+  const [imageError, setImageError] = useState(null);
   const [initialValues, setInitialValues] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+
+
+
+  console.log(selectedImageFile,"image data");
+
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const headers = {
+    'Content-Type': 'multipart/form-data',
     Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
   };
 
-  useEffect(() => {
-   
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImageFile(file);
+    setSelectedImage(URL.createObjectURL(file));
+    setImageError(null);
+  };
 
+  const submitImage = async () => {
+    if (!selectedImageFile) {
+      setImageError('Please select an image.');
+      return;
+    }
+
+    const data = new FormData();
+
+    data.append('image', selectedImageFile);
+    try {
+      //alert(data)
+      console.log(selectedImageFile, "this is selectedImageFile<<<<<<<<<<");
+      console.log(data, "this is formdata<<<<<<<<<<");
+      for (const pair of data.entries()) {
+       console.log(`${pair[0]}, ${pair[1]}`);
+        const [key, value] = pair;
+        console.log(`${key}, ${value}`);
+        if (value instanceof File) {
+          console.log(`${key}, ${value.name}, ${value.type}`);
+        } 
+
+
+      }
+       dispatch(ProfileData({ headers, data }))
+
+      //toast.success('Image uploaded successfully');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to upload image');
+    }
+  };
+
+
+
+
+
+  useEffect(() => {
     const ProfileData = async () => {
       try {
         const response = await fetchProfileData(headers);
@@ -70,19 +125,19 @@ function EditProfile() {
   });
 
   const handleSubmit = async (values) => {
-    try{
-      const response = await editProfileApi(headers,values) 
-      if(response.data.message){
+    try {
+      const response = await editProfileApi(headers,values)
+      if (response.data.message) {
         toast.success("Profile updated successfully")
         navigate('/student/profile')
-      }else{
+      } else {
         toast.error("Something went wrong")
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
       toast.error(error.response.data.error)
     }
- 
+
   };
 
 
@@ -97,19 +152,48 @@ function EditProfile() {
             <div className="col-span-4 sm:col-span-3">
               <div className="bg-white shadow rounded-lg p-6">
                 <div className="flex flex-col items-center">
-                  <img
-                    src="https://randomuser.me/api/portraits/men/94.jpg"
-                    className="w-32 h-32 bg-[#ffffff] rounded-full mb-4 border border-[#002D74] p-2"
-                    alt="Profile"
-                  />
-                  <h1 className="text-xl font-bold">{details?.fullName}</h1>
-                  <p className="text-gray-600">Software Developer</p>
-                  <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <Link className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Change image</Link>
+                  <div className="flex items-center justify-center w-full">
+                    <label
+                      htmlFor="dropzone-file"
+                      className="flex flex-col items-center justify-center w-40 h-40 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    >
+                      {selectedImage ? (
+                        <img src={selectedImage} alt="Selected" name='image' className="w-full h-full rounded-full object-cover" />
+                      ) : (
+                        <>
+                          <div className="flex flex-col  items-center justify-center b  pt-5 ">
+                            <AiOutlineCloudUpload className='w-16 h-12 animate-bounce' />
+                            <p className="mb-2 text-sm text-gray-500  dark:text-gray-400">
+                              <span className="font-semibold ">Click to upload</span>
+                            </p>
+                            <input
+                              id="dropzone-file"
+                              type="file"
+                              className="hidden"
+                              multiple
+                              name='image'
+                              onChange={handleImageChange}
+                              value={selectedImage}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </label>
+
                   </div>
+                  <h1 className="text-xl font-bold">{details?.fullName}</h1>
+                  <p className="text-gray-600">{details?.email}</p>
+                  {imageError && (
+                    <div className="text-red-500 mb-2">{imageError}</div>
+                  )}
+
+                  <button type="button" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" onClick={submitImage}>
+                    Upload Image
+                  </button>
                 </div>
               </div>
             </div>
+
             <div className="col-span-4 sm:col-span-9">
               <div className="bg-white shadow rounded-lg p-6">
                 <h2 className="text-xl font-bold mb-4">About Me</h2>
@@ -214,7 +298,7 @@ function EditProfile() {
                             </div>
                           </div>
                           <div>
-                            
+
                             <div className="mb-4">
                               <label className="text-gray-600">Parent Mobile Number</label>
                               <Field

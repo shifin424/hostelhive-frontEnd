@@ -70,3 +70,8 @@ export const editProfileApi = (headers,values) =>{
   console.log(headers,values);
   return axios.post('/student/post-edit-profile',{values},{headers})
 }
+
+export const imageUploadApi = (headers,data)=>{
+  console.log(headers,data);
+  return axios.patch('/student/upload-image',data ,{ headers})
+}
