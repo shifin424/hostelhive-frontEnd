@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FetchRequestData, StudentRejectedApi, studentApprovalApi } from '../../../Services/hostelAdmin';
 import { useSelector } from 'react-redux';
 import { Button, Modal, message } from 'antd';
+import './Request.css'
 
 function StudentRequests() {
   const [isModalOpen, setIsModalOpen] = useState(false);

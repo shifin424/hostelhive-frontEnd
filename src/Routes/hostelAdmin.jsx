@@ -18,6 +18,7 @@ import LeaveLetterPage from "../Pages/HostelAdmin/LeaveLetterPage";
 import VacatingDatas from "../Pages/HostelAdmin/vacates/VacatingDatas";
 
 
+
 const hostelRoutes = () => {
   return (
     <Routes>

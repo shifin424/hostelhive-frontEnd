@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import { RxDashboard } from 'react-icons/rx';
-import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { TbMessages } from 'react-icons/tb';
 import { CgMenuRightAlt } from 'react-icons/cg';
-import { BsEnvelopePaper } from 'react-icons/bs';
-import { ImNewspaper } from 'react-icons/im';
-import { MdOutlineReportProblem } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const GlobalSideBar = () => {
   const menus = [
     { name: 'DASHBOARD', link: '/hostel/dashboard', icon: RxDashboard },
     { name: 'HOSTELS', link: '/hostel/hostel-listing', icon: TbMessages },
-    { name: 'STUDENT REQUESTS', link: '', icon: TbMessages },
-    { name: 'VACATING LETTERS', link: '', icon: BsEnvelopePaper },
-    { name: 'LEAVE LETTERS', link: '', icon: ImNewspaper },
-    { name: 'COMPLAINTS', link: '', icon: MdOutlineReportProblem },
   ];
 
   const [open, setOpen] = useState(true);
 
   return (
-    <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4`}>
+    <div className={`bg-[#002D7A]  h-[100vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-0 left-0 `}>
       <div className="py-3 flex justify-end">
         <CgMenuRightAlt
           size={26}

@@ -8,9 +8,12 @@ import { MenuDataApi } from '../../../Services/studentsServices';
 function FoodMenu() {
 
   const [foodData, setFoodData] = useState([]);
+  console.log(foodData,"checking food data");
 
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
   const hostelId = bookingStatus.hostelId;
+
+  console.log(hostelId,"checking hostel Id");
 
   useEffect(() => {
     const fetchMenuData = async () => {

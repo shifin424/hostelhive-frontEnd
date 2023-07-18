@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import image from '../../../assets/images/student-profile.jpg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, resolvePath, useNavigate } from 'react-router-dom';
 import { editProfileApi, fetchProfileData, imageUploadApi } from '../../../Services/studentsServices';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -17,9 +17,6 @@ function EditProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageFile, setSelectedImageFile] = useState(null);
 
-
-
-  console.log(selectedImageFile,"image data");
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -46,27 +43,20 @@ function EditProfile() {
 
     data.append('image', selectedImageFile);
     try {
-      //alert(data)
-      console.log(selectedImageFile, "this is selectedImageFile<<<<<<<<<<");
-      console.log(data, "this is formdata<<<<<<<<<<");
-      for (const pair of data.entries()) {
-       console.log(`${pair[0]}, ${pair[1]}`);
-        const [key, value] = pair;
-        console.log(`${key}, ${value}`);
-        if (value instanceof File) {
-          console.log(`${key}, ${value.name}, ${value.type}`);
-        } 
 
+      const response = await dispatch(ProfileData({ headers, data }))
 
+      if (details.studentImage) {
+        toast.success("Successfully updated the Image")
+        navigate('/student/profile')
+      } else {
+        toast.error("Something went wrong please try again later")
       }
-       dispatch(ProfileData({ headers, data }))
-
-      //toast.success('Image uploaded successfully');
     } catch (error) {
       console.error(error);
       toast.error('Failed to upload image');
-    }
-  };
+    }
+  };
 
 
 
@@ -126,7 +116,7 @@ function EditProfile() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await editProfileApi(headers,values)
+      const response = await editProfileApi({headers, values})
       if (response.data.message) {
         toast.success("Profile updated successfully")
         navigate('/student/profile')

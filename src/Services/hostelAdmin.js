@@ -92,6 +92,16 @@ export const VacateDataApi = ( headers,id)=>{
     return axios.get(`/hostel/fetch-vacate-letters/${id}`,{headers})
 }
 
+export const StudentRequestData = (headers) =>{
+    return axios.get(`/hostel/fetch-request-data`,{headers})
+}
+
+export const chartDataApi = (headers,id)=>{
+    return axios.get(`/hostel/fetch-dashboard-data/${id}`,{headers})
+}
+
+
+
 
 
 
