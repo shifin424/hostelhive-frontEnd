@@ -73,3 +73,8 @@ export const editProfileApi = ({headers, values} ) => {
 export const imageUploadApi = (headers,data)=>{
   return axios.patch('/student/upload-image',data,{ headers})
 }
+
+export const changePasswordApi = ({headers,values})=>{
+  console.log(headers,values);
+  return axios.patch('/student/change-password',values,{headers})
+}

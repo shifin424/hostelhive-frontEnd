@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { fetchProfileData } from '../../../Services/studentsServices';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Modal } from 'antd';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify'
+import { changePasswordApi, fetchProfileData } from '../../../Services/studentsServices';
 
 function Profile() {
   const [details, setDetails] = useState('');
-  console.log(details,"profile details");
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate()
+
+  const headers = {
+    Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
+  };
 
   useEffect(() => {
-    const headers = {
-      Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
-    };
+
 
     const ProfileData = async () => {
       try {
@@ -28,7 +39,52 @@ function Profile() {
     ProfileData();
   }, []);
 
-  // Define a default image URL
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const ChangePasswordSchema = Yup.object().shape({
+    currentPassword: Yup.string().required('Current Password is required'),
+    newPassword: Yup.string()
+      .required('New Password is required')
+      .min(8, 'New Password must be at least 8 characters long')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'New Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character'
+      ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
+  });
+
+  const handleChangePassword = async (values) => {
+    try {
+      const headers = {
+        Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
+      };
+      const response = await changePasswordApi({ headers, values })
+
+      if (response.data.message) {
+        toast.success(response.data.message)
+        localStorage.removeItem('StudentToken')
+        navigate('/login')
+      } else {
+        toast.error("Somthing went wrong please try again later")
+      }
+
+    } catch (error) {
+      toast.error(error.response.data.error)
+    }
+  };
+
+
   const defaultImageUrl = 'https://randomuser.me/api/portraits/men/94.jpg';
 
   return (
@@ -124,7 +180,7 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" onClick={showModal}>
                   Change Password
                 </button>
               </div>
@@ -132,6 +188,58 @@ function Profile() {
           </div>
         </div>
       </div>
+
+      <Modal title="Change Password" open={isModalOpen} onCancel={handleCancel}>
+        <div className="p-4">
+          <Formik
+            initialValues={{
+              currentPassword: '',
+              newPassword: '',
+              confirmPassword: '',
+            }}
+            validationSchema={ChangePasswordSchema}
+            onSubmit={handleChangePassword}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <div className="mb-4">
+                  <label htmlFor="currentPassword">Current Password:</label>
+                  <Field
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    className="border-2 bg-white rounded w-full py-2 px-3 text-gray-700"
+                  />
+                  <ErrorMessage name="currentPassword" component="div" className="text-red-500 text-sm" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="newPassword">New Password:</label>
+                  <Field
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    className="border-2 rounded bg-white w-full py-2 px-3 text-gray-700"
+                  />
+                  <ErrorMessage name="newPassword" component="div" className="text-red-500 text-sm" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="confirmPassword">Confirm Password:</label>
+                  <Field
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    className="border-2 rounded bg-white w-full py-2 px-3 text-gray-700"
+                  />
+                  <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm" />
+                </div>
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </Modal>;
     </>
   );
 }
