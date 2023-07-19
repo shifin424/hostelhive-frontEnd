@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import defaultImage from '../../../assets/images/hostel-img-1.jpg';
+import defaultImage from '../../../assets/images/defaultHostelImg.jpeg';
 import { addHostelApi } from '../../../Services/hostelAdmin';
 import { message } from 'antd';
 import { BiCurrentLocation } from 'react-icons/bi';
@@ -129,7 +129,7 @@ const AddHostel = () => {
                           />
                         ) : (
                           <div className="mb-4 aspect-w-1 aspect-h-1 mt-4 rounded-sm ">
-                            <img src={defaultImage} alt="" />
+                            <img src={defaultImage} className='w-80 h-64' alt="" />
                           </div>
                         )}
                         <br />

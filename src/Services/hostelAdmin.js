@@ -100,6 +100,19 @@ export const chartDataApi = (headers,id)=>{
     return axios.get(`/hostel/fetch-dashboard-data/${id}`,{headers})
 }
 
+export const globalChartApi = (headers) =>{
+    return axios.get('/hostel/fetch-global-chart',{headers})
+}
+
+export const dashboardCountApi = (headers,id) =>{
+    return axios.get(`/hostel/fetch-dashboard-count/${id}`,{headers})
+}
+
+export const globalDahsboard = (headers) =>{
+    return axios.get('/hostel/fetch-global-count',{headers})
+}
+
+
 
 
 

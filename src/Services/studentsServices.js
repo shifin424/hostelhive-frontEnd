@@ -66,12 +66,10 @@ export const fetchProfileData = (headers) =>{
   return axios.get('/student/fetch-profile-data',{headers})
 }
 
-export const editProfileApi = ({ headers, values }) => {
-  console.log(headers, values);
-  return axios.put('/student/edit-profile', values, { headers });
+export const editProfileApi = ({headers, values} ) => {
+  return axios.put('/student/edit-profile',{},{ headers,params:values});
 };
 
 export const imageUploadApi = (headers,data)=>{
-  console.log(headers,data);
   return axios.patch('/student/upload-image',data,{ headers})
 }

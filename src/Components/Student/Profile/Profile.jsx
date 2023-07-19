@@ -4,6 +4,7 @@ import { fetchProfileData } from '../../../Services/studentsServices';
 
 function Profile() {
   const [details, setDetails] = useState('');
+  console.log(details,"profile details");
 
   useEffect(() => {
     const headers = {
@@ -103,7 +104,7 @@ function Profile() {
 
                     <div className="mb-4">
                       <label className="text-gray-800 text-xl font-semibold">Parent Mobile Number</label>
-                      <p className="text-gray-900">{details?.parentNumber || 'Not updated'}</p>
+                      <p className="text-gray-900">{details?.parentMobileNumber || 'Not updated'}</p>
                     </div>
 
                     <div className="mb-4">

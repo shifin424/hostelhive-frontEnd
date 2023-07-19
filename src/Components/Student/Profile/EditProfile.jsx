@@ -16,10 +16,24 @@ function EditProfile() {
   const [initialValues, setInitialValues] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageFile, setSelectedImageFile] = useState(null);
-
+  const [formValues, setFormValues] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+ 
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  
 
   const headers = {
     'Content-Type': 'multipart/form-data',
@@ -67,7 +81,6 @@ function EditProfile() {
       try {
         const response = await fetchProfileData(headers);
         if (response) {
-          console.log(response.data);
           setDetails(response?.data);
 
           setInitialValues({
@@ -77,8 +90,25 @@ function EditProfile() {
             dateOfBirth: response?.data?.dateOfBirth || '',
             bloodGroup: response?.data?.bloodGroup || '',
             hostelName: response?.data?.hostelName || '',
-            parentName: response?.data?.parentInfo?.parentName || '',
-            parentMobile: response?.data?.parentInfo?.parentMobile || '',
+            parentName: response?.data?.parentName || '',
+            parentMobile: response?.data?.parentMobileNumber || '',
+            houseName: response?.data?.address?.houseName || '',
+            landMark: response?.data?.address?.landMark || '',
+            area: response?.data?.address?.area || '',
+            city: response?.data?.address?.city || '',
+            country: response?.data?.address?.country || '',
+            pincode: response?.data?.address?.pincode || '',
+          });
+
+          setFormValues({
+            fullName: response?.data?.fullName || '',
+            mobile: response?.data?.phone || '',
+            gender: response?.data?.gender || '',
+            dateOfBirth: response?.data?.dateOfBirth || '',
+            bloodGroup: response?.data?.bloodGroup || '',
+            hostelName: response?.data?.hostelName || '',
+            parentName: response?.data?.parentName || '',
+            parentMobile: response?.data?.parentMobileNumber || '',
             houseName: response?.data?.address?.houseName || '',
             landMark: response?.data?.address?.landMark || '',
             area: response?.data?.address?.area || '',
@@ -114,7 +144,13 @@ function EditProfile() {
     pincode: Yup.string().required('Pincode is required'),
   });
 
+
+
   const handleSubmit = async (values) => {
+    if (JSON.stringify(formValues) === JSON.stringify(values)) {
+      toast.error("No changes were made.");
+      return;
+    }
     try {
       const response = await editProfileApi({headers, values})
       if (response.data.message) {
@@ -294,7 +330,7 @@ function EditProfile() {
                               <Field
                                 type="text"
                                 name="parentMobile"
-                                className={`border ${errors.parentMobile && touched.parentMobile ? 'border-red-500' : 'border-gray-300'
+                                className={`border ${errors.parentMobileNumber && touched.parentMobileNumber ? 'border-red-500' : 'border-gray-300'
                                   } text-gray-500 px-3 py-2 rounded w-full bg-gray-100`}
                               />
                               <ErrorMessage name="parentMobile">
@@ -387,6 +423,18 @@ function EditProfile() {
           </div>
         </div>
       </div>
+
+
+      <div>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={openModal}
+      >
+        Open Modal
+      </button>
+      {/* <Modal isOpen={isModalOpen} onClose={closeModal} /> */}
+    </div>
+      
     </>
   );
 }

@@ -1,26 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Bar } from "react-chartjs-2";
 import { CategoryScale } from 'chart.js';
 import { useSelector } from 'react-redux';
-import { chartDataApi } from '../../../Services/hostelAdmin';
+import { chartDataApi, dashboardCountApi } from '../../../Services/hostelAdmin';
 Chart.register(CategoryScale);
 
 function SingleHostelDashboard() {
   const [chartData, setChartData] = useState(null);
-  console.log(chartData);
-  const hostelId = useSelector(state => state?.adminHostelData?.hostelId)
+  const [chartCount,setChartCount] = useState([])
+  console.log(chartCount.studentCount,"checking the data");
+  const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
+
+  const headers = {
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  };
 
   useEffect(() => {
-    const headers = {
-      Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+   
+
+    const fetchChartCount = async () => {
+      try {
+        const response = await dashboardCountApi(headers, hostelId);
+        if (response) {
+          console.log(response.data,"this is the responce");
+          setChartCount(response.data);
+        } else {
+          console.log(response?.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
+    fetchChartCount();
+  }, []);
+
+
+  useEffect(() => {
+   
     const fetchChartData = async () => {
       try {
-        console.log(headers, hostelId);
         const response = await chartDataApi(headers, hostelId);
-
         if (response) {
           console.log(response);
           setChartData(response.data);
@@ -35,13 +56,11 @@ function SingleHostelDashboard() {
     fetchChartData();
   }, []);
 
-
-  const { userChart, complaintChart, paymentChart,VacateChart } = chartData || {};
+  const { userChart, complaintChart, paymentChart, VacateChart } = chartData || {};
 
   const chartDataConfig = {
     labels: userChart ? Object.keys(userChart[0]?.data ?? 0) : [],
     datasets: [
-     
       {
         label: "Vacate",
         data: VacateChart ? Object.values(VacateChart[0]?.data ?? 0) : [],
@@ -55,7 +74,7 @@ function SingleHostelDashboard() {
       {
         label: "Students",
         data: userChart ? Object.values(userChart[0]?.data ?? 0) : [],
-        backgroundColor: "rgba(250, 104, 17)",
+        backgroundColor: "rgba(75, 201, 108)",
       },
       {
         label: "Payment",
@@ -64,6 +83,7 @@ function SingleHostelDashboard() {
       },
     ],
   };
+
 
   const chartOptions = {
     responsive: true,
@@ -82,6 +102,7 @@ function SingleHostelDashboard() {
       },
     },
   };
+
   return (
     <>
       <div className="flex justify-between p-3 ">
@@ -89,7 +110,33 @@ function SingleHostelDashboard() {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-20">
-        <h1 className="font-bold mt-10 mb-6 text-2xl text-indigo-950">Monthly Data</h1>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+          <div className="p-4 bg-[#4bc96c] rounded  shadow-md text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Users
+            </h2>
+            <p className="text-3xl font-bold text-white">{chartCount.studentCount}</p>
+          </div>
+          <div className="p-4 bg-[#36a2eb] rounded shadow-md text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Complaints
+            </h2>
+            <p className="text-3xl font-bold text-white">{chartCount.complaintCount}</p>
+          </div>
+          <div className="p-4 bg-[#ff681c] rounded shadow-md text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+            Vacate
+            </h2>
+            <p className="text-3xl font-bold text-white">{chartCount.vacateCount}</p>
+          </div>
+          <div className="p-4 bg-[#b71777] rounded shadow-md text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+             Revenue
+            </h2>
+            <p className="text-3xl font-bold text-white">{chartCount.paymentCount}</p>
+          </div>
+        </div>
+
         <div className="chart-container h-96 sm:h-[400px] w-full">
           {chartData ? (
             <Bar data={chartDataConfig} options={chartOptions} />
@@ -98,9 +145,8 @@ function SingleHostelDashboard() {
           )}
         </div>
       </div>
-
     </>
-  )
+  );
 }
 
-export default SingleHostelDashboard
+export default SingleHostelDashboard;
