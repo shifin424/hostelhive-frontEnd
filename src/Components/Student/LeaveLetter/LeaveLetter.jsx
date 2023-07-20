@@ -34,7 +34,7 @@ function LeaveLetter() {
         };
 
         leaveData();
-    }, []);
+    }, [hostelId]);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -112,7 +112,7 @@ function LeaveLetter() {
                             </tr>
                         </thead>
                     )}
-                    <tbody role="rowgroup" className="bg-white">
+                    <tbody role="row" className="bg-white">
                         {details?.length === 0 ? (
                             <tr>
                                 <td colSpan={6} className="p-3 text-gray-500 text-2xl font-bold text-center">
