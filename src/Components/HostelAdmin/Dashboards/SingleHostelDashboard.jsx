@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Chart from 'chart.js/auto';
 import { Bar } from "react-chartjs-2";
 import { CategoryScale } from 'chart.js';
@@ -8,22 +8,20 @@ Chart.register(CategoryScale);
 
 function SingleHostelDashboard() {
   const [chartData, setChartData] = useState(null);
-  const [chartCount,setChartCount] = useState([])
-  console.log(chartCount.studentCount,"checking the data");
+  const [chartCount, setChartCount] = useState([]);
+  console.log(chartCount.studentCount, "checking the data");
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
-  const headers = {
+  const headers = useMemo(() => ({
     Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
-  };
+  }), []);
 
   useEffect(() => {
-   
-
     const fetchChartCount = async () => {
       try {
         const response = await dashboardCountApi(headers, hostelId);
         if (response) {
-          console.log(response.data,"this is the responce");
+          console.log(response.data, "this is the response");
           setChartCount(response.data);
         } else {
           console.log(response?.data);
@@ -34,11 +32,9 @@ function SingleHostelDashboard() {
     };
 
     fetchChartCount();
-  }, []);
-
+  }, [headers, hostelId]);
 
   useEffect(() => {
-   
     const fetchChartData = async () => {
       try {
         const response = await chartDataApi(headers, hostelId);
@@ -54,7 +50,8 @@ function SingleHostelDashboard() {
     };
 
     fetchChartData();
-  }, []);
+  }, [headers, hostelId]);
+
 
   const { userChart, complaintChart, paymentChart, VacateChart } = chartData || {};
 

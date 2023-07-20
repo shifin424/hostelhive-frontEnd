@@ -16,7 +16,7 @@ function SignUp() {
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('fullName is required'),
     email: Yup.string()
-      .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Invalid Email Format')
+      .matches(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/, 'Invalid Email Format')
       .required('Email is required'),
     phone: Yup.string()
       .matches(/^\d{10}$/, 'Phone Number must be 10 digits')
@@ -171,7 +171,7 @@ function SignUp() {
           </div>
 
           <div className="md:block hidden w-1/2">
-            <img className="rounded-2xl" src={image} alt="Signup Image" />
+            <img className="rounded-2xl" src={image} alt="Signup logo" />
           </div>
         </div>
       </section>

@@ -11,7 +11,7 @@ export default function AdminVerificaion({children}){
             navigate('/admin/dashBoard')
         }
     
-    },[])
+    },[navigate])
 
     return children
 }

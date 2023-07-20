@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { hostelInfoApi, hostelSingleViewApi } from '../../../Services/LandingService';
+import { hostelInfoApi } from '../../../Services/LandingService';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,8 @@ import { hostelView } from '../../../Redux/Features/student/hostelSlice';
 function Section2() {
   const [details, setDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [locationEntered, setLocationEntered] = useState(true); // Default value set to true
+  const [locationEntered, setLocationEntered] = useState(true);
+  console.log(locationEntered); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

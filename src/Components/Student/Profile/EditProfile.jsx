@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import image from '../../../assets/images/student-profile.jpg';
-import { Link, resolvePath, useNavigate } from 'react-router-dom';
-import { editProfileApi, fetchProfileData, imageUploadApi } from '../../../Services/studentsServices';
+import React, { useEffect, useState ,useMemo} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { editProfileApi, fetchProfileData,} from '../../../Services/studentsServices';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { ProfileData } from '../../../Redux/Features/student/ProfileSlice'
@@ -18,6 +17,7 @@ function EditProfile() {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [formValues, setFormValues] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(isModalOpen);
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -28,17 +28,11 @@ function EditProfile() {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-
-  
-
-  const headers = {
+ 
+  const headers = useMemo(() => ({
     'Content-Type': 'multipart/form-data',
-    Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
-  };
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -58,8 +52,8 @@ function EditProfile() {
     data.append('image', selectedImageFile);
     try {
 
-      const response = await dispatch(ProfileData({ headers, data }))
-
+       await dispatch(ProfileData({ headers, data }))
+      
       if (details.studentImage) {
         toast.success("Successfully updated the Image")
         navigate('/student/profile')
@@ -125,7 +119,7 @@ function EditProfile() {
     };
 
     ProfileData();
-  }, []);
+  }, [headers]);
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Full Name is required'),

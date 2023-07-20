@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 function Otp() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState('');
+  console.log(error);
   const [isInvalidOtp, setIsInvalidOtp] = useState(false);
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
@@ -127,7 +128,7 @@ function Otp() {
           </div>
 
           <div className="md:block hidden w-1/2">
-            <img className="rounded-2xl" src={image} alt="Signup Image" />
+            <img className="rounded-2xl" src={image} alt="Signup " />
           </div>
         </div>
       </section>

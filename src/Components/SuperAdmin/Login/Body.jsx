@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { adminLoginApi } from "../../../Services/superAdmin";
 import {useNavigate} from 'react-router-dom'
 
@@ -8,6 +8,7 @@ function Body() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("")
+  console.log(error);
   const navigate = useNavigate()
 
   const validateEmail = () => {

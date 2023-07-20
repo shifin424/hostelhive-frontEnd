@@ -1,5 +1,5 @@
-import { Button, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import {  Modal } from 'antd';
+import { useEffect, useState ,useMemo} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { complaintApi, fetchComplaintData } from '../../../Services/studentsServices';
@@ -13,10 +13,12 @@ function Complaints() {
   console.log(details);
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
+
   useEffect(() => {
-    const headers = {
-      Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
-    };
+   
 
     const fetchComplaints = async () => {
       try {
@@ -35,17 +37,14 @@ function Complaints() {
     };
 
     fetchComplaints();
-  }, []);
+  }, [headers,hostelId]);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = async (values) => {
-    const headers = {
-      Authorization: JSON.parse(localStorage.getItem("StudentToken"))?.token
-    };
-
+ 
     const response = await complaintApi(headers, values, hostelId);
     if (response) {
       toast.success("Complaint Registered successfully");
@@ -119,7 +118,7 @@ function Complaints() {
           </th>
         </tr>
       </thead>
-      <tbody role="rowgroup" className="bg-white">
+      <tbody role="row" className="bg-white">
         {details.map((complaint, index) => (
           <tr
             role="row"

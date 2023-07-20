@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { StudentDataApi, studentBlockingApi, studentDeleteApi, studentUnBlockingApi } from '../../../Services/hostelAdmin';
-import { toast } from 'react-toastify';
 import { message } from 'antd';
 import swal from 'sweetalert';
 
@@ -11,13 +10,14 @@ function StudentManagement() {
   const [filterValue, setFilterValue] = useState('');
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
+
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const headers = {
-          Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-        };
-
+      
         const response = await StudentDataApi(headers, hostelId);
         if (response) {
           console.log(response);
@@ -30,13 +30,10 @@ function StudentManagement() {
       }
     };
     fetchStudentData();
-  }, []);
+  }, [headers,hostelId]);
 
   const BlockStudent = async (id) => {
     try {
-      const headers = {
-        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-      };
       await studentBlockingApi(headers, id);
       message.success('Blocked Student Successfully');
     } catch (error) {
@@ -46,9 +43,6 @@ function StudentManagement() {
 
   const unBlockStudent = async (id) => {
     try {
-      const headers = {
-        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-      };
       await studentUnBlockingApi(headers, id);
       message.success('Unblocked Student Successfully');
     } catch (error) {
@@ -68,9 +62,6 @@ function StudentManagement() {
   };
 
   const handleDeleteConfirmation = (id) => {
-    const headers = {
-      Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-    };
     swal({
       title: 'Are you sure you want to delete?',
       icon: 'warning',

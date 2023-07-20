@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { FoodMenuApi, addFoodmenuApi, editFoodMenuApi } from '../../../Services/hostelAdmin';
 import { toast } from 'react-toastify';
 import { Button, Modal, message } from 'antd';
@@ -20,12 +20,14 @@ function FoodMenu() {
   const [ModalOpen, setModalOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
 
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
+  
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-        const headers = {
-          Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-        };
+       
         const response = await FoodMenuApi(headers, hostelId);
         if (response) {
           setFoodData(response.data.foodData);
@@ -37,7 +39,7 @@ function FoodMenu() {
       }
     };
     fetchFoodData();
-  }, []);
+  }, [headers,hostelId]);
 
 
   const handleEditMenu = (menuData) => {
@@ -52,10 +54,7 @@ function FoodMenu() {
   const handleSubmit = async (values) => {
     console.log(values, hostelId, 'handle submit values');
     try {
-      const headers = {
-        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-      };
-
+     
       const day = selectedMenu ? selectedMenu.day : '';
 
       const updatedValues = {
@@ -89,10 +88,6 @@ function FoodMenu() {
 
   const handleAddMenu = async (values) => {
     try {
-      const headers = {
-        Authorization: JSON.parse(localStorage.getItem('HostelAdminToken')).token,
-      };
-
       const response = await addFoodmenuApi(headers, values, hostelId);
       console.log(response, "<< checking responce");
       if (response.data.error) {

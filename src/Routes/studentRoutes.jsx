@@ -1,7 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import RequestPage from "../Pages/Students/RequestPage";
-import PaymentPage from "../Pages/Students/PaymentPage";
-import Student from '../Verification/studentVerification'
 import StudentVerificaion from "../Verification/studentVerification";
 import ProfilePage from "../Pages/Students/ProfilePage";
 import StudentLayout from "../Components/Student/Layouts/StudentLayout";

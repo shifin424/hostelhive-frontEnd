@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { VacateDataApi } from '../../../Services/hostelAdmin';
 
 function VacatingLetters() {
   const [details, setDetails] = useState([]);
-  console.log(details);
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
   useEffect(() => {
-    const headers = {
-      Authorization: JSON?.parse(localStorage?.getItem('HostelAdminToken'))?.token,
-    };
-
     const fetchVacateLetters = async () => {
       try {
         const response = await VacateDataApi(headers, hostelId);
@@ -26,7 +24,7 @@ function VacatingLetters() {
       }
     };
     fetchVacateLetters();
-  }, []);
+  }, [headers, hostelId]);
 
   return (
     <>
@@ -59,7 +57,7 @@ function VacatingLetters() {
               </tr>
             </thead>
           )}
-          <tbody role="rowgroup" className="bg-white">
+          <tbody className="bg-white">
             {details?.length === 0 ? (
               <tr>
                 <td colSpan={6} className="p-3 text-gray-500 text-2xl font-bold text-center">
@@ -68,8 +66,8 @@ function VacatingLetters() {
               </tr>
             ) : (
               details.map((VacateDatas, index) => (
-                <tr role="row" className={index % 2 === 0 ? 'odd:bg-white even:bg-gray-200' : 'odd:bg-white even:bg-gray-50 hover:bg-gray-200'} key={VacateDatas._id}>
-                  <td role="cell" className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words">{index +1}</td>
+                <tr className={index % 2 === 0 ? 'odd:bg-white even:bg-gray-200' : 'odd:bg-white even:bg-gray-50 hover:bg-gray-200'} key={VacateDatas._id}>
+                  <td role="cell" className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words">{index + 1}</td>
                   <td role="cell" className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words">{VacateDatas?.userId}</td>
                   <td role="cell" className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words">{VacateDatas?.fullName}</td>
                   <td role="cell" className="p-3 text-sm font-medium text-gray-700 text-center border-b border-gray-300 break-words">{VacateDatas?.hostelId}</td>

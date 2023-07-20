@@ -92,7 +92,7 @@ function FoodMenu() {
               </tr>
             </thead>
           )}
-          <tbody role="rowgroup" className="bg-white">
+          <tbody role="row" className="bg-white">
             {foodData.length > 0 ? (
               foodData.map((data, index) => (
                 <tr

@@ -48,14 +48,14 @@ function Navbar() {
   return (
     <nav className="shadow-md bg-white h-16 sticky top-0 w-full" id="navbar">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" className="flex items-center">
+        <Link  className="flex items-center">
           <img
             src={image}
             className="h-12 w-28 mr-3"
-            alt="Flowbite Logo"
+            alt=" Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kunjutty bite</span>
-        </a>
+        </Link>
         <div className="flex items-center md:order-2">
           {studentToken || hostelAdminToken ? (
             <Dropdown overlay={userMenu} placement="bottomRight" arrow>
@@ -69,7 +69,7 @@ function Navbar() {
                 <img
                   className="w-8 h-8 rounded-full"
                   src="/docs/images/people/profile-picture-3.jpg"
-                  alt="user photo"
+                  alt="user logo"
                 />
               </button>
             </Dropdown>
@@ -116,28 +116,28 @@ function Navbar() {
               </Dropdown>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+            
                 className="block py-2 pl-3 pr-4  rounded text-black hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

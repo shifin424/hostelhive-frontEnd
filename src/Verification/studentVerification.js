@@ -21,7 +21,7 @@ useEffect(() => {
         navigate('/404');
       }
     }
-  }, []);
+  }, [location.pathname,navigate,token]);
 
     return children
 }

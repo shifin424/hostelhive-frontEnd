@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import antd from 'antd'
+import React, { useEffect, useState,useMemo } from 'react'
 import { rentHistoryApi } from '../../../Services/studentsServices';
 import { useSelector } from 'react-redux';
 
@@ -9,10 +8,12 @@ function RentHistory() {
   const hostelId = bookingStatus.hostelId
   console.log(details, "<<< checking front end data");
 
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
+  
   useEffect(() => {
-    const headers = {
-      Authorization: JSON.parse(localStorage.getItem("StudentToken")).token
-    };
+   
 
     const fetchRentHistory = async () => {
       try {
@@ -28,7 +29,7 @@ function RentHistory() {
       }
     };
     fetchRentHistory();
-  }, []);
+  }, [headers,hostelId]);
 
   return (
     <>
@@ -81,7 +82,7 @@ function RentHistory() {
               </tr>
             </thead>
           )}
-          <tbody role="rowgroup" className="bg-white">
+          <tbody role="row" className="bg-white">
             {details?.length === 0 ? (
               <tr>
                 <td colSpan={6} className="p-3 text-gray-500 text-2xl font-bold text-center">

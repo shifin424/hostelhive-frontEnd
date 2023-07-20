@@ -76,9 +76,9 @@ function GlobalNavbar() {
   return (
     <nav className={`shadow-md bg-white h-16 sticky top-0 w-full ${isMobile ? " " : 'hidden'}`} id="navbar">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center">
+        <Link className="flex items-center">
           <img className="w-32 h-14 absolute left-4" src={image} alt="logo" />
-        </a>
+        </Link>
         <div className="flex items-center md:order-2">
           <Dropdown overlay={userMenu} placement="bottomRight" arrow>
             <button
@@ -91,7 +91,7 @@ function GlobalNavbar() {
               <img
                 className="w-8 h-8 rounded-full"
                 src="/docs/images/people/profile-picture-3.jpg"
-                alt="user photo"
+                alt="user pic"
               />
             </button>
           </Dropdown>

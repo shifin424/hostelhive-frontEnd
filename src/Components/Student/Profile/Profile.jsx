@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Modal } from 'antd';
+import {  Modal } from 'antd';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify'
@@ -8,16 +8,13 @@ import { changePasswordApi, fetchProfileData } from '../../../Services/studentsS
 
 function Profile() {
   const [details, setDetails] = useState('');
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate()
 
-  const headers = {
-    Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token,
-  };
+  const headers = useMemo(() => ({
+    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+  }), []); 
 
   useEffect(() => {
 
@@ -37,15 +34,12 @@ function Profile() {
     };
 
     ProfileData();
-  }, []);
+  }, [headers]);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
   const handleCancel = () => {
     setIsModalOpen(false);
   };

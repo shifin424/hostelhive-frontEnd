@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, json, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { studentLoginApi } from '../../../Services/LandingService';
@@ -9,6 +9,7 @@ import {toast} from 'react-toastify'
 
 function Login() {
   const [error, setError] = useState('');
+  console.log(error);
 
   const navigate = useNavigate();
 
@@ -149,7 +150,7 @@ function Login() {
             </button>
 
             <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
-              <a href="#">Forgot your password?</a>
+              <Link >Forgot your password?</Link>
             </div>
 
             <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">

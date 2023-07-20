@@ -16,7 +16,7 @@ export default function HostelAdminVerification({ children }) {
                 
             navigate('/hostel/dashboard')
         }
-    }, []);
+    }, [location.pathname,navigate]);
 
     return children;
 }

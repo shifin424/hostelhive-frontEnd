@@ -6,7 +6,8 @@ import { message, Modal } from 'antd';
 function Request() {
   const [requests, setRequests] = useState([]);
   const [status, setStatus] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  
   const [selectedRequestId, setSelectedRequestId] = useState(null);
   const [rejectModalVisible, setRejectModalVisible] = useState(false);
   const [rejectDescription, setRejectDescription] = useState('');
@@ -65,9 +66,7 @@ function Request() {
   };
 
   const handleRejectSubmit = () => {
-    setLoading(true);
     rejectHostel();
-    setLoading(false);
     setRejectModalVisible(false);
     setRejectDescription('');
   };

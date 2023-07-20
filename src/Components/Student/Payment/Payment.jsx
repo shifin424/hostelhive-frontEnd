@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchPaymentInfo, paymentApi, paymentDataApi } from '../../../Services/studentsServices';
-import { message } from 'antd'
 import image from '../../../assets/images/hostel-logo.png'
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';

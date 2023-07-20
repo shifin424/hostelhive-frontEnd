@@ -5,9 +5,6 @@ import SignUpPage from "../Pages/Landing/SignUpPage";
 import Landing from "../Pages/Landing/Landing";
 import LoginPage from "../Pages/Landing/LoginPage";
 import OtpPage from "../Pages/Landing/OtpPage";
-import RequestPage from "../Pages/Students/RequestPage";
-import PaymentPage from "../Pages/Students/PaymentPage";
-import StudentVerificaion from "../Verification/studentVerification";
 import RoomBookingRoutes from "./RoomBooking";
 
 

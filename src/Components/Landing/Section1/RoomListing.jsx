@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
-import { AiFillStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RoomData } from '../../../Redux/Features/student/RoomSlice';
