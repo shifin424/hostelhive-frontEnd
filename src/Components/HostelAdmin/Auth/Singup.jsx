@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { hostelAdminApi } from '../../../Services/hostelAdmin';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd'
@@ -24,7 +23,7 @@ function Singnup() {
   };
 
   const [error, setError] = useState('');
-  const [formValues, setFormValues] = useState(initialValues);
+  // const [formValues, setFormValues] = useState(initialValues);
 
   const validationSchema = yup.object({
     fullName: yup.string().required('Required'),
@@ -66,6 +65,7 @@ function Singnup() {
         .then((response) => { 
           if (response?.payload?.response?.data) {
                 toast.error(response?.payload?.response?.data?.message);
+                setError(response?.data?.error)
             } else {
                 console.log('form submitted');
                 message.success('Form submitted successfully!'); 

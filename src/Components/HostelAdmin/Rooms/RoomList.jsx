@@ -11,12 +11,14 @@ function RoomList() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  console.log(setSelectedImage);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  console.log(setItemsPerPage)
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState(null);
+  //const [selectedRoom, setSelectedRoom] = useState(null);
   const [roomData, setRoomData] = useState([])
   
   const showModal = async () => {
@@ -24,7 +26,6 @@ function RoomList() {
       Authorization: JSON.parse(localStorage.getItem("HostelAdminToken")).token
     };
 
-    console.log(headers, hostelId, "<<<< checking here");
     const response = await editRoomApi(headers, hostelId)
     if (response.data) {
       setRoomData(response.data.data)
@@ -33,16 +34,16 @@ function RoomList() {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
   const handleModalOpen = (room) => {
-    setSelectedRoom(room);
+    // setSelectedRoom(room);
     setIsModalOpen(true);
   };
 
@@ -72,7 +73,7 @@ function RoomList() {
     }
   });
 
-  const pageNumbers = Math.ceil(filteredRooms.length / itemsPerPage);
+ // const pageNumbers = Math.ceil(filteredRooms.length / itemsPerPage);
 
   const firstIndex = (currentPage - 1) * itemsPerPage;
   const lastIndex = Math.min(firstIndex + itemsPerPage, filteredRooms.length);

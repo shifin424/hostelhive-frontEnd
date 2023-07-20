@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { hostelAdminLogin } from '../../../Services/hostelAdmin'
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { hostelAdminLogin } from '../../../Services/hostelAdmin';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
@@ -8,15 +8,15 @@ import { toast } from 'react-toastify';
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string().required('Password is required'),
-  })
+  });
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
@@ -28,17 +28,16 @@ function Login() {
     hostelAdminLogin(values)
       .then((response) => {
         if (response.data.error) {
-          //setError(response.data.error);
-          console.log(response.data.error);
+          setError(response?.data?.error);
         } else {
-          localStorage.setItem("HostelAdminToken", JSON.stringify(response.data))
-          message.success('logged in successfully.')
+          localStorage.setItem('HostelAdminToken', JSON.stringify(response.data));
+          message.success('logged in successfully.');
           navigate('/hostel/dashboard');
         }
       })
       .catch((err) => {
-        console.log(err.response.data.message)
-        toast.error(err.response.data.message)
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message);
         //setError(err.response.data.error || "An error occurred");
       });
   };
@@ -64,6 +63,7 @@ function Login() {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
+                onChange={handleChange} // Use handleChange for input change
               />
               <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-2" />
             </div>
@@ -78,6 +78,7 @@ function Login() {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
+                onChange={handleChange} // Use handleChange for input change
               />
               <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
             </div>
@@ -89,22 +90,22 @@ function Login() {
               >
                 Login
               </button>
-              <a
+              <Link
+                to="/forgotpassword"
                 className="inline-block align-baseline font-bold text-sm
                  text-blue-500 hover:text-blue-800"
-                href="#"
               >
                 Forgot Password?
-              </a>
+              </Link>
             </div>
             {error && <div className="text-red-500 text-sm">{error}</div>}
           </Form>
         </Formik>
         <p className="text-center mt-4 text-gray-700">
-          Don't have an account?{" "}
-          <Link to={'/hostel/register'}
+          Don't have an account?{' '}
+          <Link
+            to="/hostel/register"
             className="text-blue-500 hover:text-blue-800 font-bold"
-            href="#"
           >
             Sign up now
           </Link>

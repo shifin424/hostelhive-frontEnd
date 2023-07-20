@@ -1,63 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import Chart from 'chart.js/auto';
 import { Bar } from "react-chartjs-2";
 import { CategoryScale } from 'chart.js';
 import { useSelector } from 'react-redux';
-import { chartDataApi, globalChartApi, globalDahsboard } from '../../../Services/hostelAdmin';
+import { globalChartApi, globalDahsboard } from '../../../Services/hostelAdmin';
 Chart.register(CategoryScale);
 
 function Globaldashboard() {
-
-
   const [chartData, setChartData] = useState(null);
-  const [chartCount,setChartCount] = useState([])
-  console.log(chartCount.studentCount,"checking the data");
+  const [chartCount, setChartCount] = useState([]);
+  console.log(chartCount.studentCount, "checking the data");
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
-  const headers = {
+  const headers = useMemo(() => ({
     Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
-  };
+  }), []);
+
+  const fetchChartCount = useCallback(async () => {
+    try {
+      const response = await globalDahsboard(headers, hostelId);
+      if (response) {
+        console.log(response.data, "this is the response");
+        setChartCount(response.data);
+      } else {
+        console.log(response?.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [headers, hostelId]);
 
   useEffect(() => {
-   
-
-    const fetchChartCount = async () => {
-      try {
-        const response = await globalDahsboard(headers, hostelId);
-        if (response) {
-          console.log(response.data,"this is the responce");
-          setChartCount(response.data);
-        } else {
-          console.log(response?.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchChartCount();
-  }, []);
+  }, [fetchChartCount]);
 
+  const fetchChartData = useCallback(async () => {
+    try {
+      const response = await globalChartApi(headers, hostelId);
+      if (response) {
+        console.log(response);
+        setChartData(response.data);
+      } else {
+        console.log(response?.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [headers, hostelId]);
 
   useEffect(() => {
-   
-    const fetchChartData = async () => {
-      try {
-        const response = await globalChartApi(headers, hostelId);
-        if (response) {
-          console.log(response);
-          setChartData(response.data);
-        } else {
-          console.log(response?.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchChartData();
-  }, []);
-
+  }, [fetchChartData]);
   const { userChart, hostelChart, paymentChart, VacateChart } = chartData || {};
 
   const chartDataConfig = {

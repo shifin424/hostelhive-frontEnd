@@ -6,7 +6,6 @@ function LeaveLetter() {
     const [details, setDetails] = useState([])
     const hostelId = useSelector(state => state?.adminHostelData?.hostelId)
 
-
     useEffect(() => {
         const headers = {
             Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
@@ -29,11 +28,10 @@ function LeaveLetter() {
         };
 
         fetchleaveData();
-    }, []);
+    }, [hostelId]);
 
     return (
         <>
-
             <div className="flex justify-between p-3 mt-5">
                 <h1 className="flex text-2xl text-[#002D74] font-bold text-center">Leave Letters</h1>
             </div>
@@ -74,10 +72,10 @@ function LeaveLetter() {
                             </tr>
                         </thead>
                     )}
-                    <tbody role="rowgroup" className="bg-white">
+                    <tbody className="bg-white">
                         {details?.length === 0 ? (
                             <tr>
-                                <td colSpan={6} className="p-3 text-gray-500 text-2xl font-bold text-center">
+                                <td colSpan={4} className="p-3 text-gray-500 text-2xl font-bold text-center">
                                     No data available
                                 </td>
                             </tr>
@@ -118,12 +116,8 @@ function LeaveLetter() {
                     </tbody>
                 </table>
             </div>
-
-
-
-
         </>
     )
 }
 
-export default LeaveLetter
+export default LeaveLetter;

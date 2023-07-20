@@ -12,7 +12,7 @@ function StudentRequests() {
   const [rejectModalVisible, setRejectModalVisible] = useState(false);
   const [rejectDescription, setRejectDescription] = useState('');
 
-  const { hostels } = useSelector(state => state?.adminHostelData);
+
   const hostelId = useSelector(state => state?.adminHostelData.hostelId);
 
   const showModal = (requestData) => {
@@ -88,7 +88,7 @@ function StudentRequests() {
       }
     };
     fetchRequestData();
-  }, []);
+  }, [hostelId]);
 
   return (
     <>

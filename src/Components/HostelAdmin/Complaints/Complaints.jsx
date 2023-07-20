@@ -65,7 +65,7 @@ function Complaints() {
     };
 
     fetchComplaints();
-  }, []);
+  }, [hostelId]);
 
   return (
     <>
@@ -119,7 +119,7 @@ function Complaints() {
         <p>No data available.</p>
       )}
 
-      {selectedComplaint && (
+      {selectedComplaint && isModalOpen  (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-900">
           <div className="bg-white rounded-lg p-6 shadow-lg w-[500px]">
             <h2 className="text-xl font-bold mb-4 text-[#002D74]">Update Status</h2>

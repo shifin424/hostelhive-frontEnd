@@ -3,16 +3,13 @@ import { Modal, message } from 'antd';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { navigate, useNavigate } from 'react-router-dom';
-import { hostelRoomApi, hostelRoomData } from '../../../Services/hostelAdmin';
+import { hostelRoomApi } from '../../../Services/hostelAdmin';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomData } from '../../../Redux/Features/hostel/roomSlice';
 
 function Rooms() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { hostels } = useSelector(state => state?.adminHostelData)
@@ -29,11 +26,11 @@ function Rooms() {
         
         dispatch(roomData({ headers, hostelId }))
       } catch (error) {
-        setError(error.message);
+      console.log(error)
       }
     };
     fetchRoomData();
-  }, []);
+  }, [ dispatch,hostelId]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -105,14 +102,12 @@ function Rooms() {
         if (response.data.error) {
           console.log(response.data.error);
           toast.error(response.data.error);
-          setError(response.data.error);
         } else {
           message.success('Room added successfully');
         }
       })
       .catch((err) => {
         console.log(err.response.data);
-        setError(err.response.data.error || 'An error occurred');
         toast.error(err.response.data.message || 'An error occurred');
       });
   };
