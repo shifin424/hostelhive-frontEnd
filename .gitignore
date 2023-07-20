@@ -4,7 +4,6 @@
 /node_modules
 .env
 /.pnp
-/src/Constants/constants.js
 .pnp.js
 
 # testing

@@ -14,7 +14,6 @@ function SuperAdminLayout() {
     { name: 'DASHBOARD', link: '/dashboard', icon: RxDashboard },
     { name: 'REQUEST', link: '/request', icon: TbMessages },
     { name: 'HOSTEL MANAGEMENT', link: '/request', icon: BiMessageAltEdit },
-    { name: 'BANNER', link: '/cool', icon: GiVerticalBanner },
     { name: 'LOGOUT', link: '/lo', icon: BiLogOutCircle },
 
   ];
@@ -23,11 +22,17 @@ function SuperAdminLayout() {
   return (
     <>
       <Navbar />
-      <section className="flex flex-col sm:flex-row ">
-        <SideBar />
 
-        <div className="bg-white p-4 sm:p-8 flex-grow">
-          <Outlet />
+
+      <section className="flex">
+        <div className='grid grid-cols-[auto_1fr] h-full w-full'>
+          <div className='col-start-1 col-end-2'>
+            <SideBar />
+          </div>
+
+          <div className="bg-white p-4 sm:p-8 col-start-2 w-full col-end-3">
+            <Outlet />
+          </div>
         </div>
       </section>
     </>
