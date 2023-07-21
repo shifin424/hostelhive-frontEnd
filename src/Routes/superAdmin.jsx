@@ -11,7 +11,7 @@ import HostelManagmentPage from "../Pages/SuperAdmin/HostelManagmentPage";
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<AdminVerificaton><Login/></AdminVerificaton>}></Route>
+      <Route path="login" element={<AdminVerificaton><Login/></AdminVerificaton>}></Route>
       <Route element={<SuperAdminLayout />} >
         <Route path="/dashBoard" element={<AdminVerificaton><DashBoard/></AdminVerificaton>}></Route>
         <Route path="/request" element={<AdminVerificaton> <Request/></AdminVerificaton> }></Route>

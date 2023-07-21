@@ -20,6 +20,8 @@ function Body() {
     }
   };
 
+  console.log("admin Login")
+
   const validatePassword = () => {
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordPattern.test(password)) {
