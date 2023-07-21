@@ -36,10 +36,13 @@ function SignUp() {
   const handleSubmit = async (values) => {
     try{
       console.log(values,"here the signup values");
-        const response = await setUpRecaptcha("+91"+values?.phone)
-        dispatch(StudentAuth(values))
-        dispatch(otpConfirmObj(response))
-        navigate('/otp-page')
+        const response = await setUpRecaptcha("+91"+values.phone).then(()=>{
+          dispatch(StudentAuth(values))
+          dispatch(otpConfirmObj(response))
+          navigate('/otp-page')
+        }).catch((err)=>[
+          console.log(err)
+        ])
     }catch(err){
         console.log(err)
     }

@@ -1,37 +1,30 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { hostelAdminLogin } from '../../../Services/hostelAdmin';
 import * as Yup from 'yup';
+import {hostelAdminLogin} from '../../../Services/hostelAdmin'
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { toast } from 'react-toastify';
 
 function Login() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
+  
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials,
-      [name]: value,
-    }));
-  };
-
   const handleSubmit = (values) => {
+    setError(''); // Clear any previous errors
     hostelAdminLogin(values)
       .then((response) => {
         if (response.data.error) {
-          setError(response?.data?.error);
+          setError(response.data.error);
         } else {
           localStorage.setItem('HostelAdminToken', JSON.stringify(response.data));
-          message.success('logged in successfully.');
+          message.success('Logged in successfully.');
           navigate('/hostel/dashboard');
         }
       })
@@ -46,7 +39,7 @@ function Login() {
     <div className="flex items-center justify-center h-screen bg-white">
       <div className="w-full max-w-xs">
         <Formik
-          initialValues={credentials}
+          initialValues={{ email: '', password: '' }} // Initialize values directly in Formik
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -63,7 +56,6 @@ function Login() {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                onChange={handleChange} // Use handleChange for input change
               />
               <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-2" />
             </div>
@@ -78,7 +70,6 @@ function Login() {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                onChange={handleChange} // Use handleChange for input change
               />
               <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
             </div>

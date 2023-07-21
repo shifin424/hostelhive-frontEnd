@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 
 function Section1() {
   const [text, setText] = useState("");
   const [showButton, setShowButton] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
     const textToDisplay =
@@ -13,7 +15,7 @@ function Section1() {
       if (currentIndex < textToDisplay.length) {
         setText((prevText) => prevText + textToDisplay[currentIndex]);
         currentIndex++;
-        setTimeout(displayText,80 ); 
+        setTimeout(displayText, 80);
       } else {
         setShowButton(true);
       }
@@ -21,6 +23,17 @@ function Section1() {
 
     setTimeout(displayText, 1000);
   }, []);
+
+
+  const hasHostelAdminToken = !!localStorage.getItem("HostelAdminToken");
+
+  const handleButtonClick = () => {
+    if (hasHostelAdminToken) {
+      navigate("/hostel/addHostel");
+    } else {
+      navigate("/hostel/login");
+    }
+  };
 
   return (
     <div className="w-full bg-white pb-10 pt-5 mt-10">
@@ -37,12 +50,15 @@ function Section1() {
           <div className="md:flex md:flex-col md:justify-center md:h-full">
             <div className="text-center text-2xl md:mt-10">
               <div>
-             <p className="text-[#002D7A] font-popins mt-14">"{text}"</p>
-             </div>
+                <p className="text-[#002D7A] font-popins mt-14">"{text}"</p>
+              </div>
               <p className="text-[#002D7A] text-2xl font-bold mt-5">- Hostel Hive -</p>
               {showButton && (
-                <button className="btn bg-[#002D7A] hover:bg-blue-500 hover:text-black text-white mt-8">
-                  Add Your Property
+                <button
+                  className="btn bg-[#002D7A] hover:bg-blue-500 hover:text-black text-white mt-8"
+                  onClick={handleButtonClick}
+                >
+                  {hasHostelAdminToken ? "Add Your Property" : "Hostel Login"}
                 </button>
               )}
             </div>
