@@ -13,7 +13,7 @@ function Profile() {
   const navigate = useNavigate()
 
   const headers = useMemo(() => ({
-    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+    Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
   }), []); 
 
   useEffect(() => {

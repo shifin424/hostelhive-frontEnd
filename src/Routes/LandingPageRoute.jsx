@@ -6,6 +6,7 @@ import Landing from "../Pages/Landing/Landing";
 import LoginPage from "../Pages/Landing/LoginPage";
 import OtpPage from "../Pages/Landing/OtpPage";
 import RoomBookingRoutes from "./RoomBooking";
+import StudentVerificaion from "../Verification/studentVerification";
 
 
 
@@ -15,13 +16,13 @@ import RoomBookingRoutes from "./RoomBooking";
 const LandingPageRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/over-view" element={<HostelOverView />}></Route>
-      <Route path="/signup" element={<SignUpPage />}></Route>
-      <Route path='/login' element={<LoginPage />}></Route>
-      <Route path="/otp-page" element={<OtpPage />}></Route>
-      <Route path="/room-booking" element={<RoomBookings />}></Route>
-      <Route path='/room-booking/*' element={<RoomBookingRoutes />}>  </Route>
+      <Route path="/" element={<StudentVerificaion><Landing /></StudentVerificaion>} />
+      <Route path="/over-view" element={<StudentVerificaion><HostelOverView /></StudentVerificaion>}></Route>
+      <Route path="/signup" element={<StudentVerificaion><SignUpPage /></StudentVerificaion>}></Route>
+      <Route path='/login' element={<StudentVerificaion><LoginPage /></StudentVerificaion>}></Route>
+      <Route path="/otp-page" element={<StudentVerificaion><OtpPage /></StudentVerificaion>}></Route>
+      <Route path="/room-booking" element={<StudentVerificaion><RoomBookings /></StudentVerificaion>}></Route>
+      <Route path='/room-booking/*' element={ <StudentVerificaion><RoomBookingRoutes /></StudentVerificaion>}></Route>
     </Routes>
   );
 };

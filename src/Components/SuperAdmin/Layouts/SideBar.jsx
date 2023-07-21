@@ -6,22 +6,21 @@ import { RxDashboard } from 'react-icons/rx';
 import { BiMessageAltEdit } from 'react-icons/bi'
 import { TbMessages } from 'react-icons/tb'
 import { BiLogOutCircle } from 'react-icons/bi'
-import { GiVerticalBanner } from 'react-icons/gi'
+
 
 const SideBar = () => {
     const menus = [
         { name: 'DASHBOARD', link: '/admin/dashboard', icon: RxDashboard },
         { name: 'REQUEST', link: '/admin/request', icon: TbMessages },
         { name: 'HOSTEL MANAGEMENT', link: '/admin/hostel-managment', icon: BiMessageAltEdit },//margin true
-        { name: 'BANNER', link: '/cool', icon: GiVerticalBanner },
-        { name: 'LOGOUT', link: '/lo', icon: BiLogOutCircle },
+        { name: 'LOGOUT', link: '/admin/logout', icon: BiLogOutCircle },
 
     ];
 
     const [open, setOpen] = useState(true);
 
   return (
-    <div className={`bg-[#002D7A] min-h-screen ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4`}>
+    <div className={`bg-[#002D7A] h-[100vh] ${open ? 'w-64' : 'w-16'} duration-500 text-gray-100 px-4 sticky top-0 left-0 `}>
     <div className="py-3 flex justify-end">
       <CgMenuRightAlt
         size={26}
@@ -59,6 +58,15 @@ const SideBar = () => {
         </div>
       ))}
     </div>
+    <style>
+        {`
+           @media (max-width: 768px) {
+                .w-64 {
+                  display: none;
+                }
+            }
+        `}
+      </style>
   </div>
   )
 }

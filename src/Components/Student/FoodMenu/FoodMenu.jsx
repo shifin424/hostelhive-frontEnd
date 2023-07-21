@@ -13,7 +13,6 @@ function FoodMenu() {
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
   const hostelId = bookingStatus.hostelId;
 
-  console.log(hostelId,"checking hostel Id");
 
   useEffect(() => {
     const fetchMenuData = async () => {

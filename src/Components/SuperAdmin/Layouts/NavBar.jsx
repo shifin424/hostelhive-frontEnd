@@ -24,19 +24,16 @@ function NavBar() {
   const mainMenu = (
     <Menu>
       <Menu.Item key="1">
-        <Link to="/">Home</Link>
+        <Link to="/admin/dashBoard">Dashboard</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/">Dashboard</Link>
+        <Link to="/admin/request">Student Requests</Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="/">Student Requests</Link>
+        <Link to="/admin/hostel-managment">Hostel Management</Link>
       </Menu.Item>
       <Menu.Item key="4">
-        <Link to="/">Hostel Management</Link>
-      </Menu.Item>
-      <Menu.Item key="5">
-        <Link to="/">Logout</Link>
+        <Link to="/admin/logout">Logout</Link>
       </Menu.Item>
     </Menu>
   );

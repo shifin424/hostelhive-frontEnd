@@ -20,7 +20,7 @@ function Payment() {
     const headers = {
       Authorization: JSON.parse(localStorage.getItem("StudentToken"))?.token
     };
-    console.log(headers, "front end token ");
+  
 
     const paymentInfo = async () => {
       try {

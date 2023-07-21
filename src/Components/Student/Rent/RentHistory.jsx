@@ -9,7 +9,7 @@ function RentHistory() {
   console.log(details, "<<< checking front end data");
 
   const headers = useMemo(() => ({
-    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+    Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
   }), []); 
   
   useEffect(() => {

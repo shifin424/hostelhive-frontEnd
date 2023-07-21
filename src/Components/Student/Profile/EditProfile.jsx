@@ -31,7 +31,7 @@ function EditProfile() {
  
   const headers = useMemo(() => ({
     'Content-Type': 'multipart/form-data',
-    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+    Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
   }), []); 
 
   const handleImageChange = (event) => {

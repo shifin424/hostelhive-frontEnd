@@ -9,7 +9,6 @@ Chart.register(CategoryScale);
 function Globaldashboard() {
   const [chartData, setChartData] = useState(null);
   const [chartCount, setChartCount] = useState([]);
-  console.log(chartCount.studentCount, "checking the data");
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
 
   const headers = useMemo(() => ({

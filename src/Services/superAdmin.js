@@ -30,8 +30,13 @@ export const hostelUnlockApi = (id,headers,adminId)=>{
     return axios.patch(`/admin/unblock-hostel/${id}/${adminId}`,{},{headers})
 }
 
+export const adminDashboardApi = (headers) =>{
+    return axios.get('/admin/fetch-admin-dashboard',{headers})
+}
 
-
+export const adminChartData = (headers) =>{
+    return axios.get('/admin/fetch-chart-data',{headers})
+}
 
 
 
