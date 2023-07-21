@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useLocation, useNavigate} from 'react-router-dom'
-
-export default function StudentVerificaion({children}){
-    const navigate = useNavigate();
+export default function StudentVerification({ children }) {
+  const navigate = useNavigate();
   const location = useLocation();
 
-   
-const token =JSON.parse( localStorage.getItem('StudentToken'))
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('StudentToken'));
 
     if (!token) {
       navigate('/login');
@@ -20,6 +20,8 @@ const token =JSON.parse( localStorage.getItem('StudentToken'))
         navigate('/404');
       }
     }
+    // eslint-disable-next-line
+  }, []);
 
-    return children
+  return children;
 }
