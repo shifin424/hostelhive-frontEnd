@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 function HostelDetails() {
 
-  const hostelOverView = useSelector(state => state.hostelView.hostelData);
+  const hostelOverView = useSelector(state => state?.hostelView?.hostelData);
 
 
   return (
