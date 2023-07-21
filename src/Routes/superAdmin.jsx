@@ -13,9 +13,9 @@ const AdminRoutes = () => {
     <Routes>
       <Route path="login" element={<AdminVerificaton><Login/></AdminVerificaton>}></Route>
       <Route element={<SuperAdminLayout />} >
-        <Route path="/dashBoard" element={<AdminVerificaton><DashBoard/></AdminVerificaton>}></Route>
-        <Route path="/request" element={<AdminVerificaton> <Request/></AdminVerificaton> }></Route>
-        <Route path="/hostel-managment" element={<AdminVerificaton><HostelManagmentPage/></AdminVerificaton>}></Route>
+        <Route path="dashBoard" element={<AdminVerificaton><DashBoard/></AdminVerificaton>}></Route>
+        <Route path="request" element={<AdminVerificaton> <Request/></AdminVerificaton> }></Route>
+        <Route path="hostel-managment" element={<AdminVerificaton><HostelManagmentPage/></AdminVerificaton>}></Route>
       </Route>
     </Routes>
   );
