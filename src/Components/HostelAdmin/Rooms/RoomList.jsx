@@ -124,7 +124,7 @@ function RoomList() {
                       </Button>
                     </td>
                     <td>
-                      <button className="btn btn-success">Edit</button>
+                    <Link to={'/hostel/hostel-listing/edit-rooms'}>  <button className="btn btn-success">Edit</button></Link>
                     </td>
                   </tr>
                 ))}

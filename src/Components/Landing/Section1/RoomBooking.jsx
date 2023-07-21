@@ -38,7 +38,7 @@ function RoomBooking() {
   }, [dispatch, navigate, token]);
 
   const handleBookNow = (id) => {
-    if (bookingStatus && bookingStatus.isRequested === false) {
+    if (bookingStatus && bookingStatus?.isRequested === false) {
       swal({
         title: 'Verification Required',
         text: 'Need to verify your data',
@@ -57,14 +57,14 @@ function RoomBooking() {
         },
       }).then((value) => {
         if (value === 'ok') {
-          if (!bookingStatus.isRequested) {
+          if (!bookingStatus?.isRequested) {
             navigate(`/room-booking/request/${id}`);
           } else {
             message.info('Request is still processing');
           }
         }
       });
-    } else if (bookingStatus && bookingStatus.isVerified) {
+    } else if (bookingStatus && bookingStatus?.isVerified) {
       navigate(`/room-booking/rent-payment/${id}`);
     } else {
       message.info('Request is still processing');
@@ -90,41 +90,41 @@ function RoomBooking() {
               className="flex flex-col px-2 rounded-md shadow-2xl md:mx-16 lg:flex-row lg:mx-20 xl:mx-32 mt-5 mb-20"
             >
               <div className="overflow-hidden rounded-md lg:w-2/6">
-                <img className="w-full h-full" src={room.url} alt="room"></img>
+                <img className="w-full h-full" src={room?.url} alt="room"></img>
               </div>
               <div className="p-5 grid lg:grid-cols-2 w-full">
                 <div className="grid gap-4">
                   <div className="text-2xl font-bold text-[#002D7A]">
-                    {room.title}
+                    {room?.title}
                   </div>
                   <div className="flex-wrap  text-gray-600 text-xl">
-                    {room.description}
+                    {room?.description}
                   </div>
                   <div className="flex flex-wrap items-center text-gray-900 text-xl gap-6 sm:gap-6">
                     <div className="flex gap-2 items-center">
                       <div>
                         <FaRegUser />
                       </div>
-                      <div>{room.occupants} Sleep</div>
+                      <div>{room?.occupants} Sleep</div>
                     </div>
                     <div className="flex gap-2 items-center">
                       <div>
                         <IoBedOutline size={25} />
                       </div>
-                      <div>{room.capacity}</div>
+                      <div>{room?.capacity}</div>
                     </div>
                   </div>
                 </div>
                 <div className="grid gap-6 py-5 lg:py-0 lg:flex lg:flex-col lg:items-end lg:justify-between">
                   <div className="">
                     <div className="text-3xl font-bold inline-block lg:text-4xl text-gray-800 lg:font-extrabold">
-                      ₹{room.rent}
+                      ₹{room?.rent}
                     </div>
                     <span className="px-1 text-gray-600 text-lg">/month</span>
                   </div>
                   <button
                     className="text-white bg-blue-800 py-3 px-5 rounded-lg text-xl font-bold w-full sm:w-40 transform hover:scale-110 transition duration-300"
-                    onClick={() => handleBookNow(room._id)}
+                    onClick={() => handleBookNow(room?._id)}
                   >
                     Book Now
                   </button>

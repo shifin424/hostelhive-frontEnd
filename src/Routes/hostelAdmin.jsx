@@ -16,6 +16,7 @@ import StudentManagmentPage from "../Pages/HostelAdmin/StudentManagmentPage";
 import ComplaintsPage from "../Pages/HostelAdmin/ComplaintsPage";
 import LeaveLetterPage from "../Pages/HostelAdmin/LeaveLetterPage";
 import VacatingDatas from "../Pages/HostelAdmin/vacates/VacatingDatas";
+import EditRoomsPage from "../Pages/HostelAdmin/EditRoomsPage";
 
 
 
@@ -35,6 +36,7 @@ const hostelRoutes = () => {
       <Route element={<SingleHostelLayouts />}>
         <Route path="/hostel-listing/dashboard" element={<SingleDashboard />}></Route>
         <Route path="/hostel-listing/rooms" element={<RoomsListing />}></Route>
+        <Route path="/hostel-listing/edit-rooms" element={<EditRoomsPage/>}></Route>
         <Route path="/hostel-listing/requests" element={<RequestsPage />}></Route>
         <Route path='/hostel-listing/food-menu' element={<FoodSystem/>}></Route>
         <Route path='/hostel-listing/student-managment' element={<StudentManagmentPage/>}></Route>
