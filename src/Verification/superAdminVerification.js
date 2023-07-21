@@ -1,14 +1,15 @@
 
-import { Navigate } from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
-
-export default function AdminVerificaion({ children }) {
-
-    let auth = localStorage.getItem('adminToken')
-
-    if (!auth) {
-        return <Navigate to={'/admin/login'}/>
+export default function AdminVerificaion({children}){
+    const navigate = useNavigate();
+        if(!localStorage.getItem('adminToken')){
+            navigate('/admin/login')
         }else{
-           return children
+            navigate('/admin/dashBoard')
         }
-    }
+    
+   
+
+    return children
+}
