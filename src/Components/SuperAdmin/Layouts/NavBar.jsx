@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import image from '../../../assets/images/hostel-logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, Dropdown } from 'antd';
 
 function NavBar() {
   const [isMobile, setIsMobile] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,6 +22,13 @@ function NavBar() {
     return null;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    navigate('/admin/login')
+  };
+
+
+
   const mainMenu = (
     <Menu>
       <Menu.Item key="1">
@@ -33,7 +41,7 @@ function NavBar() {
         <Link to="/admin/hostel-managment">Hostel Management</Link>
       </Menu.Item>
       <Menu.Item key="4">
-        <Link to="/admin/logout">Logout</Link>
+        <Link onClick={handleLogout}>Logout</Link>
       </Menu.Item>
     </Menu>
   );

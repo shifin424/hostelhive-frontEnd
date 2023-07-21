@@ -45,6 +45,7 @@ function DashBoard() {
     }
   }, [headers]);
 
+  
   useEffect(() => {
     fetchChartData();
   }, [fetchChartData]);
