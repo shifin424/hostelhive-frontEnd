@@ -1,81 +1,67 @@
 import React from 'react';
 import { Menu, Dropdown } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import image from '../../../assets/images/hostel-logo.png';
 
 function Navbar() {
-  const studentToken = JSON.parse(localStorage.getItem('StudentToken'))?.token;
-  const hostelAdminToken = JSON.parse(localStorage.getItem('HostelAdminToken'))?.token;
 
-  // const handleLogout = () => {
-  //   // Implement your logout logic here
-  // };
+  const studentToken = localStorage?.getItem('StudentToken');
+  const navigate = useNavigate()
 
+
+  const handleLogout = async() => {
+    try{
+      localStorage.removeItem('StudentToken');
+      navigate('/login');
+    }catch(error){
+      console.log(error);
+    }
+    
+  };
+
+ 
   const userMenu = (
     <Menu>
-      {studentToken && (
+      {studentToken ? (
         <Menu.Item key="1">
-          <Link to="/student/profile">Student</Link>
+          <Link to="/student/profile">Profile</Link>
         </Menu.Item>
-      )}
-      {hostelAdminToken && (
+      ) : (
         <Menu.Item key="2">
-          <Link to="/hostel/dashboard">Hostel</Link>
+          <Link to="/login">Student Login</Link>
         </Menu.Item>
       )}
-      {/* <Menu.Item key="3" onClick={handleLogout}>
-        Logout
-      </Menu.Item> */}
-    </Menu>
-  );
-
-  const mainMenu = (
-    <Menu>
-      <Menu.Item key="1">
-        <Link to="/">Home</Link>
-      </Menu.Item>
-      <Menu.Item key="2">
-        <Link to="">About</Link>
-      </Menu.Item>
-      <Menu.Item key="3">
-        <Link to="">Service</Link>
-      </Menu.Item>
-      <Menu.Item key="4">
-        <Link to="">Contact</Link>
+      <Menu.Item key="3" onClick={handleLogout}>
+        Sign Out
       </Menu.Item>
     </Menu>
   );
+  
 
-  const showUserType = () => {
-    if (studentToken && hostelAdminToken) {
-      return (
-        <Dropdown overlay={userMenu} placement="bottomRight" arrow>
-          <button
-            type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-          >
-            <span className="sr-only">Open user menu</span>
-            Account type
-          </button>
-        </Dropdown>
-      );
-    } else if (studentToken) {
-      return (
-        <Link to="/login" className="btn-student">
-          Student
-        </Link>
-      );
-    } else if (hostelAdminToken) {
-      return (
-        <Link to="/hostel/login" className="btn-hostel">
-          Hostel
-        </Link>
-      );
-    } else {
-      return (
-        <Dropdown overlay={mainMenu} placement="bottomRight" arrow>
+
+
+  return (
+    <nav className="bg-white border-gray-200 shadow-md sticky top-0 w-full">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+        <a href="https://flowbite.com/" className="flex items-center">
+          <img src={image} className="h-14 w-36" alt="Flowbite Logo" />
+        </a>
+        <div className="flex items-center md:order-2">
+          <Dropdown overlay={userMenu} placement="bottomRight" arrow>
+            <button
+              type="button"
+              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full border-2 border-gray-600"
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="user logo"
+              />
+            </button>
+          </Dropdown>
           <button
             data-collapse-toggle="navbar-user"
             type="button"
@@ -100,55 +86,51 @@ function Navbar() {
               />
             </svg>
           </button>
-        </Dropdown>
-      );
-    }
-  };
-
-  return (
-    <nav className="shadow-md bg-white h-16 sticky top-0 w-full" id="navbar">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link className="flex items-center">
-          <img
-            src={image}
-            className="h-12 w-28 mr-3"
-            alt=" Logo"
-          />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kunjutty bite</span>
-        </Link>
-        <div className="flex items-center md:order-2">{showUserType()}</div>
-        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800  dark:border-gray-700">
+        </div>
+        <div
+          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          id="navbar-user"
+        >
+          <ul
+            className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 dark:border-gray-700"
+          >
             <li>
-              <Dropdown overlay={mainMenu} placement="bottomRight" arrow>
-                <Link
-                  to="/"
-                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-              </Dropdown>
+              <Link
+                to="/"
+                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                aria-current="page"
+              >
+                Home
+              </Link>
             </li>
             <li>
               <Link
-                className="block py-2 pl-3 pr-4  rounded text-black hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                to="/about"
+                className="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0   text-gray-800  md:dark:hover:bg-transparent "
               >
                 About
               </Link>
             </li>
             <li>
               <Link
-                href="#"
-                className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                to="/services"
+                className="block py-2 pl-3 pr-4 t rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0  text-gray-800    md:dark:hover:bg-transparent "
               >
                 Services
               </Link>
             </li>
             <li>
               <Link
-                href="#"
-                className="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                to="/pricing"
+                className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0  text-gray-800   md:dark:hover:bg-transparent "
+              >
+                Pricing
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="block py-2 pl-3 pr-4 t rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0  text-gray-800   md:dark:hover:bg-transparent "
               >
                 Contact
               </Link>

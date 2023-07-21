@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -8,8 +8,8 @@ import image from '../../../assets/images/singupImage2.jpg';
 import {toast} from 'react-toastify'
 
 function Login() {
-  const [error, setError] = useState('');
-  console.log(error);
+  // const [error, setError] = useState('');
+  // console.log(error);
 
   const navigate = useNavigate();
 
@@ -28,9 +28,8 @@ function Login() {
       .then((response) => {
         if (response.data.error) {
           console.log(response.data.message);
-          setError(response.data.error);
+          // setError(response.data.error);
         } else {
-          console.log(response.data,'data from backend ');
           localStorage.setItem('StudentToken', JSON.stringify(response.data));
           message.success('logged in successfully.');
           navigate('/');
@@ -39,7 +38,6 @@ function Login() {
       .catch((err) => {
         console.log(err.response.data.message);
        toast.error(err.response.data.message)
-        setError(err.response.data.error || 'An error occurred');
       });
   };
 
