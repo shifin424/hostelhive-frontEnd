@@ -3,7 +3,7 @@ import ReactMapGL, { GeolocateControl, Marker, NavigationControl, useControl } f
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN;
 
