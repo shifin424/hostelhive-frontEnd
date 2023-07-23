@@ -38,10 +38,6 @@ export const AuthSlice = createSlice({
         StudentAuthReset: (state) => {
             state = initialState
         },
-         
-        otpConfirmObj: (state, action) =>{
-            state.confimObj = action.payload
-        }
     },
     extraReducers: (builder) => {
         builder
@@ -62,5 +58,5 @@ export const AuthSlice = createSlice({
     }
 })
 
-export const { StudentAuthReset, otpConfirmObj } = AuthSlice.actions
+export const { StudentAuthReset } = AuthSlice.actions
 export default AuthSlice.reducer

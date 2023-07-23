@@ -6,7 +6,7 @@ import { message } from 'antd';
 import { otpData } from '../../../Redux/Features/student/OtpSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik'; 
-import { toast } from 'react-toastify';
+
 
 function Otp() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -70,12 +70,21 @@ function Otp() {
       return;
     }
     try {
-      dispatch(otpData(StudentAuth));
-      navigate('/login');
-      message.success('OTP verified successfully');
+      const enteredOtp = formik.values.otp; 
+      const dataToSend = {
+        ...StudentAuth,
+        otp: enteredOtp, 
+      };
+      dispatch(otpData(dataToSend)).then(()=>{
+        navigate('/login');
+        message.success('OTP verified successfully');
+      }).catch((err)=>{
+        message.error(err)
+      })
+    
     } catch (error) {
-      console.error('Error occurred during OTP confirmation:', error);
-    toast.error("Invalid otp ")
+      console.log('Error occurred during OTP confirmation:', error);
+    
     }
   };
 

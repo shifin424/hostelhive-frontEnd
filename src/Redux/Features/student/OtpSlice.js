@@ -19,6 +19,7 @@ export const otpData = createAsyncThunk(
             console.log(response.data, "otp data responce");
             if (response) {
                 console.log(response.data);
+                
             }
             return response.data
         } catch (err) {
