@@ -35,7 +35,8 @@ function RoomBooking() {
     };
 
     fetchData();
-  }, [dispatch, navigate, token]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleBookNow = (id) => {
     if (bookingStatus && bookingStatus?.isRequested === false) {

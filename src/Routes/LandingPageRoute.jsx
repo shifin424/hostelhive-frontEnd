@@ -13,7 +13,7 @@ const LandingPageRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/over-view" element={<HostelOverView />}></Route>
+      <Route path="over-view" element={<HostelOverView />}></Route>
       <Route path="/signup" element={<SignUpPage/>}></Route>
       <Route path='/login' element={<LoginPage/>}></Route>
       <Route path="/otp-page" element={<OtpPage/>}></Route>
