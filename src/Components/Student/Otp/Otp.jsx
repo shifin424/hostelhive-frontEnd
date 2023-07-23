@@ -16,7 +16,7 @@ function Otp() {
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
   const  StudentAuth  = useSelector((state) => state?.studentAuth?.AuthData?.response);
-  const confimObj = useSelector((state) => state?.studentAuth?.confimObj);
+  //const confimObj = useSelector((state) => state?.studentAuth?.confimObj);
   const dispatch = useDispatch();
   const submitButtonRef = useRef(null);
   const navigate = useNavigate();
@@ -70,8 +70,6 @@ function Otp() {
       return;
     }
     try {
-      const otpValue = otp.join('');
-      await confimObj.confirm(otpValue);
       dispatch(otpData(StudentAuth));
       navigate('/login');
       message.success('OTP verified successfully');

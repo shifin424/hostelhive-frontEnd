@@ -50,7 +50,10 @@ function Globaldashboard() {
   useEffect(() => {
     fetchChartData();
   }, [fetchChartData]);
+
+
   const { userChart, hostelChart, paymentChart, VacateChart } = chartData || {};
+  console.log(chartData,"this is chart data");
 
   const chartDataConfig = {
     labels: userChart ? Object.keys(userChart[0]?.data ?? 0) : [],
@@ -99,7 +102,7 @@ function Globaldashboard() {
     <>
     
     
-    <div className="flex justify-between p-3 ">
+      <div className="flex justify-between p-3 ">
         <h1 className="flex text-2xl text-[#002D74] font-bold text-center">DashBoard</h1>
       </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Modal, Pagination } from 'antd';
+import { Link } from 'react-router-dom';
 
 function RoomList() {
   const rooms = useSelector((state) => state?.room?.rooms);
@@ -124,7 +125,7 @@ function RoomList() {
                       </Button>
                     </td>
                     <td>
-                    <Link to={'/hostel/hostel-listing/edit-rooms'}>  <button className="btn btn-success">Edit</button></Link>
+                    <Link to={`/hostel/hostel-listing/edit-rooms/${room._id}`}> <button className="btn btn-success">Edit</button></Link>
                     </td>
                   </tr>
                 ))}

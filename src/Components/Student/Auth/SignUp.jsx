@@ -2,20 +2,20 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import image from '../../../assets/images/loginImage.jpg';
-import setUpRecaptcha  from '../../../Contex/UserAuth'
-import {StudentAuth, otpConfirmObj} from '../../../Redux/Features/student/AuthSlice'
+//import setUpRecaptcha from '../../../Contex/UserAuth'
+import { StudentAuth } from '../../../Redux/Features/student/AuthSlice'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 function SignUp() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('fullName is required'),
     email: Yup.string()
-    .matches(/^\w+([-]?\w+)*@\w+([-]?\w+)*\.\w{2,3}$/, 'Invalid Email Format')
+      .matches(/^\w+([-]?\w+)*@\w+([-]?\w+)*\.\w{2,3}$/, 'Invalid Email Format')
       .required('Email is required'),
     phone: Yup.string()
       .matches(/^\d{10}$/, 'Phone Number must be 10 digits')
@@ -31,20 +31,15 @@ function SignUp() {
       .oneOf([Yup.ref('password'), null], "Passwords don't match")
       .required('Confirm Password is required'),
   });
-  
- 
+
+
   const handleSubmit = async (values) => {
-    try{
-      console.log(values,"here the signup values");
-        const response = await setUpRecaptcha("+91"+values.phone).then(()=>{
-          dispatch(StudentAuth(values))
-          dispatch(otpConfirmObj(response))
-          navigate('/otp-page')
-        }).catch((err)=>[
-          console.log(err)
-        ])
-    }catch(err){
-        console.log(err)
+    try {
+      console.log(values, "here the signup values");
+        dispatch(StudentAuth(values))
+        navigate('/otp-page')
+    } catch (err) {
+      console.log(err)
     }
   };
 
@@ -159,7 +154,7 @@ function SignUp() {
               </Form>
             </Formik>
 
-            <div id="recaptcha-container" ></div>
+            {/* <div id="recaptcha-container" ></div> */}
 
             <div className="mt-6 text-xs text-gray-400">
               <hr className="border-gray-400" />

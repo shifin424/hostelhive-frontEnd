@@ -12,6 +12,7 @@ export const hostelRoomDetails = (hostelId, roomType) => {
     return axios.post(`/hostel-room-data/${hostelId}`, roomType);
   };
 export const StudentSignupApi = (values) =>{
+    console.log(values)
     return axios.post('/signup',values)
 }
 

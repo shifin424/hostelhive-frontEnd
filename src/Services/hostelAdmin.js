@@ -34,6 +34,10 @@ export const editRoomApi = (headers,id)=>{
     return axios.get(`/hostel/edit-room-data/${id}`,{headers})
 }
 
+export const editRoomData = (headers, values, id) => {
+    return axios.put(`/hostel/update-room-data/${id}`, values, { headers });
+  };
+  
 export const FetchRequestData = (headers, hostelId) => {
     return axios.get(`/hostel/fetchRequestData/${hostelId}`, { headers })
 }
@@ -110,6 +114,11 @@ export const dashboardCountApi = (headers,id) =>{
 
 export const globalDahsboard = (headers) =>{
     return axios.get('/hostel/fetch-global-count',{headers})
+}
+
+export const editRoomImage = ({headers,id,data}) =>{
+    console.log(headers,id,data);
+    return axios.patch(`/hostel/fetch-room-image/${id}`,data,{headers})
 }
 
 
