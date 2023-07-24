@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { createRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import image from '../../../assets/images/loginImage.jpg';
-import { message } from 'antd';
 import { otpData } from '../../../Redux/Features/student/OtpSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik'; 
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 
 function Otp() {
@@ -15,11 +15,11 @@ function Otp() {
   const [isInvalidOtp, setIsInvalidOtp] = useState(false);
 
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
+  const navigate = useNavigate()
   const  StudentAuth  = useSelector((state) => state?.studentAuth?.AuthData?.response);
   //const confimObj = useSelector((state) => state?.studentAuth?.confimObj);
   const dispatch = useDispatch();
   const submitButtonRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleChange = (e, index) => {
     const { value } = e.target;
@@ -64,6 +64,7 @@ function Otp() {
   });
 
   const handleSubmit = async (e) => {
+    console.log("inside otp controller");
     e.preventDefault();
     if (isInvalidOtp) {
       setError('Invalid OTP');
@@ -75,16 +76,14 @@ function Otp() {
         ...StudentAuth,
         otp: enteredOtp, 
       };
-      dispatch(otpData(dataToSend)).then(()=>{
-        navigate('/login');
-        message.success('OTP verified successfully');
-      }).catch((err)=>{
-        message.error(err)
-      })
-    
+      const response = await dispatch(otpData(dataToSend));
+      if (response) {
+        console.log(response);
+       navigate('/login');
+       message.success("Otp Verified Successfully")
+      }
     } catch (error) {
       console.log('Error occurred during OTP confirmation:', error);
-    
     }
   };
 

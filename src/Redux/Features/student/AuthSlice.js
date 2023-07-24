@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { StudentSignupApi } from '../../../Services/LandingService'
+import { message} from 'antd'
+
 
 
 
@@ -13,18 +15,20 @@ const initialState = {
     error: ""
 }
 
-export const StudentAuth = createAsyncThunk(
 
+export const StudentAuth = createAsyncThunk(
     "AuthData/StudentAuth",
     async (values) => {
         try {
+            
             const response = await StudentSignupApi(values)
-            console.log(response.data, "here the signup responce data");
+            console.log(response, "here the signup responce data")
             if (response) {
                 console.log(response.data);
             }
             return response.data
         } catch (err) {
+            message.error(err.response.data.error)
             console.log(err);
         }
     }

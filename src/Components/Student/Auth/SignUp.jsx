@@ -6,6 +6,7 @@ import image from '../../../assets/images/loginImage.jpg';
 import { StudentAuth } from '../../../Redux/Features/student/AuthSlice'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
 
 
 function SignUp() {
@@ -33,15 +34,21 @@ function SignUp() {
   });
 
 
-  const handleSubmit = async (values) => {
-    try {
-      console.log(values, "here the signup values");
-        dispatch(StudentAuth(values))
-        navigate('/otp-page')
-    } catch (err) {
-      console.log(err)
-    }
-  };
+
+const handleSubmit = async (values) => {
+  try {
+      dispatch(StudentAuth(values)).then((response)=>{
+      if(response){
+      navigate('/otp-page')
+      }
+    })
+  } catch (err) {
+    toast.error(err.response.data.error)
+    console.log(err.response);
+
+  }
+};
+
 
   return (
     <>
