@@ -8,12 +8,6 @@ import { BookingData } from '../../../Redux/Features/student/RoomBooking';
 import swal from 'sweetalert';
 
 function RoomBooking() {
-  const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +30,14 @@ function RoomBooking() {
     fetchData();
     // eslint-disable-next-line
   }, []);
+  const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
+
+ 
 
   const handleBookNow = (id) => {
     if (bookingStatus && bookingStatus?.isRequested === false) {
