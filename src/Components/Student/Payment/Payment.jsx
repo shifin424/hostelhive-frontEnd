@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux';
 
 function Payment() {
   const [details, setDetails] = useState([]);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
   const hostelId = bookingStatus?.hostelId
   const { id } = useParams();
-  console.log(id);
+  console.log(id,"hostelid");
   const navigate = useNavigate()
 
 
