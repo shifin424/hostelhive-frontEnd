@@ -9,6 +9,7 @@ export const hostelSingleViewApi =(id) =>{
 }
 
 export const hostelRoomDetails = (hostelId, roomType) => {
+    console.log(hostelId,roomType,"roomDetials");
     return axios.post(`/hostel-room-data/${hostelId}`, roomType);
   };
 export const StudentSignupApi = (values) =>{

@@ -9,8 +9,7 @@ import swal from 'sweetalert';
 
 function RoomBooking() {
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
-  console.log(bookingStatus?.isRequested, "redux data");
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

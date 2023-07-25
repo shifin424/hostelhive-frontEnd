@@ -26,7 +26,7 @@ function Complaints() {
     console.log(values,"<<",complaintId);
 
     const headers = {
-      Authorization: JSON?.parse(localStorage.getItem('HostelAdminToken'))?.token
+      Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token
     };
 
    const response = await editComplaintApi(headers,values,complaintId)
