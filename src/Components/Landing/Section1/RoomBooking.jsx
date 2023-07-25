@@ -9,6 +9,10 @@ import swal from 'sweetalert';
 
 function RoomBooking() {
 
+  const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
@@ -32,10 +36,9 @@ function RoomBooking() {
   }, []);
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+ 
 
-  const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
+ 
 
  
 
