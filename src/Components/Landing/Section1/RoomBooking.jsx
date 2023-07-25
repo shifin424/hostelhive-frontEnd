@@ -35,7 +35,7 @@ function RoomBooking() {
     // eslint-disable-next-line
   }, []);
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
  
 
  
