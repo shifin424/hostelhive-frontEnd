@@ -10,7 +10,12 @@ function Complaints() {
   const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
   const [details, setDetails] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedComplaint, setSelectedComplaint] = useState(null);
+  const [selectedComplaint, setSelectedComplaint] = useState(false);
+  console.log(selectedComplaint,"<<<<<<");
+
+  const headers = {
+    Authorization: JSON?.parse(localStorage.getItem('HostelAdminToken'))?.token
+  };
 
   const handleModalOpen = (complaint) => {
     setSelectedComplaint(complaint);
@@ -25,9 +30,6 @@ function Complaints() {
   const handleModalSubmit = async (values, complaintId, { setSubmitting }) => {
     console.log(values,"<<",complaintId);
 
-    const headers = {
-      Authorization: JSON?.parse(localStorage.getItem('StudentToken'))?.token
-    };
 
    const response = await editComplaintApi(headers,values,complaintId)
    if(response.data.message){
@@ -119,7 +121,7 @@ function Complaints() {
         <p>No data available.</p>
       )}
 
-      {selectedComplaint && isModalOpen  (
+      {selectedComplaint && isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-900">
           <div className="bg-white rounded-lg p-6 shadow-lg w-[500px]">
             <h2 className="text-xl font-bold mb-4 text-[#002D74]">Update Status</h2>
