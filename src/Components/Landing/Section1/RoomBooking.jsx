@@ -35,7 +35,10 @@ function RoomBooking() {
     // eslint-disable-next-line
   }, []);
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const Requested = bookingStatus[0].isRequested
+  const verified = bookingStatus[0].isVerified
+ console.log( verified,"request data")
  
 
  
@@ -43,7 +46,7 @@ function RoomBooking() {
  
 
   const handleBookNow = (id) => {
-    if (bookingStatus && bookingStatus?.isRequested === false) {
+    if (bookingStatus && Requested === false) {
       swal({
         title: 'Verification Required',
         text: 'Need to verify your data',
@@ -62,14 +65,14 @@ function RoomBooking() {
         },
       }).then((value) => {
         if (value === 'ok') {
-          if (!bookingStatus?.isRequested) {
+          if (!Requested) {
             navigate(`/room-booking/request/${id}`);
           } else {
             message.info('Request is still processing');
           }
         }
       });
-    } else if (bookingStatus && bookingStatus?.isVerified) {
+    } else if (bookingStatus && verified) {
       navigate(`/room-booking/rent-payment/${id}`);
     } else {
       message.info('Request is still processing');
