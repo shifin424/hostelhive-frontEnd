@@ -39,7 +39,7 @@ export const editRoomData = (headers, values, id) => {
   };
   
 export const FetchRequestData = (headers, hostelId) => {
-    return axios.get(`/hostel/fetchRequestData/${hostelId}`, { headers })
+    return axios.get(`/hostel/fetch-request-data/${hostelId}`,{ headers })
 }
 
 export const studentApprovalApi = (id, headers) => {
