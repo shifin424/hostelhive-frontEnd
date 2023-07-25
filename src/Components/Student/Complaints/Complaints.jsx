@@ -13,9 +13,9 @@ function Complaints() {
   console.log(details);
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
   const hostelId = bookingStatus?.hostelId;
-  
+
   const headers = useMemo(() => ({
-    Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
+    Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
   }), []); 
 
   useEffect(() => {
