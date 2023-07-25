@@ -121,6 +121,9 @@ export const editRoomImage = ({headers,id,data}) =>{
     return axios.patch(`/hostel/fetch-room-image/${id}`,data,{headers})
 }
 
+export const profileDataApi = (headers,id)=>{
+    return axios.get(`/hostel/fetch-profile-data/${id}`,{headers})
+}
 
 
 

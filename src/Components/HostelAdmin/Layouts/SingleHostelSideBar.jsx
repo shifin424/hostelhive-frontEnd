@@ -8,6 +8,7 @@ import { SlEnvolopeLetter } from 'react-icons/sl';
 import {GiScrollQuill}  from 'react-icons/gi'
 import {IoFastFoodSharp} from  'react-icons/io5'
 import { MdOutlineReportProblem } from 'react-icons/md';
+import {BsPersonCircle} from 'react-icons/bs'
 import { Link } from 'react-router-dom';
 
 function SingleHostelSideBar() {
@@ -20,6 +21,7 @@ function SingleHostelSideBar() {
         { name: 'LEAVE LETTERS', link: '/hostel/hostel-listing/leave-letter', icon: SlEnvolopeLetter },
         { name: 'VACATING LETTERS', link: '/hostel/hostel-listing/vacate-letters', icon: GiScrollQuill },
         { name: 'COMPLAINTS', link: '/hostel/hostel-listing/complaints', icon: MdOutlineReportProblem },
+        {name:'PROFILE',link: '/hostel/hostel-listing/profile',icon:BsPersonCircle}
       ];
     
       const [open, setOpen] = useState(true);

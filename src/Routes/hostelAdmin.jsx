@@ -17,6 +17,7 @@ import ComplaintsPage from "../Pages/HostelAdmin/ComplaintsPage";
 import LeaveLetterPage from "../Pages/HostelAdmin/LeaveLetterPage";
 import VacatingDatas from "../Pages/HostelAdmin/vacates/VacatingDatas";
 import EditRoomsPage from "../Pages/HostelAdmin/EditRoomsPage";
+import ProfilePage from "../Pages/HostelAdmin/ProfilePage";
 
 
 
@@ -43,6 +44,7 @@ const hostelRoutes = () => {
         <Route path='/hostel-listing/complaints' element={<ComplaintsPage/>}></Route> 
         <Route path='/hostel-listing/leave-letter' element={<LeaveLetterPage/>}></Route>
         <Route path='/hostel-listing/vacate-letters' element={<VacatingDatas/>}></Route>
+        <Route path="/hostel-listing/profile" element={<ProfilePage/>}></Route>
       </Route>
 
     </Routes>
