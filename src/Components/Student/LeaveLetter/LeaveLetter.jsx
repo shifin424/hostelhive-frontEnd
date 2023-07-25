@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 function LeaveLetter() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [details, setDetails] = useState([])
-    const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
+    const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
     const hostelId = bookingStatus?.hostelId
 
 

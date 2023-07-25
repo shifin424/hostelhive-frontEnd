@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
 
 function VacatingLetter() {
   const navigate = useNavigate();
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
   const hostelId = bookingStatus?.hostelId;
 
   const handleSubmit = async (values, { setSubmitting }) => {

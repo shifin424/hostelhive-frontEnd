@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 function RentHistory() {
   const [details, setDetails] = useState([])
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
-  const hostelId = bookingStatus.hostelId
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const hostelId = bookingStatus?.hostelId
   console.log(details, "<<< checking front end data");
 
   const headers = useMemo(() => ({

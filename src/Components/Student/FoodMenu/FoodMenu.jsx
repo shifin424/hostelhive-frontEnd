@@ -10,8 +10,8 @@ function FoodMenu() {
   const [foodData, setFoodData] = useState([]);
   console.log(foodData,"checking food data");
 
-  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus[0]);
-  const hostelId = bookingStatus.hostelId;
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const hostelId = bookingStatus?.hostelId;
 
 
   useEffect(() => {

@@ -11,8 +11,9 @@ function Complaints() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [details, setDetails] = useState([]);
   console.log(details);
-  const hostelId = useSelector(state => state?.adminHostelData?.hostelId);
-
+  const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
+  const hostelId = bookingStatus?.hostelId;
+  
   const headers = useMemo(() => ({
     Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
   }), []); 
