@@ -36,13 +36,8 @@ function RoomBooking() {
   }, []);
   const roomDetails = useSelector(state => state?.roomsDetils?.roomDetails);
   const bookingStatus = useSelector(state => state?.roomBookingData?.bookingDetails?.bookingStatus);
-
-  
-  console.log(bookingStatus," <<<<<<<<<<<<< datas");
-  const Requested = bookingStatus[0]?.isRequested
-  console.log(Requested,"Reqest data");
-  const verified = bookingStatus[0]?.isVerified
- console.log( verified,"verified data")
+  const Requested = bookingStatus?.isRequested
+  const verified = bookingStatus?.isVerified
  
 
  
