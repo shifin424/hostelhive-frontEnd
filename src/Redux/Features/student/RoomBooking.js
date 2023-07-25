@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RoomBookingApi } from '../../../Services/studentsServices'
 
 const initialState = {
-    bookingDetails: {},
+    bookingDetails: [],
     isLoading: false,
     isSuccess: false,
     isError: false,
