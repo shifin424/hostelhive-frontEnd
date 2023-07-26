@@ -10,6 +10,8 @@ import studentAuthReducer from './Features/student/AuthSlice'
 //import { reset as bookingDataReset } from './Features/student/RoomBooking'
 import RoomBookingReducer from './Features/student/RoomBooking'
 import StudentProfileReducer from './Features/student/ProfileSlice'
+import adminProfileReducer from './Features/hostel/profileSlice'
+
 
 const hostelPersistConfig = {
     key:"adminHostelData",
@@ -51,7 +53,10 @@ const profileDataPersistConfig = {
     storage
 }
 
-
+const adminProfileDataPersistConfig = {
+    key:"adminProfile",
+    storage
+}
 
 
 const persistedHostelReducer = persistReducer(hostelPersistConfig,hostelReducer)
@@ -62,6 +67,7 @@ const persistedRoomDataReducer = persistReducer(roomDataPersistConfig,roomDatare
 const persistedStudentAuthReducer = persistReducer(studentAuthPersistConfig,studentAuthReducer)
 const persistedRoomBookingReducer = persistReducer(bookingDataPersistConfig,RoomBookingReducer)
 const persistedProfileDataReducer = persistReducer(profileDataPersistConfig,StudentProfileReducer)
+const persistedAdminProfileReducer = persistReducer(adminProfileDataPersistConfig,adminProfileReducer)
 
 
 
@@ -73,7 +79,8 @@ const rootReducer = {
     roomsDetils: persistedRoomDataReducer,
     studentAuth: persistedStudentAuthReducer,
     roomBookingData: persistedRoomBookingReducer,
-    studentProfile:persistedProfileDataReducer
+    studentProfile:persistedProfileDataReducer,
+    adminProfile:persistedAdminProfileReducer
   };
 
  // rootReducer.roomBookingData.reset = bookingDataReset;

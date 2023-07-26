@@ -43,7 +43,7 @@ export const ProfileSlice = createSlice({
       .addCase(ProfileData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.bookingDetails = action.payload;
+        state.studentprofile = action.payload;
       })
       .addCase(ProfileData.rejected, (state, action) => {
         state.isLoading = false;

@@ -130,6 +130,11 @@ export const editProfileDataApi = (headers,values,id)=>{
     return axios.put(`/hostel/edit-hostel-data/${id}`,{values},{headers})
 }
 
+export const imageUploadApi = (headers,data,id) =>{
+    console.log(headers,data,id);
+    return axios.patch(`/hostel/edit-hostel-image/${id}`,data,{headers})
+}
+
 
 
 

@@ -2,16 +2,24 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { editProfileDataApi, profileDataApi } from '../../../Services/hostelAdmin';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { adminProfileData } from '../../../Redux/Features/hostel/profileSlice';
 
 function EditProfile() {
   const [details, setDetails] = useState([])
   const [initialValues, setInitialValues] = useState(null);
   const [formValues, setFormValues] = useState(null);
+  const [imageError, setImageError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  console.log(selectedImage)
+  
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  console.log(selectedImageFile);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
 
   const headers = useMemo(() => ({
@@ -91,6 +99,32 @@ function EditProfile() {
     }
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImageFile(file);
+    setSelectedImage(URL.createObjectURL(file));
+     setImageError(null);
+  };
+
+  const submitImage = async () => {
+    if (!selectedImageFile) {
+      setImageError('Please select an image.');
+      return;
+    }
+  
+    const data = new FormData();
+    data.append('image', selectedImageFile);
+  
+    try {
+      await dispatch(adminProfileData({ headers, data, hostelId }));
+      toast.success('Successfully updated the Image');
+      navigate('/hostel/hostel-listing/profile');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to upload image');
+    }
+  };
+  
   return (
     <>
       <div className="flex justify-between p-3">
@@ -108,28 +142,36 @@ function EditProfile() {
                       htmlFor="dropzone-file"
                       className="flex flex-col items-center justify-center w-40 h-40 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
-                      <img src='' alt='netwokrk error' name='image' className="w-full h-full rounded-full object-cover" />
-                      <>
-                        <div className="flex flex-col  items-center justify-center b  pt-5 ">
-                          <AiOutlineCloudUpload className='w-16 h-12 animate-bounce' />
-                          <p className="mb-2 text-sm text-gray-500  dark:text-gray-400">
-                            <span className="font-semibold ">Click to upload</span>
-                          </p>
-                          <input
-                            id="dropzone-file"
-                            type="file"
-                            className="hidden"
-                            multiple
-                            name='image'
-                          />
-                        </div>
-                      </>
+                      {selectedImage ? (
+                        <img src={selectedImage} alt="Selected" name='image' className="w-full h-full rounded-full object-cover" />
+                      ) : (
+                        <>
+                          <div className="flex flex-col  items-center justify-center b  pt-5 ">
+                            <AiOutlineCloudUpload className='w-16 h-12 animate-bounce' />
+                            <p className="mb-2 text-sm text-gray-500  dark:text-gray-400">
+                              <span className="font-semibold ">Click to upload</span>
+                            </p>
+                            <input
+                              id="dropzone-file"
+                              type="file"
+                              className="hidden"
+                              name='image'
+                              onChange={handleImageChange}
+                              value={selectedImage}
+                            />
+                          </div>
+                        </>
+                      )}
                     </label>
 
                   </div>
-                  <h1 className="text-xl font-bold">{details?.fullName}</h1>
+                  <h1 className="text-xl font-bold">{details?.hostelName}</h1>
                   <p className="text-gray-600">{details?.email}</p>
-                  <button type="button" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" >
+                  {imageError && (
+                    <div className="text-red-500 mb-2">{imageError}</div>
+                  )}
+
+                  <button type="button" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" onClick={submitImage}>
                     Upload Image
                   </button>
                 </div>
