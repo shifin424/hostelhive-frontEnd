@@ -18,6 +18,7 @@ import LeaveLetterPage from "../Pages/HostelAdmin/LeaveLetterPage";
 import VacatingDatas from "../Pages/HostelAdmin/vacates/VacatingDatas";
 import EditRoomsPage from "../Pages/HostelAdmin/EditRoomsPage";
 import ProfilePage from "../Pages/HostelAdmin/ProfilePage";
+import EditProfile from "../Components/HostelAdmin/Profile/EditProfile";
 
 
 
@@ -35,16 +36,17 @@ const hostelRoutes = () => {
       </Route>
 
       <Route element={<SingleHostelLayouts />}>
-        <Route path="/hostel-listing/dashboard" element={<SingleDashboard />}></Route>
-        <Route path="/hostel-listing/rooms" element={<RoomsListing />}></Route>
-        <Route path="/hostel-listing/edit-rooms/:id" element={<EditRoomsPage/>}></Route>
-        <Route path="/hostel-listing/requests" element={<RequestsPage />}></Route>
-        <Route path='/hostel-listing/food-menu' element={<FoodSystem/>}></Route>
-        <Route path='/hostel-listing/student-managment' element={<StudentManagmentPage/>}></Route>
-        <Route path='/hostel-listing/complaints' element={<ComplaintsPage/>}></Route> 
-        <Route path='/hostel-listing/leave-letter' element={<LeaveLetterPage/>}></Route>
-        <Route path='/hostel-listing/vacate-letters' element={<VacatingDatas/>}></Route>
-        <Route path="/hostel-listing/profile" element={<ProfilePage/>}></Route>
+        <Route path="/hostel-listing/dashboard" element={<HostelAdmin><SingleDashboard /></HostelAdmin>}></Route>
+        <Route path="/hostel-listing/rooms" element={<HostelAdmin><RoomsListing /></HostelAdmin>}></Route>
+        <Route path="/hostel-listing/edit-rooms/:id" element={<HostelAdmin><EditRoomsPage/></HostelAdmin>}></Route>
+        <Route path="/hostel-listing/requests" element={<HostelAdmin><RequestsPage /></HostelAdmin>}></Route>
+        <Route path='/hostel-listing/food-menu' element={<HostelAdmin><FoodSystem/></HostelAdmin>}></Route>
+        <Route path='/hostel-listing/student-managment' element={<HostelAdmin><StudentManagmentPage/></HostelAdmin>}></Route>
+        <Route path='/hostel-listing/complaints' element={<HostelAdmin><ComplaintsPage/></HostelAdmin>}></Route> 
+        <Route path='/hostel-listing/leave-letter' element={<HostelAdmin><LeaveLetterPage/></HostelAdmin>}></Route>
+        <Route path='/hostel-listing/vacate-letters' element={<HostelAdmin><VacatingDatas/></HostelAdmin>}></Route>
+        <Route path="/hostel-listing/profile" element={<HostelAdmin><ProfilePage/></HostelAdmin>}></Route>
+        <Route path="/hostel-listing/edit-profile" element={<HostelAdmin><EditProfile/></HostelAdmin>}></Route>
       </Route>
 
     </Routes>

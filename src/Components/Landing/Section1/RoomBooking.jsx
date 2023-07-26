@@ -10,6 +10,7 @@ import swal from 'sweetalert';
 function RoomBooking() {
 
   const token = JSON.parse(localStorage?.getItem('StudentToken'))?.token;
+  const student = JSON.parse(localStorage?.getItem('StudentToken'))
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,12 +41,8 @@ function RoomBooking() {
   const verified = bookingStatus?.isVerified
  
 
- 
-
- 
-
   const handleBookNow = (id) => {
-    if (bookingStatus && Requested === false) {
+    if (bookingStatus && Requested === false && student.role === 'guest') {
       swal({
         title: 'Verification Required',
         text: 'Need to verify your data',
@@ -71,10 +68,14 @@ function RoomBooking() {
           }
         }
       });
-    } else if (bookingStatus && verified) {
+    } else if (bookingStatus && verified && student.role === 'guest') {
       navigate(`/room-booking/rent-payment/${id}`);
-    } else {
-      message.info('Request is still processing');
+    }else if(student.role === 'resident'){
+      message.info("The payment is already done!")
+      navigate('/student/profile')
+    }
+     else {
+      message.info("Request is still processing")
     }
   };
 

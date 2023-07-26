@@ -22,13 +22,10 @@ function EditProfile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
- 
-
   const openModal = () => {
     setIsModalOpen(true);
   };
 
- 
   const headers = useMemo(() => ({
     'Content-Type': 'multipart/form-data',
     Authorization: JSON?.parse(localStorage.getItem("StudentToken"))?.token
@@ -51,9 +48,7 @@ function EditProfile() {
 
     data.append('image', selectedImageFile);
     try {
-
        await dispatch(ProfileData({ headers, data }))
-      
       if (details.studentImage) {
         toast.success("Successfully updated the Image")
         navigate('/student/profile')
@@ -65,10 +60,6 @@ function EditProfile() {
       toast.error('Failed to upload image');
     }
   };
-
-
-
-
 
   useEffect(() => {
     const ProfileData = async () => {
@@ -157,7 +148,6 @@ function EditProfile() {
       console.log(error);
       toast.error(error.response.data.error)
     }
-
   };
 
 

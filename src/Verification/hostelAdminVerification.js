@@ -1,19 +1,23 @@
 
-import { useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 
 export default function HostelAdminVerification({ children }) {
     const location = useLocation();
-    useEffect(() => {
 
-        if (!localStorage.getItem("HostelAdminToken")) {
-            if (location.pathname !== "/hostel/register" && location.pathname !== "/hostel/otpVerification")
-                <Navigate to={"/hostel/login"}/>
-        } else {
-                
-            < Navigate to={'/hostel/dashboard'}/>
-        }
-        // eslint-disable-next-line
-    }, []);
-    return children;
+    const token = localStorage.getItem("HostelAdminToken")
+
+    if (!token) {
+        if (location.pathname === "/hostel/register" || location.pathname === "/hostel/otpVerification" || location.pathname === "/hostel/login")
+            return children;
+        else
+            return <Navigate to={"/hostel/login"} />
+    } else {
+        if (location.pathname === "/hostel/register" || location.pathname === "/hostel/otpVerification" || location.pathname === "/hostel/login")
+            return <Navigate to={"/hostel/dashboard"} />
+        else
+            return children;
+
+    }
+    // eslint-disable-next-line
+
 }

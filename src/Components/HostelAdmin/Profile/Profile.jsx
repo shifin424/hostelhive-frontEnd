@@ -58,7 +58,7 @@ function Profile() {
                   <p className="text-gray-600">{details.email}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <Link
-                      to="/student/edit-profile"
+                      to="/hostel/hostel-listing/edit-profile"
                       className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
                     >
                       Edit profile

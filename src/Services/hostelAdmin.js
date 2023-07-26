@@ -125,6 +125,10 @@ export const profileDataApi = (headers,id)=>{
     return axios.get(`/hostel/fetch-profile-data/${id}`,{headers})
 }
 
+export const editProfileDataApi = (headers,values,id)=>{
+    console.log(headers,"<<<",id,"<<<<<<<",values);
+    return axios.put(`/hostel/edit-hostel-data/${id}`,{values},{headers})
+}
 
 
 
