@@ -41,7 +41,7 @@ function Section2() {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setLocationEntered(true); // Reset the location entered state when searching again
+    setLocationEntered(true); 
   };
 
   const filteredHostels = details.filter((hostel) =>

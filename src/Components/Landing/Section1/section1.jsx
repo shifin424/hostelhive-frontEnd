@@ -29,7 +29,7 @@ function Section1() {
 
   const handleButtonClick = () => {
     if (hasHostelAdminToken) {
-      navigate("/hostel/add-hostel");
+      navigate("/hostel/hostel-listing");
     } else {
       navigate("/hostel/login");
     }

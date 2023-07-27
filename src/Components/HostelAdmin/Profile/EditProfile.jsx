@@ -71,13 +71,35 @@ function EditProfile() {
 
   const validationSchema = Yup.object().shape({
     adminName: Yup.string().required('Owner Name is required'),
-    adminMobile: Yup.string().required('Owner Mobile is required'),
+    adminMobile: Yup.number()
+    .required('Mobile Number is required')
+    .typeError('Mobile Number must be a number')
+    .integer('Mobile Number must be an integer')
+    .positive('Mobile Number must be a positive number')
+    .test('len', 'Mobile Number must be exactly 10 digits', (val) => {
+      if (val) {
+        const numberString = String(val);
+        return numberString.length === 10;
+      }
+      return false;
+    }),
     hostelName: Yup.string().required('Hostel Name required'),
     email: Yup.string().email('Invalid email address').required('Owner Email is required'),
     hostelFee: Yup.number().typeError('Admission Fee must be a number').required('Admission Fee is required'),
     hostelType: Yup.string().required('Hostel Type is required'),
     location: Yup.string().required('Location is required'),
-    description: Yup.string().required('Description is required'),
+    description:Yup.string()
+    .trim()
+    .required('Description is required')
+    .test('minWords', 'Description must have at least 50 words', (value) => {
+      if (!value) return false;
+      const words = value.split(' ');
+      return words.length >= 50;
+    }).test('maxWords', 'Description must have at most 90 words', (value) => {
+      if (!value) return true;
+      const words = value.split(' ');
+      return words.length <= 90;
+    }),
   });
 
   const handleSubmit = async (values) => {
@@ -211,6 +233,7 @@ function EditProfile() {
                               <label className="text-gray-600">Owner Email</label>
                               <Field
                                 name="email"
+                                disable
                                 className={`border ${errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
                                   } text-gray-500 bg-gray-100 px-3 py-2 rounded w-full`}
                               />
