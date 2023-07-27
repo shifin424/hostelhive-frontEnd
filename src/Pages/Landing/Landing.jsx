@@ -9,7 +9,7 @@ import Footer from '../../Components/Student/Layouts/Footer'
 
 function Landing() {
   return (
-    <div>
+    <div className='bg-white'>
       <NavBar/>
       <Section/>
       <Section2/>

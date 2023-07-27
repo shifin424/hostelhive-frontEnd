@@ -14,16 +14,16 @@ function Banner() {
     <div>
       <div>
         <img
-          className='opacity-25 absolute'
+            className='mt-10'
           style={bannerStyle}
           src={Image}
           alt=""
         />
-        <div className='w-full mx-auto max-w-screen-xl '>
-          <h1 className='relative text-white animate-pulse text-center md:pt-44 text-5xl  font-popins'>
+        {/* <div className='w-full mx-auto max-w-screen-xl '>
+          <h1 className=' text-white animate-pulse text-center md:pt-44 text-5xl  font-popins'>
             "Hostels are a melting pot of cultures, languages, and experiences, where everyone is welcome and making memories together”
           </h1>
-        </div>
+        </div> */}
       </div>
     </div>
   );

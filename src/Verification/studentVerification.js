@@ -7,7 +7,13 @@ export default function StudentVerification({ children }) {
   const token = JSON.parse(localStorage.getItem('StudentToken'));
 
   if (!token) {
-    navigate('/login');
+    
+    if(location.pathname === '/login'){
+      return children
+    }
+    else{
+      navigate('/login');
+    }
   } else {
     console.log(token, "token<<<<<<");
     if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/otp-page') {
@@ -24,14 +30,6 @@ export default function StudentVerification({ children }) {
       }
       return children
     }
-    // console.log(token.role);
-    // if (token.role === 'guest') {
-    //   navigate(`${location.pathname}`);
-    // } else if (token.role === 'resident') {
-    //   navigate('/student/profile');
-    // } else {
-    //   navigate('/404');
-    // }
   }
   // eslint-disable-next-line
 
