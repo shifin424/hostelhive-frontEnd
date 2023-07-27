@@ -8,7 +8,7 @@ export default function StudentVerification({ children }) {
 
   if (!token) {
     
-    if(location.pathname === '/login'){
+    if(location.pathname === '/login'  || location.pathname === '/signup' || location.pathname === '/otp-page'){
       return children
     }
     else{
