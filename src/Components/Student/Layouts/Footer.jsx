@@ -9,7 +9,7 @@ function Footer() {
         <div className="flex items-center justify-center">
           <p className="flex items-center">
             <span className="mr-4">Register for free</span>
-            <Link to={'/singup'}>
+            <Link to={'/signup'}>
             <button
               type="button"
               className="inline-block rounded-full border-2 border-gray-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-gray-50 transition duration-150 ease-in-out hover:border-gray-100 hover:bg-gray-500 hover:bg-opacity-10 hover:text-gray-100 focus:border-gray-100 focus:text-gray-100 focus:outline-none focus:ring-0 active:border-gray-200 active:text-gray-200 dark:hover:bg-gray-100 dark:hover:bg-opacity-10"
