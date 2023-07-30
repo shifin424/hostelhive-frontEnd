@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik'; 
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import {toast} from 'react-toastify'
 
 
 function Otp() {
@@ -17,7 +18,6 @@ function Otp() {
   const inputRefs = useRef([...Array(6)].map(() => createRef()));
   const navigate = useNavigate()
   const  StudentAuth  = useSelector((state) => state?.studentAuth?.AuthData?.response);
-  //const confimObj = useSelector((state) => state?.studentAuth?.confimObj);
   const dispatch = useDispatch();
   const submitButtonRef = useRef(null);
 
@@ -83,6 +83,7 @@ function Otp() {
        message.success("Otp Verified Successfully")
       }
     } catch (error) {
+      toast.error(error)
       console.log('Error occurred during OTP confirmation:', error);
     }
   };

@@ -3,7 +3,7 @@ import Login from '../../Components/Student/Auth/Login'
 
 function LoginPage() {
   return (
-    <div className='bg-white pb-36'>
+    <div className='bg-white '>
       <Login/>
     </div>
   )

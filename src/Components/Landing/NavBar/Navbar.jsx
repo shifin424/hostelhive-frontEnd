@@ -41,7 +41,7 @@ function Navbar() {
 
 
   return (
-    <nav className="bg-white border-gray-200 shadow-md sticky top-0 w-full">
+    <nav className="bg-white border-gray-200 shadow-md z-50 sticky top-0 w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="https://flowbite.com/" className="flex items-center">
           <img src={image} className="h-14 w-36" alt="Flowbite Logo" />
@@ -87,7 +87,7 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        {/* <div
+        <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-user"
          >
@@ -136,7 +136,7 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-        </div> */}
+        </div>
       </div>
     </nav>
   );

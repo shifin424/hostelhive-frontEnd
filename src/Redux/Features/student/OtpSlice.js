@@ -17,7 +17,7 @@ export const otpData = createAsyncThunk(
         try {
             const response = await StudentOtpApi(StudentAuth)
             console.log(response.data, "otp data responce");
-            if (response) {
+            if (response.data) {
                 console.log(response.data);
                 
             }

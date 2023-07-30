@@ -5,12 +5,16 @@ import { MdOutlineDoubleArrow } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { hostelView } from '../../../Redux/Features/student/hostelSlice';
+import { Pagination } from 'antd'; // Import the Pagination component
 
 function Section2() {
   const [details, setDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [locationEntered, setLocationEntered] = useState(true);
-  console.log(locationEntered); 
+  const [currentPage, setCurrentPage] = useState(1); // State to keep track of the current page
+  const hostelsPerPage = 4; // Number of hostels to display per page
+
+  console.log(locationEntered);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,16 +45,21 @@ function Section2() {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setLocationEntered(true); 
+    setLocationEntered(true);
   };
 
   const filteredHostels = details.filter((hostel) =>
     hostel.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
-    setLocationEntered(filteredHostels.length > 0);
-  }, [filteredHostels]);
+  // Calculate the current hostels to display based on the current page
+  const indexOfLastHostel = currentPage * hostelsPerPage;
+  const indexOfFirstHostel = indexOfLastHostel - hostelsPerPage;
+  const currentHostels = filteredHostels.slice(indexOfFirstHostel, indexOfLastHostel);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="bg-white w-full min-h-screen">
@@ -65,8 +74,8 @@ function Section2() {
         />
       </div>
       <div className="bg-white w-full mt-5 px-10 flex flex-wrap">
-        {filteredHostels.length > 0 ? (
-          filteredHostels.map((hostel) => (
+        {currentHostels.length > 0 ? (
+          currentHostels.map((hostel) => (
             <div
               key={hostel._id}
               className="card w-[19rem] h-[25rem] bg-base-100 rounded-lg shadow-2xl m-5 transform hover:scale-105 transition duration-300"
@@ -96,9 +105,17 @@ function Section2() {
           ))
         ) : (
           <div className="text-[#002D7A]  flex items-center mt-10">
-            <h1 className='font-semibold'>No hostels available for your enterd location</h1>
+            <h1 className="font-semibold">No hostels available for your entered location</h1>
           </div>
         )}
+      </div>
+      <div className="flex justify-center mt-5">
+        <Pagination
+          defaultCurrent={currentPage}
+          total={filteredHostels.length}
+          pageSize={hostelsPerPage}
+          onChange={handlePageChange}
+        />
       </div>
     </div>
   );
