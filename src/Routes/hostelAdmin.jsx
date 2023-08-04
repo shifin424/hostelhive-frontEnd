@@ -19,6 +19,7 @@ import VacatingDatas from "../Pages/HostelAdmin/vacates/VacatingDatas";
 import EditRoomsPage from "../Pages/HostelAdmin/EditRoomsPage";
 import ProfilePage from "../Pages/HostelAdmin/ProfilePage";
 import EditProfile from "../Components/HostelAdmin/Profile/EditProfile";
+import NotFoundPage from "../Pages/Landing/NotFoundPage";
 
 
 
@@ -48,7 +49,7 @@ const hostelRoutes = () => {
         <Route path="/hostel-listing/profile" element={<HostelAdmin><ProfilePage/></HostelAdmin>}></Route>
         <Route path="/hostel-listing/edit-profile" element={<HostelAdmin><EditProfile/></HostelAdmin>}></Route>
       </Route>
-
+      <Route path='/*' element={<NotFoundPage/>}></Route>
     </Routes>
   );
 };

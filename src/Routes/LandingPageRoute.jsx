@@ -7,6 +7,7 @@ import LoginPage from "../Pages/Landing/LoginPage";
 import OtpPage from "../Pages/Landing/OtpPage";
 import RoomBookingRoutes from "./RoomBooking";
 import StudentVerification from "../Verification/studentVerification";
+import NotFoundPage from "../Pages/Landing/NotFoundPage";
 
 
 
@@ -21,7 +22,11 @@ const LandingPageRoutes = () => {
       <Route path="/otp-page" element={<StudentVerification><OtpPage/></StudentVerification>}></Route>
       <Route path="room-booking" element={<RoomBookings/>}></Route>
       <Route path='room-booking/*' element={<RoomBookingRoutes/>}></Route>
+
+      <Route path='/*' element={<NotFoundPage/>}></Route>
     </Routes>
+  
+  
   );
 };
 

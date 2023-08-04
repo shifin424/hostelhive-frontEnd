@@ -10,6 +10,7 @@ import RentDuePage from "../Pages/Students/RentDuePage";
 import VacatingPage from "../Pages/Students/VacatingPage";
 import ReviewPage from "../Pages/Students/ReviewPage";
 import EditProfilePage from "../Pages/Students/EditProfilePage";
+import NotFoundPage from "../Pages/Landing/NotFoundPage";
 
 
 
@@ -27,6 +28,8 @@ const StudentRoutes = () => {
       <Route path='/review' element={<StudentVerificaion><ReviewPage/></StudentVerificaion>}></Route>
       <Route path='/edit-profile' element={<StudentVerificaion><EditProfilePage/></StudentVerificaion>}></Route>
       </Route>
+
+      <Route path='/*' element={<NotFoundPage/>}></Route>
     </Routes>
   );
 };

@@ -31,9 +31,11 @@ function Navbar() {
           <Link to="/login">Student Login</Link>
         </Menu.Item>
       )}
-      <Menu.Item key="3" onClick={handleLogout}>
-        Sign Out
-      </Menu.Item>
+      {studentToken && (
+        <Menu.Item key="3" onClick={handleLogout}>
+          Sign Out
+        </Menu.Item>
+      )}
     </Menu>
   );
   
