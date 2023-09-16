@@ -5,7 +5,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN;
+mapboxgl.accessToken = "pk.eyJ1Ijoic2hpZmluIiwiYSI6ImNsaTh0M3RxdDN6Y3IzZW50djdlc2ltdnUifQ.hzwTjcEUnrCGzMT-6zY9Vw";
 
 function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
   const Geocoder = () => {
