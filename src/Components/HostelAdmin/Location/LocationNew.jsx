@@ -28,14 +28,25 @@ function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
       );
+      
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+  
       const data = await response.json();
       const placeName = data.features[0]?.place_name;
-      console.log('Place Name:', placeName);
-      updatePlaceName(placeName); 
+  
+      if (placeName) {
+        console.log('Place Name:', placeName);
+        updatePlaceName(placeName);
+      } else {
+        console.error('Place name not found in response.');
+      }
     } catch (error) {
       console.error('Error retrieving place name:', error);
     }
   };
+  
 
   return (
     <ReactMapGL
