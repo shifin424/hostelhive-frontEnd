@@ -28,35 +28,21 @@ function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
       );
-      
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-  
       const data = await response.json();
-      console.log(data.features,"printing data")
-      // const placeName = data.features[0]?.place_name;
       const desiredPlaceType = "postcode";
 
       // Find the feature with the desired place_type
       const desiredFeature = data.features.find(feature => feature.place_type.includes(desiredPlaceType));
-      
+
       // Check if the feature was found and extract the place_name
       const placeName = desiredFeature ? desiredFeature.place_name : "Not found";
-      
+
       console.log("Place Name:", placeName);
-  
-      if (placeName) {
-        console.log('Place Name:', placeName);
-        updatePlaceName(placeName);
-      } else {
-        console.error('Place name not found in response.');
-      }
+      updatePlaceName(placeName);
     } catch (error) {
       console.error('Error retrieving place name:', error);
     }
   };
-  
 
   return (
     <ReactMapGL
