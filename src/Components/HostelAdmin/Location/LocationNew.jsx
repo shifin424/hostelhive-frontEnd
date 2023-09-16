@@ -45,6 +45,13 @@ function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
       const placeName = desiredFeature ? desiredFeature.place_name : "Not found";
       
       console.log("Place Name:", placeName);
+  
+      if (placeName) {
+        console.log('Place Name:', placeName);
+        updatePlaceName(placeName);
+      } else {
+        console.error('Place name not found in response.');
+      }
     } catch (error) {
       console.error('Error retrieving place name:', error);
     }
