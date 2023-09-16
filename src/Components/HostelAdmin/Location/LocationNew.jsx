@@ -33,15 +33,15 @@ function LocationNew({ lat, setLat, lng, setLng, updatePlaceName }) {
         throw new Error(`Request failed with status: ${response.status}`);
       }
   
-      const data = await response.json();
-      const placeName = data.features[0]?.place_name;
+      // const data = await response.json();
+      //const placeName = data.features?.place_name;
   
-      if (placeName) {
-        console.log('Place Name:', placeName);
-        updatePlaceName(placeName);
-      } else {
-        console.error('Place name not found in response.');
-      }
+      // if (placeName) {
+      //   console.log('Place Name:', placeName);
+      //   updatePlaceName(placeName);
+      // } else {
+      //   console.error('Place name not found in response.');
+      // }
     } catch (error) {
       console.error('Error retrieving place name:', error);
     }
