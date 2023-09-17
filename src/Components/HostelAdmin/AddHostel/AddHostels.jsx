@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import defaultImage from '../../../assets/images/defaultHostelImg.jpeg';
 import { addHostelApi } from '../../../Services/hostelAdmin';
 import { message } from 'antd';
 import { BiCurrentLocation } from 'react-icons/bi';
 import { Modal, Button } from 'antd';
 import LocationNew from '../Location/LocationNew';
 import { toast } from 'react-toastify';
+import uploadImage from '../../../assets/images/uploadHostel.jpg'
 
 const AddHostel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -129,7 +129,7 @@ const AddHostel = () => {
                           />
                         ) : (
                           <div className="mb-4 aspect-w-1 aspect-h-1 mt-4 rounded-sm ">
-                            <img src={defaultImage} className='w-80 h-64' alt="" />
+                            <img src={uploadImage} className='w-80 h-64' alt="" />
                           </div>
                         )}
                         <br />
