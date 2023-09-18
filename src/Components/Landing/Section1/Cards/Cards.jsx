@@ -6,11 +6,11 @@ import Privacy from '../../../../assets/images/Privacy.jpg';
 
 function Cards() {
   return (
-    <div className="cards-container mt-5 ">
+    <div className="cards-container  h-[38rem]  ">
       <div className="text-[#002D7A] p-4 font-bold text-3xl ">
         <h2>Things We Offer</h2>
       </div>
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full pb-20">
         <div className="container">
           <div className="card">
             <div className="imgBx">

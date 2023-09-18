@@ -90,7 +90,7 @@ function GlobalNavbar() {
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
-                src="/docs/images/people/profile-picture-3.jpg"
+                src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
                 alt="user pic"
               />
             </button>

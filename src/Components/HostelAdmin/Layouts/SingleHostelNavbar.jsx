@@ -40,7 +40,7 @@ function SingleHostelNavbar() {
   const userMenu = (
     <Menu>
       <Menu.Item key="1">
-        <Link to='/student/profile'>Profile</Link>
+        <Link to='/hostel/profile'>Profile</Link>
       </Menu.Item>
       <Menu.Item key="1" onClick={handleLogout}>
         Sign Out
@@ -54,25 +54,22 @@ function SingleHostelNavbar() {
         <Link to="/">Home</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/student/menu">Food Menu</Link>
+        <Link to="/hostel/hostel-listing/food-menu">Food Menu</Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="/student/rent-due">Hostel Rent</Link>
+        <Link to="/hostel/hostel-listing/rent-due">Hostel Rent</Link>
       </Menu.Item>
       <Menu.Item key="4">
-        <Link to="/student/rent-history">Rent History</Link>
+        <Link to="/hostel/hostel-listing/rent-history">Rent History</Link>
       </Menu.Item>
       <Menu.Item key="5">
-        <Link to="/reviews">Reviews</Link>
+        <Link to="/hostel/hostel-listing/complaints">Complaints</Link>
       </Menu.Item>
       <Menu.Item key="6">
-        <Link to="/student/complaints">Complaints</Link>
+        <Link to="/hostel/hostel-listing/leave-letter">Leave Letter</Link>
       </Menu.Item>
       <Menu.Item key="7">
-        <Link to="/student/leave-letter">Leave Letter</Link>
-      </Menu.Item>
-      <Menu.Item key="8">
-        <Link to="/student/vacating-letter">Vacating Letter</Link>
+        <Link to="/hostel/hostel-listing/vacate-letters">Vacating Letter</Link>
       </Menu.Item>
     </Menu>
   );
@@ -82,7 +79,7 @@ function SingleHostelNavbar() {
       <nav className={`shadow-md bg-white h-16 sticky top-0 w-full ${isMobile ? " " : 'hidden'}`} id="navbar">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <img
-            className="w-8 h-8 rounded-full"
+            className="h-12 w-28 mr-3"
             src={Logo}
             alt="Hostel Logo"
           />
@@ -101,7 +98,7 @@ function SingleHostelNavbar() {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-8 h-8 rounded-full"
-                  src="/docs/images/people/profile-picture-3.jpg"
+                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                   alt="Hostel Logo"
                 />
               </button>
