@@ -3,6 +3,7 @@ import axios from "../axios";
 
 
 export const hostelAdminApi = (values) => {
+    console.log(values)
     return axios.post('/hostel/signing', values)
 }
 
