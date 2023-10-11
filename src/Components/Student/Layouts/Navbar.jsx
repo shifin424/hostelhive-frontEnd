@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import image from '../../../assets/images/hostel-logo.png'
@@ -16,6 +16,7 @@ function Navbar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+ 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
