@@ -15,7 +15,7 @@ import NotFoundPage from "../Pages/Landing/NotFoundPage";
 const LandingPageRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<StudentVerification> <Landing /></StudentVerification> }/>
+      <Route path="/" element={<StudentVerification><Landing /></StudentVerification> }/>
       <Route path="over-view" element={<HostelOverView />}></Route>
       <Route path="/signup" element={<StudentVerification><SignUpPage/></StudentVerification>}></Route>
       <Route path='/login' element={<StudentVerification><LoginPage/></StudentVerification>}></Route>

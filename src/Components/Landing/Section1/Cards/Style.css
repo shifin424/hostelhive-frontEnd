@@ -67,6 +67,10 @@
   transition-delay: 0.3s;
 }
 
+.hide-cards {
+  display: none; 
+}
+
 @media (max-width: 768px) {
   .container .card {
     width: calc(50% - 20px);

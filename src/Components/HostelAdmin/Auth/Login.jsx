@@ -101,6 +101,9 @@ function Login() {
             Sign up now
           </Link>
         </p>
+        <p  className="text-gray-400 text-center hover:text-gray-600 font-bold">
+        <Link to={'/'}>Back to Home</Link>
+        </p>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ function Landing() {
       <NavBar/>
       <Section/>
       <Section2/>
-      <Cards/>
+      {/* <Cards className='hide-cards'/> */}
       <Footer/>
     </div>
   )

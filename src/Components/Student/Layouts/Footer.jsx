@@ -1,12 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-
-
 function Footer() {
+
   return (
-    <div>
-      <footer className="text-center bg-[#002D7A] text-white  ">
-        <div className="container py-6 flex flex-col items-center"> {/* Use flex and items-center */}
+    <div className="footer-container mt-10">
+      <footer className="text-center bg-[#002D7A] text-white">
+        <div className="container py-6 flex flex-col items-center">
           <p>
             <span className="mr-4">Register for free</span>
             <Link to={'/signup'}>

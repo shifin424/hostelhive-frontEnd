@@ -6,7 +6,7 @@ import image from '../../../assets/images/loginImage.jpg';
 import { StudentAuth } from '../../../Redux/Features/student/AuthSlice'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 
 function SignUp() {
@@ -35,20 +35,19 @@ function SignUp() {
 
 
 
-const handleSubmit = async (values) => {
-  try {
-      dispatch(StudentAuth(values)).then((response)=>{
-      if(response){
-      navigate('/otp-page')
-      }
-    })
-  } catch (err) {
-    toast.error(err.response.data.error)
-    console.log(err.response);
+  const handleSubmit = async (values) => {
+    try {
+      dispatch(StudentAuth(values)).then((response) => {
+        if (response) {
+          navigate('/otp-page')
+        }
+      })
+    } catch (err) {
+      toast.error(err.response.data.error)
+      console.log(err.response);
 
-  }
-};
-
+    }
+  };
 
   return (
     <>
@@ -164,11 +163,10 @@ const handleSubmit = async (values) => {
             {/* <div id="recaptcha-container" ></div> */}
 
             <div className="mt-6 text-xs text-gray-400">
-              <hr className="border-gray-400" />
-              <p className="text-center">Already have an account?</p>
               <Link to={'/login'} className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300 text-[#002D74]">
                 Login
               </Link>
+              <Link to={'/'} className="py-2 px-5 text-[#002D74] bg-white border rounded-xl hover:scale-110 duration-300">Home</Link>
             </div>
           </div>
 

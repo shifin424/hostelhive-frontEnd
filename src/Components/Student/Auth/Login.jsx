@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { studentLoginApi } from '../../../Services/LandingService';
 import { message } from 'antd';
 import image from '../../../assets/images/singupImage2.jpg';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 function Login() {
   // const [error, setError] = useState('');
@@ -16,11 +16,11 @@ function Login() {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number'
-    )
-    .required('Password is required'),
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number'
+      )
+      .required('Password is required'),
   });
 
   const handleSubmit = (values) => {
@@ -37,7 +37,7 @@ function Login() {
       })
       .catch((err) => {
         console.log(err.response.data.message);
-       toast.error(err.response.data.message)
+        toast.error(err.response.data.message)
       });
   };
 
@@ -60,9 +60,8 @@ function Login() {
               {({ errors, touched }) => (
                 <Form className="flex flex-col gap-4">
                   <Field
-                    className={`p-2 mt-8 rounded-xl border bg-white ${
-                      errors.email && touched.email ? 'border-red-500' : ''
-                    }`}
+                    className={`p-2 mt-8 rounded-xl border bg-white ${errors.email && touched.email ? 'border-red-500' : ''
+                      }`}
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -74,11 +73,10 @@ function Login() {
                   />
                   <div className="relative">
                     <Field
-                      className={`p-2 rounded-xl border w-full bg-white ${
-                        errors.password && touched.password
-                          ? 'border-red-500'
-                          : ''
-                      }`}
+                      className={`p-2 rounded-xl border w-full bg-white ${errors.password && touched.password
+                        ? 'border-red-500'
+                        : ''
+                        }`}
                       type="password"
                       name="password"
                       placeholder="Password"
@@ -159,14 +157,19 @@ function Login() {
               >
                 Register
               </Link>
+              <Link to={"/"} className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Home</Link>
             </div>
           </div>
+
 
           <div className="md:block hidden w-1/2">
             <img className="rounded-2xl" src={image} alt="signup" />
           </div>
         </div>
+
+
       </section>
+
     </>
   );
 }

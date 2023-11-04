@@ -7,15 +7,14 @@ export default function StudentVerification({ children }) {
   const token = JSON.parse(localStorage.getItem('StudentToken'));
 
   if (!token) {
-    
-    if(location.pathname === '/login'  || location.pathname === '/signup' || location.pathname === '/otp-page'){
+
+    if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/otp-page') {
       return children
     }
-    else{
-      navigate('/login');
+    else {
+     return children
     }
   } else {
-    console.log(token, "token<<<<<<");
     if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/otp-page') {
       return <Navigate to={'/'} />
     }
@@ -23,15 +22,16 @@ export default function StudentVerification({ children }) {
       const routePattern = /^\/rent-payment\/\d+$/;
 
       const isMatchingRoute = routePattern.test(location.pathname);
-      if(isMatchingRoute){
-        if(token.role === 'guest'){
-          return 
+      if (isMatchingRoute) {
+        if (token.role === 'guest') {
+          return
         }
       }
       return children
     }
   }
   // eslint-disable-next-line
-
   return children;
 }
+
+
