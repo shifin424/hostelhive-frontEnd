@@ -1,7 +1,6 @@
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation} from 'react-router-dom';
 
 export default function StudentVerification({ children }) {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const token = JSON.parse(localStorage.getItem('StudentToken'));
