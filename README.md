@@ -1,70 +1,320 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# HostelHive - Solution for Hostel Owners and Students
 
-## Available Scripts
+Hostel Hive is a comprehensive full-stack web platform designed to simplify hostel management for both owners and students. With a powerful stack of technologies, including Redux Toolkit, Tailwind, Razorpay, Twilio, Nodemailer, Cloudinary, Cron Jobs, MapBox, Chart.js, Formik, Yup, and Joi, it offers an enriched user experience.
 
-In the project directory, you can run:
+Hostel owners can effortlessly add and manage multiple hostels, utilizing a map-based feature for precise property location. The platform includes user-friendly interfaces for hostel management, streamlining tasks such as handling leave requests, complaints, vacation letters, and rent payments.
 
-### `npm start`
+For students, Hostel Hive provides a personalized interface for profile completion, letter submissions, and easy payment management. This centralized system ensures efficient hostel administration and reservations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Acknowledgements
 
-### `npm test`
+I would like to express my gratitude for the following libraries and tools that have greatly contributed to the development of Hostel Hive.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ Open Source Libraries and Tools:
+  - [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
+  - [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)
+  - [Razorpay](https://github.com/razorpay/razorpay-node)
+  - [Yup](https://github.com/jquense/yup)
+  - [Joi](https://github.com/sideway/joi)
+  - [MapBox](https://github.com/mapbox/mapbox-gl-js)
+  - [Formik](https://github.com/formium/formik)
+ 
+Thank you to the creators and maintainers of these valuable libraries and tools for their essential contributions to the project.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+ 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## API Reference
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Landing Routes 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Get Hostel Information
 
-## Learn More
+```http
+  GET /api/hostel-info
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `none` | `string` | for fetching the hostel Information |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Get Single Hostel Overview
 
-### Code Splitting
+```http
+  GET /api/hostel-over-view/{id}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` | for finding the hostels using the specific Id |
 
-### Analyzing the Bundle Size
+#### Get Hostel Room Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```http
+POST /api/hostel-room-data/{hostelId}
+```
 
-### Making a Progressive Web App
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `hostelId` | `string` | finding the rooms by using the hostel Id |
+| `roomType` | `object` | finding the rooms by specific room types 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Student Signup
 
-### Advanced Configuration
+```http
+POST /api/signup
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `values` | `object` | User registration data |
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Student OTP Verification
 
-### `npm run build` fails to minify
+```http
+POST /api/otp
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `StudentAuth` | `object` | OTP credentials |
+
+#### Student Login
+
+```http
+POST /api/login
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `values` | `object` |User login data |
+
+### Student Routes
+
+#### Send Request Data
+
+```http
+POST /api/student/request-data/{id}/{hostelId}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required**  Student ID |
+| `hostelId` | `string` |**Required** Hostel ID |
+| `values` | `object` |Request data |
+
+#### Room Booking
+
+```http
+GET /api/student/room-booking
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `none` | `object` |Student room booking Details |
+
+#### Fetch Payment Information
+
+```http
+GET /api/student/payment-data/{id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required** Student ID |
+
+#### Submit Payment Request
+
+```http
+POST /api/student/payment-Request
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `paymentRespone` | `object` |Payment information |
+
+#### Payment Verification
+
+```http
+POST /api/student/payment-verification/{hostelId}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `hostelId` | `string` |**Required** Hostel ID |
+| `orderId` | `string` |Order ID |
+| `rentPayment` | `number` |	Rent Payment |
+
+#### Submit Student Complaint
+
+```http
+POST /api/student/student-complaint/{id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required** Student ID |
+| `values` | `object` |**Required**Complaint data |
+
+#### Fetch Student Complaint Data
+
+```http
+GET /api/student/student-complaint-data/{id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required** Student ID |
+
+#### Fetch Food Menu
+
+```http
+GET /api/student/fetch-food-menu/{id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required** Hostel ID |
+
+### Hostel Owner Routes
+
+#### Hostel Admin Registration
+
+```http
+POST /api/hostel/signing
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `values` | `object` |Admin registration data
+
+
+#### Verify OTP for Admin Registration
+
+```http
+POST /api/hostel/verifyOtp
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `data` | `object` |OTP verification data|
+
+
+#### Hostel Admin Login
+
+```http
+POST /api/hostel/postLogin
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `values` | `object` |Admin login data|
+
+### Super Admin Routes
+
+#### Hostel Admin Login
+
+```http
+POST /api/admin/login
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `formData` | `object` |Admin login data|
+
+#### Hostel Request Approval
+
+```http
+PATCH /api/admin/approve-hostel/{id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` |**Required** Hostel ID|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Demo
+
+https://github.com/shifin424/hostelhive-frontend.git
+
+
+## Conclusion
+
+This API reference encompasses the routes for my MERN Stack hostel management system. It serves as a crucial guide for developers seeking to integrate, expand, and innovate within the framework. I appreciate your feedback and am open to collaboration for further enhancements.
+
+ If you have any questions or need additional details, please don't hesitate to contact me at _dev.muhammedshifin.com_
+
+
+
