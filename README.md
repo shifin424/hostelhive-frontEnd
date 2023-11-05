@@ -305,9 +305,6 @@ PATCH /api/admin/approve-hostel/{id}
 
 
 
-## Demo
-
-https://github.com/shifin424/hostelhive-frontend.git
 
 
 ## Conclusion
