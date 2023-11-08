@@ -124,7 +124,7 @@ function Globaldashboard() {
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
             Vacates
             </h2>
-            <p className="text-3xl font-bold text-white">{chartCount.vacateCount}</p>
+            <p className="text-3xl font-bold text-white">{chartCount.vacatingCount}</p>
           </div>
           <div className="p-4 bg-[#b71777] rounded shadow-md text-center">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">

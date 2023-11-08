@@ -71,6 +71,7 @@ function OtpVerification() {
 
       verifyOtp(data)
         .then(() => {
+          message.success("Otp verified successfully")
           navigate('/hostel/login');
         })
         .catch((error) => {
