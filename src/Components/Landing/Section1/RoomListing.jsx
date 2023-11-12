@@ -24,13 +24,13 @@ function RoomListing() {
 
   return (
     <>
-      <div className="bg-white w-full h-32 pt-4">
+      <div className=" w-full h-32 pt-4">
         <h1 className="ml-10 text-4xl text-[#002D7A] font-bold font-popins">
           Our Rooms
         </h1>
       </div>
 
-      <div className="bg-white w-full px-16 pb-6 flex flex-wrap">
+      <div className="w-full px-16 pb-6 flex flex-wrap">
         {hostelRoomData.rooms.map((room, index) => (
           <div
             key={index}

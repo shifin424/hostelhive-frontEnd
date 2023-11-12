@@ -5,14 +5,14 @@ import { MdOutlineDoubleArrow } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { hostelView } from '../../../Redux/Features/student/hostelSlice';
-import { Pagination } from 'antd'; // Import the Pagination component
+import { Pagination } from 'antd';
 
 function Section2() {
   const [details, setDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [locationEntered, setLocationEntered] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1); // State to keep track of the current page
-  const hostelsPerPage = 4; // Number of hostels to display per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const hostelsPerPage = 4;
 
   console.log(locationEntered);
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ function Section2() {
     hostel.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Calculate the current hostels to display based on the current page
+
   const indexOfLastHostel = currentPage * hostelsPerPage;
   const indexOfFirstHostel = indexOfLastHostel - hostelsPerPage;
   const currentHostels = filteredHostels.slice(indexOfFirstHostel, indexOfLastHostel);
@@ -62,28 +62,28 @@ function Section2() {
   };
 
   return (
-    <div className="bg-white w-full min-h-screen">
-      <div className="bg-white text-[#002D7A] p-8 font-bold text-3xl">Hostels with Rooms Available</div>
-      <div className="bg-white flex justify-center w-full mt-5 px-10">
+    <div className=" w-full min-h-screen">
+      <div className=" text-[#002D7A] p-8 font-bold text-3xl">Hostels with Rooms Available</div>
+      <div className=" flex justify-center w-full mt-5 px-10">
         <input
           type="text"
           placeholder="    Search by location ..."
           value={searchQuery}
           onChange={handleSearch}
-          className="w-96 p-2 border bg-white  text-black h-14 border-[#002D7A] rounded-full"
+          className="w-96 p-2 border bg-transparent  text-black h-14 border-[#002D7A] rounded-full"
         />
       </div>
-      <div className="bg-white w-full mt-5 px-10 flex flex-wrap">
+      <div className="w-full mt-5 px-4 flex flex-wrap justify-center">
         {currentHostels.length > 0 ? (
           currentHostels.map((hostel) => (
             <div
               key={hostel._id}
-              className="card w-[19rem] h-[25rem] bg-base-100 rounded-lg shadow-2xl m-5 transform hover:scale-105 transition duration-300"
+              className="card w-full md:w-1/2 lg:w-1/3 xl:w-1/4 bg-base-100 rounded-lg shadow-2xl m-5 transform hover:scale-105 transition duration-300"
             >
               <figure>
-                <img src={hostel.hostelImage.url} alt="Card" className="w-full h-60 object-cover" />
+                <img src={hostel.hostelImage.url} alt="Card" className="w-full h-60 object-cover rounded-t-lg" />
               </figure>
-              <div className="card-body bg-white rounded-b-lg p-3 flex flex-col justify-between">
+              <div className="card-body bg-white rounded-b-lg p-3 flex flex-col justify-between h-40">
                 <div>
                   <h2 className="card-title text-xl font-popins text-[#002D7A]">{hostel.hostelName}</h2>
                   <div className="flex items-center">
@@ -109,6 +109,7 @@ function Section2() {
           </div>
         )}
       </div>
+
       <div className="flex justify-center mt-5">
         <Pagination
           defaultCurrent={currentPage}

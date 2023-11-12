@@ -36,9 +36,9 @@ function Section1() {
   };
 
   return (
-    <div className="w-full bg-white pb-10 pt-5 mt-10">
-      <div className="w-full md:flex h-auto bg-white items-start">
-        <div className="md:w-1/2 md:h-96 bg-white md:order-2">
+    <div className="w-full pb-10 pt-5 mt-10">
+      <div className="w-full md:flex h-auto items-start">
+        <div className="md:w-1/2 md:h-96 md:order-2">
           <img
             className="object-cover w-full rounded-sm h-full"
             src={require("../../../assets/images/2-bed-pic.jpg")}
@@ -46,7 +46,7 @@ function Section1() {
           />
         </div>
 
-        <div className="md:w-1/2 bg-white md:pl-6 md:order-1">
+        <div className="md:w-1/2 md:pl-6 md:order-1">
           <div className="md:flex md:flex-col md:justify-center md:h-full">
             <div className="text-center text-2xl md:mt-10">
               <div>

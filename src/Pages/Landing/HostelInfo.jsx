@@ -5,7 +5,7 @@ import RoomListing from '../../Components/Landing/Section1/RoomListing'
 
 function HostelInfo() {
   return (
-    <div className='bg-white w-full h-full '>
+    <div className='w-full h-full '>
         <GlobalNavbar/>
       <HostelDetails/>
       <RoomListing/>

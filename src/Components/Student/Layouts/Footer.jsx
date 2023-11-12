@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+
 function Footer() {
 
   return (
-    <div className="footer-container mt-10">
+    <div className="footer-container mt-14 ">
       <footer className="text-center bg-[#002D7A] text-white">
         <div className="container py-6 flex flex-col items-center">
           <p>
