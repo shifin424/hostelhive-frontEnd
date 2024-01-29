@@ -43,7 +43,7 @@ function Login() {
 
   const handleDemoLogin = () => {
     const demoCredentials = {
-      email: 'shifin@gmail.com',
+      email: 'hostelhive424@gmail.com',
       password: 'Shifin@123',
     };
     handleSubmit(demoCredentials);
