@@ -22,12 +22,12 @@ function FoodMenu() {
 
   const headers = useMemo(() => ({
     Authorization: JSON?.parse(localStorage.getItem("HostelAdminToken"))?.token
-  }), []); 
-  
+  }), []);
+
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-       
+
         const response = await FoodMenuApi(headers, hostelId);
         if (response) {
           setFoodData(response.data.foodData);
@@ -39,7 +39,7 @@ function FoodMenu() {
       }
     };
     fetchFoodData();
-  }, [headers,hostelId]);
+  }, [headers, hostelId]);
 
 
   const handleEditMenu = (menuData) => {
@@ -54,7 +54,7 @@ function FoodMenu() {
   const handleSubmit = async (values) => {
     console.log(values, hostelId, 'handle submit values');
     try {
-     
+
       const day = selectedMenu ? selectedMenu.day : '';
 
       const updatedValues = {

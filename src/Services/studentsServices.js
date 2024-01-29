@@ -14,13 +14,11 @@ export const fetchPaymentInfo = (headers,id) =>{
 }
 
 export const paymentApi = (headers, paymentResponce) => {
-  console.log(paymentResponce, headers, "front end data checking");
   return axios.post('/student/payment-Request', paymentResponce,  headers);
 }
 
 
 export const paymentDataApi = ({ orderId, rentPayment, headers,hostelId }) => {
-  console.log(orderId,"<<<<<",rentPayment,"<<<<",headers,"<<<<",hostelId);
   return axios.post(`/student/payment-verification/${hostelId}`, { orderId, rentPayment }, headers);
 }
 

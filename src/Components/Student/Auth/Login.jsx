@@ -41,6 +41,14 @@ function Login() {
       });
   };
 
+  const handleDemoLogin = () => {
+    const demoCredentials = {
+      email: 'shifin@gmail.com',
+      password: 'Shifin@123',
+    };
+    handleSubmit(demoCredentials);
+  };
+
 
   return (
     <>
@@ -107,6 +115,13 @@ function Login() {
                     className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
                   >
                     Login
+                  </button>
+                  <button
+                    type="button"
+                    className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
+                    onClick={() => handleDemoLogin()}
+                  >
+                    Demo Login
                   </button>
                 </Form>
               )}

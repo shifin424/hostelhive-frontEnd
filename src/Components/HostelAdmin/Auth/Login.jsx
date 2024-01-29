@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {hostelAdminLogin} from '../../../Services/hostelAdmin'
+import { hostelAdminLogin } from '../../../Services/hostelAdmin'
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { toast } from 'react-toastify';
@@ -10,14 +10,14 @@ function Login() {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-  
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
   const handleSubmit = (values) => {
-    setError(''); // Clear any previous errors
+    setError(''); 
     hostelAdminLogin(values)
       .then((response) => {
         if (response.data.error) {
@@ -31,7 +31,6 @@ function Login() {
       .catch((err) => {
         console.log(err.response.data.message);
         toast.error(err.response.data.message);
-        //setError(err.response.data.error || "An error occurred");
       });
   };
 
@@ -39,7 +38,7 @@ function Login() {
     <div className="flex items-center justify-center h-screen bg-white">
       <div className="w-full max-w-xs">
         <Formik
-          initialValues={{ email: '', password: '' }} // Initialize values directly in Formik
+          initialValues={{ email: '', password: '' }} 
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -101,8 +100,8 @@ function Login() {
             Sign up now
           </Link>
         </p>
-        <p  className="text-gray-400 text-center hover:text-gray-600 font-bold">
-        <Link to={'/'}>Back to Home</Link>
+        <p className="text-gray-400 text-center hover:text-gray-600 font-bold">
+          <Link to={'/'}>Back to Home</Link>
         </p>
       </div>
     </div>

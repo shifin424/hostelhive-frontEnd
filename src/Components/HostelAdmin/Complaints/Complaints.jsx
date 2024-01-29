@@ -28,8 +28,6 @@ function Complaints() {
   };
 
   const handleModalSubmit = async (values, complaintId, { setSubmitting }) => {
-    console.log(values,"<<",complaintId);
-
 
    const response = await editComplaintApi(headers,values,complaintId)
    if(response.data.message){
